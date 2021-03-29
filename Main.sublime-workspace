@@ -1,0 +1,553 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"l",
+				"length"
+			],
+			[
+				"con",
+				"align-content\tproperty"
+			],
+			[
+				"flex",
+				"flex-container"
+			],
+			[
+				"bacground",
+				"background-image\tproperty"
+			],
+			[
+				"show",
+				"showImage"
+			],
+			[
+				"Hello",
+				"HelloWorld"
+			],
+			[
+				"boo",
+				"bool"
+			],
+			[
+				"text",
+				"textFileNames"
+			],
+			[
+				"textFile",
+				"textFileAddress"
+			],
+			[
+				"spl_auto",
+				"spl_autoload_register"
+			],
+			[
+				"spl_autol",
+				"spl_autoload_register"
+			],
+			[
+				"get_",
+				"get_class"
+			],
+			[
+				"stat",
+				"static"
+			],
+			[
+				"dynami",
+				"dynamicF"
+			],
+			[
+				"register",
+				"register_tick_function"
+			],
+			[
+				"uns",
+				"unset"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"str_re",
+				"str_replace"
+			],
+			[
+				"bod",
+				"bodyEnd"
+			],
+			[
+				"body",
+				"bodyStart"
+			],
+			[
+				"head",
+				"headEnd"
+			],
+			[
+				"php",
+				"phpinfo"
+			],
+			[
+				"Mon",
+				"Montserrat-Bold"
+			],
+			[
+				"font-s",
+				"font-size\tproperty"
+			],
+			[
+				"padding",
+				"padding-bottom\tproperty"
+			],
+			[
+				"pa",
+				"padding-top\tproperty"
+			],
+			[
+				"t",
+				"transition\tproperty"
+			],
+			[
+				"back",
+				"background-color\tproperty"
+			],
+			[
+				"se",
+				"section-paragraph"
+			],
+			[
+				"section",
+				"section-highlighted"
+			],
+			[
+				"col",
+				"color\tproperty"
+			],
+			[
+				"ba",
+				"background-color\tproperty"
+			],
+			[
+				"backgrou",
+				"background-size\tproperty"
+			],
+			[
+				"b",
+				"bcg-image"
+			],
+			[
+				"bor",
+				"border-color\tproperty"
+			],
+			[
+				"min",
+				"min-height\tproperty"
+			],
+			[
+				"tra",
+				"transform\tproperty"
+			],
+			[
+				"o",
+				"opacity\tproperty"
+			],
+			[
+				"bcg",
+				"bcg-txt"
+			],
+			[
+				"background",
+				"background-color\tproperty"
+			],
+			[
+				"tex",
+				"txtfield"
+			],
+			[
+				"font",
+				"font-family\tproperty"
+			],
+			[
+				"fo",
+				"font-size\tproperty"
+			],
+			[
+				"ali",
+				"align-content\tproperty"
+			],
+			[
+				"Over",
+				"overflow-y\tproperty"
+			],
+			[
+				"max",
+				"max-width\tproperty"
+			],
+			[
+				"border-",
+				"border-collapse"
+			],
+			[
+				"border",
+				"border-color\tproperty"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "Main.cpp",
+			"settings":
+			{
+				"buffer_size": 137,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Voo/Desktop/wtf.cpp",
+		"/E/_LAB/_C/DSA_CPP_Lecture/x64/Debug/main.i",
+		"/E/_LAB/_C/Barebone/barebone.cpp",
+		"/C/Users/Voo/Desktop/poirot",
+		"/C/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/VC/Snippets/1033/Visual C++/surroundCode.snippet",
+		"/C/Users/Voo/AppData/Local/Android/Sdk/sources/android-25/android/media/AudioFormat.java",
+		"/C/Users/Voo/AppData/Local/Android/Sdk/sources/android-25/android/media/AudioDeviceCallback.java",
+		"/C/Users/Voo/AppData/Local/Android/Sdk/sources/android-25/android/media/AmrInputStream.java",
+		"/C/Users/Voo/AppData/Local/Android/Sdk/sources/android-25/android/filterfw/geometry/Point.java",
+		"/C/Users/Voo/AppData/Local/Android/Sdk/platform-tools/systrace/catapult/devil/devil/android/fastboot_utils.py",
+		"/C/Users/Voo/AppData/Local/Android/Sdk/platform-tools/systrace/catapult/common/py_vulcanize/py_vulcanize/js_utils_unittest.py",
+		"/C/Users/Voo/AppData/Local/Temp/Temp1_src.zip/com/sun/corba/se/pept/encoding/InputObject.java",
+		"/C/Users/Voo/AppData/Local/Temp/Temp1_src.zip/com/sun/corba/se/internal/CosNaming/BootstrapServer.java",
+		"/C/Users/Voo/AppData/Local/Temp/Temp1_src.zip/java/lang/System.java",
+		"/C/Users/Voo/Desktop/temporal.txt",
+		"/C/Users/Voo/Desktop/temporal",
+		"/C/Users/Voo/Desktop/tmp",
+		"/C/Users/Voo/Desktop/tmp.wav",
+		"/C/Users/Voo/Desktop/Nowy dokument tekstowy.wav",
+		"/C/Users/Voo/Desktop/Nowy dokument tekstowy",
+		"/C/Users/Voo/Desktop/_temp/s01/E09 - The King of Clubs.srt",
+		"/C/Users/Voo/Desktop/_temp/s01/E03 - The Adventure of Johnnie Waverly.srt",
+		"/C/Users/Voo/Desktop/_temp/s02/E08 - The Kidnapped Prime Minister.srt",
+		"/C/Users/Voo/Desktop/_temp/s02/E02 - The Veiled Lady.srt",
+		"/C/Users/Voo/Desktop/_temp/s02/E01 - Peril at End House (Part 1).srt",
+		"/C/Users/Voo/Desktop/_temp/s01/E10 - The Dream.srt",
+		"/C/Users/Voo/Desktop/_temp/s01/E08 - The Incredible Theft.srt",
+		"/C/Users/Voo/Desktop/_temp/s01/E07 - Problem at Sea.srt",
+		"/C/Users/Voo/Desktop/_temp/s01/E06 - Triangle at Rhodes.srt",
+		"/C/Users/Voo/Desktop/_temp/s01/E04 - Four and Twenty Blackbirds.srt",
+		"/C/Users/Voo/Desktop/_temp/Poirot S07E02 - Lord Edgware Dies.srt",
+		"/C/Users/Voo/Desktop/_temp/s01/E01 - The Adventure of the Clapham Cook.srt",
+		"/C/Users/Voo/Desktop/_temp/Poirot S07E02 - Lord Edgware Dies (2000)-eng.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie Poirot - S07E02 - Lord Edgware Dies.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie Poirot - S07E01 - The Murder of Roger Ackroyd.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie - Poirot - 7x01 - The Murder of Roger Ackroyd - David Suchet - (2000)-eng.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S03E11 - The Mystery of Hunters Lodge.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S03E10 - The Affair at the Victory Ball.srt",
+		"/C/Users/Voo/Desktop/_temp/Hercule Poirot 03x10 The Affair at the Victory Ball.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S03E09 - The Theft of the Royal Ruby.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S03E07 - The Mystery of the Spanish Chest.srt",
+		"/C/Users/Voo/Desktop/_temp/Hercule Poirot 03x08 The Mystery of the Spanish Chest.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S03E07 - The Double Clue.srt",
+		"/C/Users/Voo/Desktop/_temp/agatha.christie.poirot.s03e08.dvdrip.x264-trentkort-eng.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S03E06 - The Tragedy at Marsdon Manor .srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S03E06 - The Tragedy at Marsdon Manor.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S03E05 - Wasps' Nest.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S03E04 - The Plymouth Express.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S03E03 - The Million Dollar Bond Robbery.srt",
+		"/C/Users/Voo/Desktop/_temp/S03E02 - How Does Your Garden Grow.srt",
+		"/C/Users/Voo/Desktop/_temp/S03E01 - The Mysterious Affair At Styles.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S02E09 - The Adventure of the Western Star.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S02E08 - The Kidnapped Prime Minister.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S02E07 - The Adventure of the Cheap Flat.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S02E06 - Double Sin.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S02E05 - The Disappearance of Mr. Davenheim.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S02E04 - The Cornish Mystery.srt",
+		"/C/Users/Voo/MicrosoftEdgeBackups/backups/MicrosoftEdgeBackup20200330/Protected - It is a violation of Windows Policy to modify/Backup.dat",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S02E03 - The Lost Mine.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S02E01 - Peril at End House (Part 2).srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S02E02 - The Veiled Lady.srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S02E01 - Peril at End House (Part 1).srt",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S01E10 - The Dream.srt",
+		"/C/Users/Voo/Desktop/taras/www/index.html",
+		"/C/Users/Voo/Desktop/_temp/Agatha Christie's Poirot - S01E09 - The King of Clubs.srt",
+		"/C/Users/Voo/Desktop/taras/_Arch/_01/index.html",
+		"/C/Users/Voo/Desktop/taras/www/index-v00.html",
+		"/C/Users/Voo/Desktop/taras/www/template/template.php",
+		"/C/Users/Voo/Desktop/taras/www/includes/functions.php",
+		"/C/Users/Voo/Desktop/taras/www/includes/config.php",
+		"/C/Users/Voo/Desktop/taras/www/index.php",
+		"/C/Users/Voo/Desktop/taras/www/content/products.phtml",
+		"/C/Users/Voo/Desktop/taras/www/content/home.phtml",
+		"/C/Users/Voo/Desktop/taras/www/content/contact.phtml",
+		"/C/Users/Voo/Desktop/taras/www/content/about-us.phtml",
+		"/C/Users/Voo/Desktop/taras/www/content/404.phtml",
+		"/C/Users/Voo/Desktop/taras/www/template/style.css",
+		"/C/Users/Voo/Desktop/taras/www/index_.html",
+		"/C/Users/Voo/Desktop/taras/_Arch/www/index.php",
+		"/C/Users/Voo/Desktop/taras/_Arch/www/index-v07.html",
+		"/C/Users/Voo/Desktop/taras/_Arch/www/static/source/footer.php",
+		"/C/Users/Voo/Desktop/taras/www/static/source/Section.php",
+		"/C/Users/Voo/Desktop/taras/www/index-v07.html",
+		"/C/Users/Voo/Desktop/taras/www/static/C.php",
+		"/C/Users/Voo/Desktop/taras/www/include/htmlTags.php",
+		"/C/Users/Voo/Desktop/taras/www/htmlTags.php",
+		"/C/Users/Voo/Desktop/taras/www/C.php",
+		"/C/Users/Voo/Desktop/taras/www/footer.php",
+		"/C/Users/Voo/Desktop/taras/www/static/instalacjeElektryczne.php",
+		"/C/Users/Voo/Desktop/taras/www/classC.php",
+		"/C/Users/Voo/Desktop/taras/www/external.php",
+		"/C/Apache24/conf/httpd.conf",
+		"/C/Users/Voo/Desktop/taras/www/test_get.php",
+		"/C/Apache24/conf/extra/httpd-mpm.conf",
+		"/C/Users/Voo/Desktop/taras/index-v05.html",
+		"/I/_arch/apache-tomcat-8.5.49/webapps/docs/api/index.html",
+		"/C/Apache24/htdocs/index.html",
+		"/C/Users/Voo/Desktop/taras/www/indexphp",
+		"/C/Users/Voo/Desktop/taras/index-v04.html",
+		"/C/Users/Voo/Desktop/taras/index.html",
+		"/C/Users/Voo/Desktop/www-witalis/index.html",
+		"/C/Users/Voo/Desktop/taras/_Arch/temporal.html",
+		"/C/Users/Voo/Desktop/index.html",
+		"/C/Users/Voo/Desktop/taras/_Arch/index-v02.html",
+		"/C/Users/Voo/Desktop/taras/_Arch/taras.html",
+		"/C/Users/Voo/Desktop/taras/taras.html",
+		"/C/Users/Voo/Desktop/taras/site/JavaWebStartAppPage.html",
+		"/E/_LAB/pl/popoff/dspAlgorithmics/.git/COMMIT_EDITMSG",
+		"/E/_LAB/pl/cschool/programator/Memory/Fork/src/main/resources/fonts/Saloon_Girl.ttf",
+		"/E/_LAB/pl/cschool/programator/Memory/Fork/src/main/gui/TemporalParent.java",
+		"/E/_LAB/pl/cschool/programator/Memory/Fork/src/main/gui/infoPanel/PlayerStatusPanel.java",
+		"/E/_LAB/pl/cschool/programator/Memory/Fork/src/main/gui/infoPanel/MenuPanel.java",
+		"/E/_LAB/pl/cschool/programator/Memory/Fork/src/main/gui/infoPanel/GameHeadline.java",
+		"/E/_LAB/pl/cschool/programator/Memory/Fork/src/main/gui/BackgroundPanel.java",
+		"/E/_LAB/pl/cschool/programator/Memory/Fork/src/main/gui/CardPanel.java",
+		"/E/_LAB/pl/popoff/dspAlgorithmics/src/main/resources/sample-mono.wav",
+		"/I/_arch/_kartkowka-master/initial/BisectionTestMarcinBartosiak.java",
+		"/I/_arch/_kartkowka-master/initial/Krzysiek.java",
+		"/I/_arch/_kartkowka-master/initial/Hania.java",
+		"/C/Users/Voo/Desktop/unpeak/shortie/2_samples-mono.wav",
+		"/C/Users/Voo/Desktop/unpeak/shortie/1kHz_16_mono.wav",
+		"/C/Users/Voo/Desktop/unpeak/analysis txt files/2_samples-mono.wav .txt",
+		"/C/Users/Voo/Desktop/ordonka",
+		"/C/Users/Voo/Desktop/unpeak/shortie/2_samples-mono-8bit.wav",
+		"/E/- BIURO - TEMP -18401/Hania/_ania/Piotr - strony/index.html",
+		"/C/Users/Voo/Desktop/unpeak/shortie/2_samples.wav",
+		"/C/Users/Voo/AppData/Roaming/Mozilla/Firefox/Profiles/qxq197yp.default-release/cookies.sqlite",
+		"/E/- BIURO - TEMP -18401/Hania/_ania/Ania - strony/v00/index.html"
+	],
+	"find":
+	{
+		"height": 29.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"e_monday",
+			"enum Days",
+			",",
+			" ",
+			"harley street",
+			"Oct ",
+			"Oct",
+			"inspector",
+			"oct",
+			"nov",
+			"Sorebank",
+			"++\n",
+			"echo C::$var;",
+			"dupa",
+			"Dupa",
+			"dupa1",
+			"mpm_event",
+			"mpmp_event",
+			"mpmp_prefork",
+			"<Filex",
+			",",
+			", ",
+			"(byte) 0x",
+			"\n",
+			" ",
+			"li>",
+			"indent"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"",
+			" ",
+			"",
+			"p>"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "Main.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 137,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								123,
+								123
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 29.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "Main.sublime-project",
+	"replace":
+	{
+		"height": 54.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
