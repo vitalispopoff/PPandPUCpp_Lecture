@@ -88,12 +88,104 @@ void stringArithmetics02() {
 void repetitions() {
 
 	string previous = " ", current;
+	int repeated = 0;
 
 	while (cin >> current) {
+		if (previous == current)
+			cout << "\n\t\'" << current << "\' repeated " << repeated << (++repeated == 1 ? " time\n" : " times\n");
+		//else repeated -= repeated;	// assemlby mov, sub, mov
+		else repeated = 0;				// assembly : mov
 
-		if (previous == current) cout << "repeated word: " << current << endl;
 		previous = current;
 	}
+}
+
+void typeSafety() {
+
+	//int x, y = x, z = y + 2;
+}
+
+void conversions0() {
+
+	bool truth = true;
+	char c = truth;
+	int i = c;
+	float f = i;
+	double d = f;
+
+	double phi = 1.6180339887498948482;
+	float fi = phi;
+	long lie = fi;
+
+	int big = 0x80000001;
+	char small = big;
+
+	auto check = [](auto v1, auto v2) {
+
+		string
+			type1 = typeid(v1).name(),
+			type2 = typeid(v2).name(),
+			result[]{ "changed.", "remained." };
+		bool
+			comparison = v1 == v2;
+
+		cout
+			<< "\n\tcast " << type1
+			<< " to " << type2
+			<< " - value has " << result[comparison]
+			<< endl;
+	};
+}
+
+void conversions1() {
+
+	int i = 0;
+	char c = 0;
+
+	while (cin >> i) {
+		c = i;
+		int result = i - c;
+		cout
+			<< "\n\tint " << i
+			<< " cast to char (" << (int)c
+			<< "), difference in value is " << result
+			<< endl;
+	}
+}
+
+void conversions2() {
+
+	/*using c++11 universal & uniform initialization syntax prevents narrowing conversion:
+		C2397 : conversion from 'int' to 'char' requires a narrowing conversion.
+	using pre-C++11 notation convention would result in 
+		C4244 : 'initializing': conversion from 'int' to 'char', possible loss of data
+	but the compilator would proceed anyways.
+	*/
+
+	int i{ 0 };
+
+	/*
+	while (cin >> i) {
+
+		char c{ i };
+		int result{ i - c };
+
+		cout
+			<< "\n\tint " << i
+			<< " cast to char (" << (int)c
+			<< "), difference in value is " << result
+			<< endl;
+	}
+	*/
+}
+
+void drill() {
+
+	string recipient, sender;
+
+	cout << "\n\n\tEnter the names of the recipient and sender separated with whitespace.\t";	
+	cin >> recipient >> sender;
+	cout << "\n\n\tDear " << recipient <<",\n\n\tIn these first words of sympathy I'd like You to ask You to stop writing your code at once.\n\n\tSincerely,\n\t"<<sender<<endl;
 }
 
 void objectsTypesValues() {
@@ -104,5 +196,10 @@ void objectsTypesValues() {
 	//integralArithmetics();
 	//stringArithmetics();
 	//stringArithmetics02();
-	repetitions();
+	//repetitions();
+	//conversions0();
+	//conversions1();
+	drill();
+
+
 }
