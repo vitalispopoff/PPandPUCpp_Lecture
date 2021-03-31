@@ -8,8 +8,9 @@ int main() {
 	srand(time(NULL));
 
 	//helloWorld();
+	//objectsTypesValues();
 
-	objectsTypesValues();
+	computation();
 
 	return 0;
 }

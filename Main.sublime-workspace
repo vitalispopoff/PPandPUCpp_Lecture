@@ -199,15 +199,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "Main.cpp",
-			"settings":
-			{
-				"buffer_size": 137,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -241,6 +232,7 @@
 	},
 	"file_history":
 	[
+		"/E/_LAB/_C/PPandPUCpp_Lecture/Main.cpp",
 		"/C/Users/Voo/Desktop/wtf.cpp",
 		"/E/_LAB/_C/DSA_CPP_Lecture/x64/Debug/main.i",
 		"/E/_LAB/_C/Barebone/barebone.cpp",
@@ -367,8 +359,7 @@
 		"/C/Users/Voo/Desktop/unpeak/shortie/2_samples-mono-8bit.wav",
 		"/E/- BIURO - TEMP -18401/Hania/_ania/Piotr - strony/index.html",
 		"/C/Users/Voo/Desktop/unpeak/shortie/2_samples.wav",
-		"/C/Users/Voo/AppData/Roaming/Mozilla/Firefox/Profiles/qxq197yp.default-release/cookies.sqlite",
-		"/E/- BIURO - TEMP -18401/Hania/_ania/Ania - strony/v00/index.html"
+		"/C/Users/Voo/AppData/Roaming/Mozilla/Firefox/Profiles/qxq197yp.default-release/cookies.sqlite"
 	],
 	"find":
 	{
@@ -386,6 +377,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			" ",
+			", ",
 			"e_monday",
 			"enum Days",
 			",",
@@ -417,9 +410,10 @@
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": false,
+		"regex": true,
 		"replace_history":
 		[
+			"\\n",
 			"",
 			" ",
 			"",
@@ -434,37 +428,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "Main.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 137,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								123,
-								123
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -507,7 +472,7 @@
 	"project": "Main.sublime-project",
 	"replace":
 	{
-		"height": 54.0
+		"height": 74.0
 	},
 	"save_all_on_build": true,
 	"select_file":

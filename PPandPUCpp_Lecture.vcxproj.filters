@@ -27,12 +27,18 @@
     <ClCompile Include="_3_objects_types_values.cpp">
       <Filter>Source Files\_1_Basics</Filter>
     </ClCompile>
+    <ClCompile Include="_4_computation.cpp">
+      <Filter>Source Files\_1_Basics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="std_lib_facilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="_1_basics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

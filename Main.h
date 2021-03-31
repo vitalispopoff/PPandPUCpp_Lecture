@@ -7,6 +7,4 @@ green - advice
 red - warning
 */
 
-
-void helloWorld();
-void objectsTypesValues();
+#include "_1_basics.h"
