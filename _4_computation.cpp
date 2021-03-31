@@ -69,6 +69,7 @@ void emptyStatements() {
 
 	[]() {};
 
+	// wrn C4390 : ';' : empty controlled statement found; is this the intent ?
 	if (true);
 
 	//assembly: xor, je, jmp, jmp
@@ -85,10 +86,10 @@ void ifElse() {
 	else cout << "\n\n\tnot so true as it could have been if it was TRUE, just like intended in first place...\n";
 }
 
-void ifElse1() {
+void convertLengthIfElse() {
 
 	constexpr double
-		cmPerInch = 2.54;
+		cmToInch = 2.54;
 	double
 		length{ 0 };
 	char
@@ -101,15 +102,50 @@ void ifElse1() {
 	cout
 		<< "\n\t";
 	if (unit == 'i')
-		cout << length << "in == " << length * cmPerInch << "cm.\n";
+		cout << length << "in == " << length * cmToInch << "cm.\n";
 	else
 		if (unit == 'c')
-			cout << length << "cm == " << length / cmPerInch << "in.\n";
+			cout << length << "cm == " << length / cmToInch << "in.\n";
 		else
-			cout << "Unit must be either cm ('c') or in ('i'), and it's not either. Can't convert. Bye.\n";
+			cout << "Unit must be either cm ('c') or in ('i'), and it's neither. Can't convert. Bye.\n";
 }
 
-void cashConvert() {
+void convertLengthSwitch() {
+
+	constexpr double
+		cmToInch{ 2.54 };
+	double
+		length{ 0 };
+	char
+		unit{ 'c' };
+	cout
+		<< "\n\n\tEnter a length followed by a unit:"
+		<< "\n\t c\tcm"
+		<< "\n\t i\tinch"
+		<< "\n\t";
+	cin
+		>> length
+		>> unit;
+	cout
+		<< "\n\t";
+	switch (unit) {
+	case 'c': {
+		cout << length << "in == " << length * cmToInch << "cm.\n";
+		break;
+	};
+	case 'i': {
+		cout << length << "cm == " << length / cmToInch << "in.\n";
+		break;
+	};
+	default: {
+		cout << "Unit must be either cm ('c') or in ('i'), and it's neither. Can't convert.\n\tBye.\n";
+		break;
+	};
+	}
+
+}
+
+void convertCashIfElse() {
 
 	const double
 		eur2usd{ 1.17 },
@@ -163,20 +199,132 @@ void cashConvert() {
 		<< endl;
 }
 
+void temporal() {
+
+	char 
+		currency{ ' ' };
+
+	double
+		eur2usd,
+		jpy2usd,
+		gbp2usd,
+		chf2usd,
+		value,
+		result;
+	string
+		currencyCode;
+
+	cout
+		<< "\n\tenter currency:";
+
+
+	auto attach = [&](double rate, string code) {
+
+		result = value * rate;
+		currencyCode = currency;
+	};
+
+	switch (currency) {
+
+	case 'e' :break;
+	case 'y' :break;
+	case 'p' :break;
+	case 'f' :break;
+	default:break;
+
+	}
+}
 
 
 
 
+void multipleSwitchCases() {
 
+	/*
+	Zbyszek
+	Czesiek
+	Rysiek
+	Marzena
+	Bo¿ena
+	Gra¿yna
+	*/
+
+	char
+		input{ ' ' };
+	cin
+		>> input;
+	cout
+		<< "\n\n\t";
+	switch (input) {
+
+		/*doesn't work - adding a filter variable to the case (e.g. 'c':) causes multiple errors
+		err E0065 : expected a ';'
+		err C2143 : syntax error: missing ';' ':'
+		err C2059 : syntax error ':'
+		*/
+	case 'z':
+		cout << "male in general";
+		break;
+	case 'c':
+		cout << "c case";
+		break;
+	case 'm':
+		break;
+	default:
+		cout << "moustache at will";
+		break;
+	}
+
+	cout << endl;
+
+}
+
+void switchWithStringSelector1() {
+
+	/*
+	idea: implement switch using a hashcode of certain strings.
+
+	the problem tho: is it possible to set the case filtering value to be not hardcoded... ?
+	*/
+
+	const unsigned int cases[3]{
+		4126860097,
+		261001112,
+		2054715501,
+	};
+
+	string
+		selectorIn{ " " };
+	cin
+		>> selectorIn;
+
+	auto stringToUnInt = [](string s)-> unsigned int { return hash<string>()(s); };
+
+	switch (stringToUnInt(selectorIn)) {
+
+	case 4126860097: {
+		cout << "\n\n\t this is Zbyszek.\n";
+		break;
+	}
+	case 261001112: {
+		cout << "\n\n\t this is Rysiek.\n";
+		break;
+	}
+	case 2054715501: {
+		cout << "\n\n\t this is Andrzej.\n";
+		break;
+	}
+	default: {
+		cout << "User not recognized. Access denied.\n";
+	}
+	}
+
+	//cout << hash<string>()(selectorIn);
+}
 
 void computation() {
 
 	//constants();	// constexpr
 	//constants1();	// const
-	//operators();
-	//emptyStatements();
-	//ifElse();
-	//ifElse1();
-	cashConvert();
 
 }
