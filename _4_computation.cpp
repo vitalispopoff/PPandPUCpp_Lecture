@@ -199,44 +199,73 @@ void convertCashIfElse() {
 		<< endl;
 }
 
-void temporal() {
+void convertCashSwitch() {
 
-	char 
+	char
 		currency{ ' ' };
-
 	double
-		eur2usd,
-		jpy2usd,
-		gbp2usd,
-		chf2usd,
-		value,
-		result;
+		eur2usd{ 1.17 },
+		jpy2usd{ 0.00904 },
+		gbp2usd{ 1.37 },
+		chf2usd{ 1.06 },
+		value{ 0. },
+		result{ 0. };
 	string
-		currencyCode;
-
+		currencyCode{ " " };
 	cout
-		<< "\n\tenter currency:";
-
+		<< "\n\tenter currency:"
+		<< "\n\t 'e'\tEUR"
+		<< "\n\t 'y'\tJPY"
+		<< "\n\t 'p'\tGBP"
+		<< "\n\t 'f'\tCHF"
+		<< "\n\twhitespace and a value to convert into USD.\n\tConfirm with 'Enter'.\t";
+	cin
+		>> currency
+		>> value;
 
 	auto attach = [&](double rate, string code) {
 
 		result = value * rate;
-		currencyCode = currency;
+		currencyCode = code;
 	};
 
 	switch (currency) {
 
-	case 'e' :break;
-	case 'y' :break;
-	case 'p' :break;
-	case 'f' :break;
-	default:break;
+	case 'e':
+	{
+		attach(eur2usd, "EUR");
+		break;
+	}
+	case 'y':
+	{
+		attach(jpy2usd, "JPY");
+		break;
+	}
+	case 'p':
+	{
+		attach(gbp2usd, "GBP");
+		break;
+	}
+	case 'f':
+	{
+		attach(chf2usd, "CHF");
+		break;
+	}
+	default:
+	{
+		cout
+			<< "\n\n\tNone of currencies available for a conversion were chosen."
+			<< "\n\tBetter luck next time."
+			<< "\n\tBye."
+			<< endl;
+		return;
+	}
 
 	}
+	cout
+		<< "\n\n\t" << fixed << setprecision(2) << currencyCode << ' ' << value << " equals to USD " << result
+		<< endl;
 }
-
-
-
 
 void multipleSwitchCases() {
 
@@ -322,9 +351,158 @@ void switchWithStringSelector1() {
 	//cout << hash<string>()(selectorIn);
 }
 
+void squaresWhile() {
+	int
+		i{ 0 },
+		max{ 0 };
+	cin
+		>> max;
+	while (i < max)
+		cout
+		<< "\n\t" << ++i
+		<< "\t" << i * i;
+	cout
+		<< endl;
+}
+
+void randomizeWhile() {
+
+	auto drawACoin = [] {
+		int
+			counter{ 0 };
+		bool
+			flag = true;
+		while (flag) {
+			counter++;
+			flag = rand() & 1;
+		}
+		cout
+			<< "\n\t" << counter;
+	};
+	char
+		again{ 'y' };
+
+	while (again == 'y') {
+
+		drawACoin();
+		cout
+			<< "\n\tagain ?\t(y/n)\t";
+		cin
+			>> again;
+	}
+	cout
+		<< endl;
+}
+
+void printableCharsWhile() {
+	int
+		c = 32;
+	while (++c < 256)
+		cout << "\n\t" << (char)c << "\t" << (unsigned int)c;
+	cout
+		<< endl;
+}
+
+void randomYayWhile() {
+	/*while loop w/ the counter increment inside the sustain statement
+	*/
+
+	int
+		i{ 0 };
+	while (i++ < 100) {
+		cout
+			<< "\n\t"
+			<< (rand() & 1) ? "yay" : "";
+	}
+	cout
+		<< endl;
+}
+
+void printableCharsFor() {
+
+	for (int i = 32; i < 256; ++i) {
+		cout
+			<< "\n\t" << (char)i
+			<< "\t" << i;
+	}
+	cout
+		<< endl;
+}
+
+void squareByAdding() {
+
+	int
+		in{ 0 },
+		result{ 0 };
+	cin
+		>> in;
+	for (int i = 0; i < in; ++i)
+		result += in;
+	cout
+		<< "\n\t" << result
+		<< endl;
+}
+
+void vectors() {
+
+	vector<int> v{ 0, 1, 2, 3 };
+	cout << "\n\tvector v: ";
+	for (int i : v)
+		cout << i << " , ";
+	//cout << endl;
+
+	//cout << ' , '; // this produces something strange : 2108448210844821084482108448
+
+	vector <int> w(4);
+	cout << "\n\tvector w: ";
+	for (int i : w)
+		cout << i << " , ";
+
+	vector<int> u(5);
+	cout << "\n\tvector u: ";
+	for (int i = 0; i < u.size(); ++i) {
+		u[i] = i;
+		cout << (i > 0 ? " , " : "") << u[i];
+	}
+
+	/*to be correctly initialized vector needs at least a stated size,
+	even 0 works.
+	*/
+	vector<int> t(0);
+	cout
+		<< "\n\tvector t:"
+		<< "\n\t\tsize = " << t.size()
+		<< "\n\t\tlocation = " << &t;
+	
+	t.push_back(0);
+	cout 
+		<< "\n\t\tsize = " << t.size()
+		<< "\n\t\tlocation = " << &t;
+
+
+
+	cout << endl;
+}
+
+void temporal() {
+
+
+
+}
+
 void computation() {
 
 	//constants();	// constexpr
 	//constants1();	// const
+
+	//squaresWhile();
+	//randomizeWhile();
+	//printableCharsWhile();
+	//randomYayWhile();
+	//printableCharsFor();
+	//squareByAdding();
+	vectors();
+
+	temporal();
 
 }
