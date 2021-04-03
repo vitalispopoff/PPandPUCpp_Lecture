@@ -1,6 +1,6 @@
 ﻿#include "std_lib_facilities.h"
 
-/*
+
 void constants() {
 
 	constexpr double
@@ -13,9 +13,7 @@ void constants() {
 
 	//++phi; // disabled due to the errors
 }
-*/
 
-/*
 void constants1() {
 
 	int input{ 0 };
@@ -41,9 +39,7 @@ void constants1() {
 	//daysThisYear++; // disabled due to the errors
 
 }
-*/
 
-/*
 void operators() {
 
 	int i = -1;
@@ -66,9 +62,7 @@ void operators() {
 	//cout << double{ i };
 	//cout << long{ f };
 }
-*/
 
-/*
 void emptyStatements() {
 
 	[]() {};
@@ -81,9 +75,7 @@ void emptyStatements() {
 
 	return;
 }
-*/
 
-/*
 void ifElse() {
 
 	int i{ 0 };
@@ -91,9 +83,7 @@ void ifElse() {
 	if (i) cout << "\n\n\tTRUE\n\n";
 	else cout << "\n\n\tnot so true as it could have been if it was TRUE, just like intended in first place...\n";
 }
-*/
 
-/*
 void convertLengthIfElse() {
 
 	constexpr double
@@ -117,9 +107,7 @@ void convertLengthIfElse() {
 		else
 			cout << "Unit must be either cm ('c') or in ('i'), and it's neither. Can't convert. Bye.\n";
 }
-*/
 
-/*
 void convertLengthSwitch() {
 
 	constexpr double
@@ -153,9 +141,7 @@ void convertLengthSwitch() {
 	};
 	}
 }
-*/
 
-/*
 void convertCashIfElse() {
 
 	const double
@@ -209,9 +195,7 @@ void convertCashIfElse() {
 		<< "\n\n\t" << fixed << setprecision(2) << currencyCode << ' ' << value << " equals to USD " << result
 		<< endl;
 }
-*/
 
-/*
 void convertCashSwitch() {
 
 	char
@@ -279,9 +263,7 @@ void convertCashSwitch() {
 		<< "\n\n\t" << fixed << setprecision(2) << currencyCode << ' ' << value << " equals to USD " << result
 		<< endl;
 }
-*/
 
-/*
 void multipleSwitchCases() {
 
 	//Zbyszek
@@ -318,9 +300,7 @@ void multipleSwitchCases() {
 	}
 	cout << endl;
 }
-*/
 
-/*
 void switchWithStringSelector1() {
 
 	//idea: implement switch using a hashcode of certain strings.
@@ -359,9 +339,7 @@ void switchWithStringSelector1() {
 	}
 	//cout << hash<string>()(selectorIn);
 }
-*/
 
-/*
 void squaresWhile() {
 	int
 		i{ 0 },
@@ -375,9 +353,7 @@ void squaresWhile() {
 	cout
 		<< endl;
 }
-*/
 
-/*
 void randomizeWhile() {
 
 	auto drawACoin = [] {
@@ -406,9 +382,7 @@ void randomizeWhile() {
 	cout
 		<< endl;
 }
-*/
 
-/*
 void printableCharsWhile() {
 	int
 		c = 32;
@@ -417,9 +391,7 @@ void printableCharsWhile() {
 	cout
 		<< endl;
 }
-*/
 
-/*
 void randomYayWhile() {
 	//while loop w/ the counter increment inside the sustain statement
 
@@ -434,9 +406,7 @@ void randomYayWhile() {
 	cout
 		<< endl;
 }
-*/
 
-/*
 void printableCharsFor() {
 
 	for (int i = 32; i < 256; ++i) {
@@ -447,9 +417,7 @@ void printableCharsFor() {
 	cout
 		<< endl;
 }
-*/
 
-/*
 void squareByAdding() {
 
 	int
@@ -463,9 +431,7 @@ void squareByAdding() {
 		<< "\n\t" << result
 		<< endl;
 }
-*/
 
-/*
 void vectors() {
 
 	vector<int> v{ 0, 1, 2, 3 };
@@ -501,9 +467,7 @@ void vectors() {
 	cout
 		<< endl;
 }
-*/
 
-/*
 void vectorPushBackWithRangeForLoop() {
 
 	vector<char> txt(16);
@@ -513,9 +477,7 @@ void vectorPushBackWithRangeForLoop() {
 	for (char c : txt) cout << c;
 	cout << endl;
 }
-*/
 
-/*
 void fillingVectorWithForLoop() {
 	//declaration is enough to make the vector work.
 
@@ -526,9 +488,7 @@ void fillingVectorWithForLoop() {
 	for (double d : dd) cout << d << " , ";
 	cout << endl;
 }
-*/
 
-/*
 void wordBucket() {
 	vector<string> words;
 	for (string input; cin >> input;) {
@@ -540,9 +500,7 @@ void wordBucket() {
 	for (int i = 1; i < words.size(); ++i) if (words[i] != words[i - 1]) cout << words[i] << ",\n";
 	cout << endl;
 }
-*/
 
-/*
 void bleep() {
 
 	vector<string>
@@ -559,9 +517,7 @@ void bleep() {
 			cout << "\n\n\t" << input << endl;
 	}
 }
-*/
 
-/*
 void drill01() {
 	//Write a program that consists of a while-loop
 	//that (each time around the loop) reads in two ints
@@ -572,9 +528,7 @@ void drill01() {
 	cout << "\n\t";
 	while (cin >> input1 >> input2)	cout << input1 << " , " << input2 << "\n\t";
 }
-*/
 
-/*
 void drill02() {
 	//make 01 printout the smaller value
 
@@ -587,9 +541,7 @@ void drill02() {
 
 	cout << endl;
 }
-*/
 
-/*
 void drill03() {
 	//make it respond to an equal values
 
@@ -608,9 +560,7 @@ void drill03() {
 			<< "\n\tthe larger value is: " << max(input1, input2)
 			<< endl;
 }
-*/
 
-/*
 void drill04() {
 	//change it to doubles
 
@@ -629,9 +579,7 @@ void drill04() {
 			<< "\n\tthe larger value is: " << max(input1, input2)
 			<< endl;
 }
-*/
 
-/*
 void drill05() {
 	//add the "almost equal" printout  for the non-equal case with a diff < 0.01
 
@@ -656,9 +604,7 @@ void drill05() {
 				<< endl;
 		}
 }
-*/
 
-/*
 void drill06() {
 	// make while write just one int each iteration; add min and max. report upon reaching either of 'em
 
@@ -703,9 +649,7 @@ void drill06() {
 		switcher = !switcher;
 	}
 }
-*/
 
-/*
 void drill07() {
 
 	double
@@ -746,9 +690,7 @@ void drill07() {
 		switcher = !switcher;
 	}
 }
-*/
 
-/*
 void drill09() {
 
 	double
@@ -802,9 +744,7 @@ void drill09() {
 	cout << "\n\n\tBye.\n";
 
 }
-*/
 
-/*
 void exc02() {
 
 	vector<double>temps;
@@ -820,9 +760,7 @@ void exc02() {
 		<< ((length & 1) ? (temps[length / 2]) : (temps[(length >> 1) - 1] + temps[length >> 1]) / 2.)
 		<< endl;
 }
-*/
 
-/*
 void exc03() {
 
 	int numberOfCities = 11;
@@ -846,11 +784,8 @@ void exc03() {
 	for (double d : distances) average += d;
 
 	cout << "\n\taverage distances is " << average / distances.size() << endl;
-
 }
-*/
 
-/*
 void exc04() {
 
 	int
@@ -895,9 +830,7 @@ void exc04() {
 			return;
 	}
 }
-*/
 
-/*
 void exc05() {
 
 	cout << "\n\n\tenter value1, operation (+ - * / ), and value2 - all separated with spaces.\t";
@@ -964,9 +897,7 @@ void exc06() {
 		cout << endl;
 	}
 }
-*/
 
-/*
 void exc07() {
 
 	vector<string> digits{ "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
@@ -1031,11 +962,8 @@ void exc07() {
 		}
 		cout << "\n\n\t the " << names[s.find(operation)] << " of " << value1 << " and " << value2 << " is " << result << " .\n";
 	}
-
 }
-*/
 
-/*
 void exc08() {
 
 	int
@@ -1078,9 +1006,7 @@ void exc09() {
 	//(2-(1/16777216))^255,
 	//which is almost 2^255;
 }
-*/
 
-/*
 void exc10() {
 
 	cout
@@ -1125,9 +1051,7 @@ void exc10() {
 		}
 	}
 }
-*/
 
-/*
 void exc11() {
 
 	vector<int> primes{ 2 };
@@ -1153,9 +1077,7 @@ void exc11() {
 		cout << endl;
 	}
 }
-*/
 
-/*
 void exc13() {
 
 	int max{ 0 };
@@ -1182,9 +1104,7 @@ void exc13() {
 		cout << endl;
 	}
 }
-*/
 
-/*
 void exc15() {
 
 	int population, max;
@@ -1192,7 +1112,7 @@ void exc15() {
 	while (cin >> population) {
 		if (population == 1) cout << "2 , \n";
 		else {
-																//computing the search range.
+			//computing the search range.
 			{
 				double temporal{ 1. + double(population) };
 				max = int(ceil(1.2 * temporal * log(temporal)));
@@ -1217,9 +1137,7 @@ void exc15() {
 		}
 	}
 }
-*/
 
-/*
 void exc16() {
 
 	vector<int> series;
@@ -1266,9 +1184,7 @@ void exc16() {
 	cout << "\n\t" << theMode.element << "/" << theMode.appearances;
 	cout << endl;
 }
-*/
 
-/*
 void exc17() {
 
 	int length{ 8 }, population{ 16 };
@@ -1286,12 +1202,12 @@ void exc17() {
 		}
 		cout << "\n\t" << s;
 	}
+	sort(strings);	
+	cout << "\n\tmin " << strings[0] << "\t\tmax" << strings[strings.size() - 1] << endl;
 
 	//...
 }
-*/
 
-/*
 void exc18() {
 
 	double a, b, c;
@@ -1320,8 +1236,6 @@ void exc18() {
 	}
 
 }
-*/
-
 
 void exc19() {
 
@@ -1348,29 +1262,71 @@ void exc19() {
 		else break;
 	}
 
-	name = "";
+	//query
+	string input{ "" };
+
+	auto inputIsInt = [&] {
+		for (char c : input)
+			if (c < '0' || c > '9')
+				return false;
+		return true;
+	};
+	auto scoreIndex = [&]()-> int {
+		for (int i = 0; i < scores.size(); ++i)
+			if (scores[i] == score) return i;
+		return -1;
+	};
+
+	while (cin >> input) {
+
+		if (inputIsInt()) {
+			score = stoi(input);
+			int index = scoreIndex();
+
+			//report a single score (prints the first on the list only), inform whether n/a 
+			switch (index) {
+			case -1:
+				cout << "\n\tScore not found.\n";
+				break;
+			default:
+				cout << "\t: " << names[index]<< endl;
+			}
+
+		}
+		else {
+			cout << "\n\t";
+			name = input;
+			int index = nameIndex();
+
+			// report everybody and exit
+			if (name == "get_all") {
+				cout << endl;
+				for (int i = 0; i < names.size(); ++i)
+					cout << "\n\t" << names[i] << "\t: " << scores[i];
+				cout << endl;
+				return;
+			}
+
+			//report a single person, inform whether n/a 
+			switch (index) {
+			case -1:
+				cout << "\n\tName not found.\n";
+				break;
+			default:
+				cout << "\t: " << scores[index] << endl;
+			}
+		}
+
+
+
+
+
+	}
+
+
 	//query
 	while (cin >> name) {
-		cout << "\n\t";
-		int index = nameIndex();
 
-		// report everybody and exit
-		if (name == "get_all") {
-			cout << endl;
-			for (int i = 0; i < names.size(); ++i)
-				cout << "\n\t" << names[i] << "\t: " << scores[i];
-			cout << endl;
-			return;
-		}
-
-		//report a single person, inform whether n/a 
-		switch (index) {
-		case -1:
-			cout << "\n\tName not found.\n";
-			break;
-		default:
-			cout << "\t: " << scores[index];
-		}
 	}
 }
 
