@@ -199,15 +199,6 @@
 	},
 	"buffers":
 	[
-		{
-			"contents": "2 , \n3 , \n5 , \n7 , \n11 , \n13 , \n17 , \n19 , \n23 , \n29 , \n31 , \n37 , \n41 , \n43 , \n47 , \n53 , \n59 , \n61 , \n67 ,\t\n71",
-			"settings":
-			{
-				"buffer_size": 112,
-				"line_ending": "Windows",
-				"name": "2 ,"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -241,6 +232,7 @@
 	},
 	"file_history":
 	[
+		"/E/_LAB/_C/PPandPUCpp_Lecture/Debug/_2_hello_world.obj"
 	],
 	"find":
 	{
@@ -309,37 +301,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 112,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								112,
-								112
-							]
-						],
-						"settings":
-						{
-							"auto_name": "2 ,",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
