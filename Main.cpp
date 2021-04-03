@@ -9,8 +9,9 @@ int main() {
 
 	//helloWorld();
 	//objectsTypesValues();
+	//computation();
 
-	computation();
+	errors();
 
 	return 0;
 }

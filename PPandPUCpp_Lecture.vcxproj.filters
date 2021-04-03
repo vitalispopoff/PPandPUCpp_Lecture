@@ -30,6 +30,9 @@
     <ClCompile Include="_4_computation.cpp">
       <Filter>Source Files\_1_Basics</Filter>
     </ClCompile>
+    <ClCompile Include="_5_errors.cpp">
+      <Filter>Source Files\_1_Basics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
