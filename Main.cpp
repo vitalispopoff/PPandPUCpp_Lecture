@@ -3,15 +3,19 @@
 //#include <stdlib.h>
 //#include <time.h>
 
-//aim: print "Hello World" in console; exit.
 int main() {
-	srand(time(NULL));
-
-	//helloWorld();
-	//objectsTypesValues();
-	//computation();
 
 	errors();
 
-	return 0;
+	//try {
+	//	//helloWorld();
+	//	//objectsTypesValues();
+	//	//computation();
+	//	return 0;
+	//}
+	//catch (...) {
+	//	cerr << "\n\tunknown exception occured\n";
+	//	keep_window_open();
+	//	return 2;
+	//}
 }
