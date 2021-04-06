@@ -517,7 +517,7 @@ void bleep() {
 	}
 }
 
-void drill01() {
+void computation_drill01() {
 	//Write a program that consists of a while-loop
 	//that (each time around the loop) reads in two ints
 	//and then prints them.
@@ -528,7 +528,7 @@ void drill01() {
 	while (cin >> input1 >> input2)	cout << input1 << " , " << input2 << "\n\t";
 }
 
-void drill02() {
+void computation_drill02() {
 	//make 01 printout the smaller value
 
 	int input1, input2;
@@ -541,7 +541,7 @@ void drill02() {
 	cout << endl;
 }
 
-void drill03() {
+void computation_drill03() {
 	//make it respond to an equal values
 
 	int
@@ -560,7 +560,7 @@ void drill03() {
 			<< endl;
 }
 
-void drill04() {
+void computation_drill04() {
 	//change it to doubles
 
 	double
@@ -579,7 +579,7 @@ void drill04() {
 			<< endl;
 }
 
-void drill05() {
+void computation_drill05() {
 	//add the "almost equal" printout  for the non-equal case with a diff < 0.01
 
 	double
@@ -604,7 +604,7 @@ void drill05() {
 		}
 }
 
-void drill06() {
+void computation_drill06() {
 	// make while write just one int each iteration; add min and max. report upon reaching either of 'em
 
 	double
@@ -649,7 +649,7 @@ void drill06() {
 	}
 }
 
-void drill07() {
+void computation_drill07() {
 
 	double
 		minimum = numeric_limits<double>::max(),
@@ -690,7 +690,7 @@ void drill07() {
 	}
 }
 
-void drill09() {
+void computation_drill09() {
 
 	double
 		minimum = numeric_limits<double>::max(),
@@ -744,7 +744,7 @@ void drill09() {
 
 }
 
-void exc02() {
+void computation_exc02() {
 
 	vector<double>temps;
 	for (double temp; cin >> temp;)	temps.push_back(temp);
@@ -760,7 +760,7 @@ void exc02() {
 		<< endl;
 }
 
-void exc03() {
+void computation_exc03() {
 
 	int numberOfCities = 11;
 	vector<double> distances;
@@ -785,7 +785,7 @@ void exc03() {
 	cout << "\n\taverage distances is " << average / distances.size() << endl;
 }
 
-void exc04() {
+void computation_exc04() {
 
 	int
 		guess{ 50 },
@@ -823,14 +823,14 @@ void exc04() {
 			<< endl;
 
 		if (cin >> answer && answer != 'n')
-			exc04();
+			computation_exc04();
 
 		else
 			return;
 	}
 }
 
-void exc05() {
+void computation_exc05() {
 
 	cout << "\n\n\tenter value1, operation (+ - * / ), and value2 - all separated with spaces.\t";
 	double
@@ -867,7 +867,7 @@ void exc05() {
 
 }
 
-void exc06() {
+void computation_exc06() {
 
 	vector<string> names{ "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
 	string input;
@@ -897,7 +897,7 @@ void exc06() {
 	}
 }
 
-void exc07() {
+void computation_exc07() {
 
 	vector<string> digits{ "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
 	string input1, input2;
@@ -963,7 +963,7 @@ void exc07() {
 	}
 }
 
-void exc08() {
+void computation_exc08() {
 
 	int
 		aimValue{ 0 };
@@ -973,7 +973,7 @@ void exc08() {
 	cout << "\n\n\t" << i;
 }
 
-void exc09() {
+void computation_exc09() {
 
 	//	The amount of all grains from the chessboard would be: (2^65) - 1;
 	//double would lack a single bit to represent the number;
@@ -1006,7 +1006,7 @@ void exc09() {
 	//which is almost 2^255;
 }
 
-void exc10() {
+void computation_exc10() {
 
 	cout
 		<< "\n\t~\tpaper"
@@ -1051,7 +1051,7 @@ void exc10() {
 	}
 }
 
-void exc11() {
+void computation_exc11() {
 
 	vector<int> primes{ 2 };
 
@@ -1077,7 +1077,7 @@ void exc11() {
 	}
 }
 
-void exc13() {
+void computation_exc13() {
 
 	int max{ 0 };
 
@@ -1104,7 +1104,7 @@ void exc13() {
 	}
 }
 
-void exc15() {
+void computation_exc15() {
 
 	int population, max;
 
@@ -1137,7 +1137,7 @@ void exc15() {
 	}
 }
 
-void exc16() {
+void computation_exc16() {
 
 	vector<int> series;
 	int
@@ -1184,7 +1184,7 @@ void exc16() {
 	cout << endl;
 }
 
-void exc17() {
+void computation_exc17() {
 
 	int length{ 8 }, population{ 16 };
 	//length = rand()% (length - 1);
@@ -1207,7 +1207,7 @@ void exc17() {
 	//...
 }
 
-void exc18() {
+void computation_exc18() {
 
 	double a, b, c;
 
@@ -1236,7 +1236,7 @@ void exc18() {
 
 }
 
-void exc19() {
+void computation_exc19() {
 
 	string name{ "" };
 	int score;
@@ -1330,7 +1330,5 @@ void exc19() {
 }
 
 void computation() {
-
-	exc19();
 
 }

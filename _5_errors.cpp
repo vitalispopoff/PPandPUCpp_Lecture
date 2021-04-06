@@ -293,10 +293,440 @@ void lowHighAverage() {
 
 // Example11 : testing -------------------------
 
+void error_drill01() {
 
+	// 1.
+	// err E0020
+	// err C2065
+	// wrn C4018 
+	// wrn C4101
+	//Cout << "Success!\n";
 
-void errors() {
+	cout << "Success!\n";
+}
 
+void error_drill02() {
 
+	// err E0008
+	// err E0065
+	// err C2001
+	// err C2143
+	// wrn C4018
+	// wrn C4101
+
+	//cout << "Success!\n;
+
+	cout << "Success!\n";
+}
+
+void error_drill03() {
+
+	// err E0007
+	// err E0008
+	// err E0065
+	// err C2017
+	// err C2001
+	// err C2065
+	// err C2143
+	// err C2142
+	// wrn C4018
+	// wrn C4101
+	//cout << "Success" << !\n"
+
+	cout << "Success" << "!\n";
 
 }
+
+void error_drill04() {
+
+	// err E0020
+	// err C2065
+	// wrn C4018
+	// wrn C4101
+	//cout << success << '\n';
+
+	cout << "success" << '\n';
+}
+
+void error_drill05() {
+
+	// err E0415
+	// err E0413
+	// err C2440
+	// err C2440
+	// wrn C4018
+	// wrn C4101
+	//string res = 7; vector<int>v(10); v[5] = res; cout << "Success!\n";
+
+	//string res = 7;	//mustn't be string.
+	int res = 7;
+	vector<int> v(10);
+	v[5] = res;
+	cout << "Success!\n";
+
+}
+
+void error_drill06() {
+
+	// err E0980
+	// err E0980
+	// err C2064
+	// err C2064
+	// err C4018
+	// err C4101
+	//vector<int>v(10); v(5) = 7; if (v(5) != 7)cout << "Success!\n";
+
+	vector<int>v(10);
+
+	//v(5) = 7;	//wrong brackets
+	v[5] = 7;
+
+	//if (v(5) != 7) cout << "Success!\n";	// wrong brackets here as well
+	//if (v[5] != 7) cout << "Success!\n";	// gotta switch != to == to get "Success!" 
+
+	if (v[5] == 7) cout << "Success!\n";
+}
+
+void error_drill07() {
+
+	// err E0020
+	// err C2065
+	// wrn C4018
+	// wrn C4101
+
+	//if (cond)cout << "Success!\n"; else cout << "Fail!\n"; // cond not declared, nor initialized.
+
+	bool cond = true;
+	if (cond) cout << "Success!\n";
+	else cout << "Fail!\n";
+}
+
+void error_drill08() {
+
+	//bool c = false; if(c)cout << "Success!\n"; else cout << "Fail!\n"; // c needs being true, or if assertion changed to !
+
+	bool c = true;
+	if (c) cout << "Success!\n";
+	else cout << "Fail!\n";
+}
+
+void error_drill09() {
+
+	// err E0020
+	// err C2374
+	// err C2065
+	// err C2146
+	// err C2065
+	// err C2065
+	// wrn C4018
+	// wrn C4101
+	//string s = "ape";boo c = "fool"<s;if(c)cout<<"Success!\n"; // no type 'boo'
+
+	string s = "ape";
+	bool c = "fool" < s;			// had to rename c to c1 because of line 408
+	if (!c) cout << "Success!\n";	// to have it success gotta switch to !c1
+
+}
+
+void error_drill10() {
+
+	//string s = "ape"; if (s == "fool")cout << "Success!\n";// this one needs != instead of ==
+
+	string s = "ape";
+	if (s != "fool") cout << "Success!\n";
+}
+
+void error_drill11() {
+
+	// err E0349
+	// err C2678
+	// wrn C4018
+	// wrn C4101
+	//string s="ape";if(s=="fool")cout<"Success!\n"; // assert : == to != ; also cout << rather than <
+
+	string s = "ape";
+	if (s != "fool") cout << "Success!\n";
+}
+
+void error_drill12() {
+
+	// err E0711
+	// err E0349
+	// err C2451
+	// err C2678
+	// wrn C4018
+	// wrn C4101
+
+	//string s="ape";if(s+"fool")cout<"Success!\n"; // assertion needs to be a proper expression, cout needs <<
+
+	string s = "ape";
+	s = "fool";		// was + a shift mistype?
+	if (s == "fool") cout << "Success!\n";
+}
+
+void error_drill13() {
+
+	//vector<char>v(5);for(int i=0;0<v.size();++i);cout<<"Success!\n";	// for loop sustain condition is always true, and its code block is empty
+
+	vector<char> v(5);
+	for (int i = 0; i < v.size(); ++i); // keeping it useless, but not infinite
+	cout << "Success!\n";
+
+}
+
+void error_drill14() {
+
+	//vector<char>v(5);for(int i=0;i<=v.size();++i);cout<<"Success!\n";//this works actually
+
+	vector<char> v(5);
+	for (int i = 0; i < v.size(); ++i); // we should change <= into < . just in case
+	cout << "Success!\n";
+}
+
+void error_drill15() {
+
+	//string s = "Success!\n"; for (int i = 0; i < 6; ++i) cout << s[i]; // prints "Success" only
+
+	string s = "Success!\n";
+	//for (int i = 0; i < s.size(); ++i) cout << s[i];
+
+	for (char c : s) cout << c;	// even safer.
+}
+
+void error_drill16() {
+
+	// err E0020
+	// err E0065
+	// err C2065
+	// err C2146
+	// err C2181
+	// wrn C4018
+	// wrn C4101
+	// wrn C4018
+	// wrn C4018
+
+	//if (true)then cout << "Success!\n"; else cout << "Fail!\n"; // looks like Excel.
+
+	if (true) cout << "Success!\n";
+	else cout << "Fail!\n";
+
+}
+
+void error_drill17() {
+
+	//int x = 2000; char c = x; if (c == 2000) cout << "Success!\n"; // 2000 exceeds char length
+
+	int x = 2000;
+	char c = (x % 256);
+
+	if (c == char(2000)) cout << "Success!\n"; // not sure if char(2000 % 256) wasn't better
+
+}
+
+void error_drill18() {
+
+	//string s = "Success!\n"; for (int i = 0 ; i < 10; ++i) cout << s[i]; works but is not safe.
+
+	string s = "Success!\n";
+	for (char c : s)cout << c;
+
+}
+
+void error_drill19() {
+
+	// err E0441
+	// err C2955
+	// err C2514
+	// err C2662
+	// wrn C4018 
+	// wrn C4101
+	// wrn C4018 
+	// wrn C4018
+
+
+	//vector v(5); for (int i = 0; i <= v.size(); ++i); cout << "Success!\n"; // vector w/o type declaration, for loop sustaine condition not safe, for loop codeblock empty;
+
+	int vectorLength = 5;					// vector length moved outside the declaration - vector cannot be defined properly
+	//vector</*...*/> v(vectorLength);		// no info on the vector type provided
+	for (int i = 0; i < vectorLength; ++i);	// sustain condition based on a external variable instead of vector member
+	cout << "Success!\n";
+
+}
+
+void error_drill20() {
+
+	//int i = 0; int j = 9; while (i < 10) ++j; if (j < i) cout << "Success!\n"; // will never happen
+
+	//int i = 0, j = 9;
+	//while (i < 10) ++j;	// will never stop
+	//if (j < i) cout << "Success!\n";	// will never be true
+
+
+	int i = 0, j = 9;
+	while (i < 10) ++i;	// it's the i to be asserted
+	if (j < i) cout << "Success!\n";
+
+}
+
+void error_drill21() {
+
+	//int x = 2; double d = 5 / (x - 2); if (d == 2 * x + 0.5) cout << "Success!\n";
+
+	int x = 2;
+	double d = 5 / (double(x) - 2);					//this will yield 'inf.' but at least won't throw an exception
+	if (d != 2 * x + 0.5) cout << "Success!\n";		//it's rude, but effective
+
+}
+
+void error_drill22() {
+
+	//string<char>s = "Success!\n"; for (int i = 0; i <= 10; ++i) cout << s[i];	// string doesn't accept this kind of declaration
+
+
+	string s = "Success!\n";						// removed the <char> thing
+	for (char c : s) cout << c;						// switched from for to range for loop, dumped the magic constant, and got safer
+
+}
+
+void error_drill23() {
+
+	//int i = 0; while (i < 10) ++j; if (j < i)cout << "Success!\n"; // j not defined
+
+	int 
+		i = 0, 
+		j = 0;						// added definition of j
+	while (i < 10)
+		++i;						// changed to i increment to break the while condition, and make the if condition true
+	if (j < i) 
+		cout << "Success!\n";
+}
+
+void error_drill24() {
+
+	//int x = 4; double d = 5 / (x - 2); if (d = 2 * x + 0.5) cout << "Success!\n"; // d reinitialized in the if condition ?
+
+	int 
+		x = 2;
+	double 
+		d = x == 2 ? 0 : 5 / (double(x)-2);
+	if (d = 2 * x + 0.5)					// this is just true
+		cout << "Success!\n";
+}
+
+void error_drill25() {
+
+	//cin << "Success!\n"; cin requires >>, << requires cout
+
+	cout << "Success!\n";
+
+}
+
+// Excercise 02 --------------------------------
+
+//inspect and fix the code:
+
+/* 
+	double ctok(double c)		//shortening the names not a good idea
+	{
+
+		int k = c + 273.15;		// int instead of double, 'k' is never referred to in the local scope
+		return int				// no ';' , returned type instead of variable
+	}
+
+	int tempFunction01()	
+	{
+
+		double c = 0;			// would be nice to have '0.0' rather than '0'
+		cin >> d;				// 'd' was never declared
+		double k = ctok("c");	//	ctok accepts doubles, this is string, declaring 'k; in the scope is confusing, as ctok already has the variable called 'k', 
+		Cout << k << '\n';		// cout should be written with small caps
+	}
+
+	*/
+
+
+double CelsiusToKelvin02(double temperature) {
+
+	return temperature + 273.15;
+}
+
+void error_exc02() {
+
+	double 
+		input{ 0. };
+	cin 
+		>> input;
+	double 
+		tempInKelvin = CelsiusToKelvin02(input);
+	cout 
+		<< tempInKelvin 
+		<< endl;
+
+}
+
+// Excercise 03 & 04 ---------------------------
+
+// the exc02 program needs correction for input < -273.15.
+
+double CelsiusToKelvin03(double temperature) {
+
+	//branchless - if temperature is less then 0K, returns 0;
+	return (temperature >= -273.15) * (temperature + 273.15);
+}
+
+void error_exc03() {
+
+	double
+		input{ 0. };
+	cin
+		>> input;
+	double
+		tempInKelvin = CelsiusToKelvin03(input);
+	cout
+		<< tempInKelvin
+		<< endl;
+
+}
+
+// Excercise 05 --------------------------------
+
+/*converts temperature value between different scales.
+* @var temperature - value 
+* @var scale - scale to which temperature is to be converted
+*/
+double CelsiusToKelvin05(double temperature, char scale) {
+
+	//branchless - if temperature is less then 0K, returns 0;
+
+	switch (scale) {
+
+	case 'k':; case 'K':
+	return (temperature >= -273.15) * (temperature + 273.15);
+
+	case 'c':; case 'C':
+	return (temperature >= 0) * (temperature - 273.15);
+
+	default:
+		cout << "No accepted scale was chosen. Returning 0.";
+		return 0.;
+	}
+}
+
+void error_exc05() {
+
+	double
+		input{ 0. };
+	char scale{ 'k' };
+	cin
+		>> input 
+		>> scale;
+	double
+		tempInKelvin = CelsiusToKelvin05(input, scale);
+	cout
+		<< tempInKelvin
+		<< endl;
+
+}
+
+
+void errors() { error_exc03(); }

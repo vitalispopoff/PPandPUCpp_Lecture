@@ -5,7 +5,7 @@
 
 int main() {
 
-	errors();
+	//errors();
 
 	//try {
 	//	//helloWorld();
@@ -18,4 +18,29 @@ int main() {
 	//	keep_window_open();
 	//	return 2;
 	//}
+
+
+	//drill
+
+	try {
+	
+		errors();
+
+		keep_window_open();
+		return 0;
+	}
+	catch (exception& e) {
+		cerr << "error: " << e.what() << endl;
+		keep_window_open();
+		return 1;
+	}
+	catch (...) {
+
+		cerr << "unknown exception.\n";
+		keep_window_open();
+		return 2;
+	}
+
+
+
 }
