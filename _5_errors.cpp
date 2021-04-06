@@ -592,12 +592,12 @@ void error_drill23() {
 
 	//int i = 0; while (i < 10) ++j; if (j < i)cout << "Success!\n"; // j not defined
 
-	int 
-		i = 0, 
+	int
+		i = 0,
 		j = 0;						// added definition of j
 	while (i < 10)
 		++i;						// changed to i increment to break the while condition, and make the if condition true
-	if (j < i) 
+	if (j < i)
 		cout << "Success!\n";
 }
 
@@ -605,10 +605,10 @@ void error_drill24() {
 
 	//int x = 4; double d = 5 / (x - 2); if (d = 2 * x + 0.5) cout << "Success!\n"; // d reinitialized in the if condition ?
 
-	int 
+	int
 		x = 2;
-	double 
-		d = x == 2 ? 0 : 5 / (double(x)-2);
+	double
+		d = x == 2 ? 0 : 5 / (double(x) - 2);
 	if (d = 2 * x + 0.5)					// this is just true
 		cout << "Success!\n";
 }
@@ -625,7 +625,7 @@ void error_drill25() {
 
 //inspect and fix the code:
 
-/* 
+/*
 	double ctok(double c)		//shortening the names not a good idea
 	{
 
@@ -633,12 +633,12 @@ void error_drill25() {
 		return int				// no ';' , returned type instead of variable
 	}
 
-	int tempFunction01()	
+	int tempFunction01()
 	{
 
 		double c = 0;			// would be nice to have '0.0' rather than '0'
 		cin >> d;				// 'd' was never declared
-		double k = ctok("c");	//	ctok accepts doubles, this is string, declaring 'k; in the scope is confusing, as ctok already has the variable called 'k', 
+		double k = ctok("c");	//	ctok accepts doubles, this is string, declaring 'k; in the scope is confusing, as ctok already has the variable called 'k',
 		Cout << k << '\n';		// cout should be written with small caps
 	}
 
@@ -652,14 +652,14 @@ double CelsiusToKelvin02(double temperature) {
 
 void error_exc02() {
 
-	double 
+	double
 		input{ 0. };
-	cin 
+	cin
 		>> input;
-	double 
+	double
 		tempInKelvin = CelsiusToKelvin02(input);
-	cout 
-		<< tempInKelvin 
+	cout
+		<< tempInKelvin
 		<< endl;
 
 }
@@ -691,7 +691,7 @@ void error_exc03() {
 // Excercise 05 --------------------------------
 
 /*converts temperature value between different scales.
-* @var temperature - value 
+* @var temperature - value
 * @var scale - scale to which temperature is to be converted
 */
 double CelsiusToKelvin05(double temperature, char scale) {
@@ -701,10 +701,10 @@ double CelsiusToKelvin05(double temperature, char scale) {
 	switch (scale) {
 
 	case 'k':; case 'K':
-	return (temperature >= -273.15) * (temperature + 273.15);
+		return (temperature >= -273.15) * (temperature + 273.15);
 
 	case 'c':; case 'C':
-	return (temperature >= 0) * (temperature - 273.15);
+		return (temperature >= 0) * (temperature - 273.15);
 
 	default:
 		cout << "No accepted scale was chosen. Returning 0.";
@@ -718,7 +718,7 @@ void error_exc05() {
 		input{ 0. };
 	char scale{ 'k' };
 	cin
-		>> input 
+		>> input
 		>> scale;
 	double
 		tempInKelvin = CelsiusToKelvin05(input, scale);
@@ -728,5 +728,279 @@ void error_exc05() {
 
 }
 
+// Excercise 06 --------------------------------
 
-void errors() { error_exc03(); }
+double CelsiusToFahrenheit06(double temperature, char scale) {
+
+	switch (scale) {
+
+	case 'f':; case'F':
+		return 32. + temperature * 1.8;
+	case 'c':; case'C':
+		return (temperature - 32) * 0.5555555555555;
+	default:
+		cout << "No accepted scale was chosen. Returning 0.";
+		return 0;
+	}
+}
+
+void error_exc06() {
+
+	double
+		input{ 0. };
+	char
+		scale{ 'f' };
+	while (cin >> input >> scale) {
+		double
+			tempInFahrenheit = CelsiusToFahrenheit06(input, scale);
+		cout
+			<< tempInFahrenheit
+			<< endl;
+	}
+}
+
+// Excercise 07 --------------------------------
+
+void error_exc07() {
+
+	// a * x^2 + b * x + c == 0
+	double
+		a{ 0. },
+		b{ 0. },
+		c{ 0. };
+	auto discriminant = [&]() -> double {
+		return (b * b) - (4 * a * c);
+	};
+
+	while (cin >> a >> b >> c) {
+
+		if (discriminant() < 0)
+			cout << "\n\tNo solution available.";
+		else if (discriminant() == 0)
+			cout << "\n\tx: " << (0 - b) / (2 * a); // we don't want a '-0'
+		else {
+			cout
+				<< "\n\tx1: " << (-b + sqrt(discriminant())) / (2 * a)
+				<< "\tx2: " << -(b + sqrt(discriminant())) / (2 * a);
+		}
+		cout << endl;
+	}
+}
+
+// Excercise 08 --------------------------------
+
+void error_exc08() {
+
+	for (int input; cin >> input;) {
+
+		vector<int>
+			numbers(input);
+		cout
+			<< "\n\tEnter "
+			<< numbers.size()
+			<< " integrals then.\t";
+		for (int& i : numbers)
+			cin >> i;
+		int
+			result = 0;
+		for (int i : numbers)
+			result += i;
+		cout
+			<< "\n\tSum of those "
+			<< input
+			<< " integrals of your choice is "
+			<< result
+			<< endl;
+	}
+
+}
+
+// Excercise 09 --------------------------------
+
+void error_exc09() {
+	for (int input; cin >> input;) {
+
+		vector<int>
+			numbers(input);
+		cout
+			<< "\n\tEnter "
+			<< numbers.size()
+			<< " integrals then.\t";
+		for (int& i : numbers)
+			cin >> i;
+		double
+			result = 0;
+		for (int i : numbers)
+			result += i;
+
+		if (result - floor(result) == 0.)
+			cout
+			<< "\n\tSum of those "
+			<< input
+			<< " integrals of your choice is "
+			<< round(result)
+			<< endl;
+		else
+			cout
+			<< "\n\tResult is not a proper integral.\n";
+	}
+}
+
+// Excercise 10 --------------------------------
+
+void error_exc10() {
+
+	for (int input; cin >> input;) {
+
+		vector<double>
+			numbers(input),
+			differentials(input - 1);
+		cout
+			<< "\n\tEnter "
+			<< numbers.size()
+			<< " integrals then.\t";
+		for (double& i : numbers)
+			cin >> i;
+		for (int i = 0; i < differentials.size(); ++i)
+			differentials[i] = numbers[i + 1] - numbers[i];
+		double
+			result = 0;
+		for (double i : numbers)
+			result += i;
+		cout
+			<< "\n\tSum of those "
+			<< input
+			<< " values of your choice is "
+			<< result
+			<< "\n\n\tDifferentials of the provided numbers:\t";
+		for (double d : differentials)
+			cout << d << " , ";
+		cout
+			<< endl;
+	}
+}
+
+// Excercise 11 --------------------------------
+
+void error_exc11() {
+
+	//nth of the fibonacci sequence. 
+	//implemented with int - no concurrency
+
+	vector<int> numbers{ 0, 1, };
+
+	int nth{ 0 };
+	while (cin >> nth && nth > 0 && nth < 47) // F47 exceeds int range.
+	{
+
+		if (nth >= numbers.size())
+			for (int i = numbers.size(); i <= nth; ++i)
+				numbers.push_back(numbers[i - 1] + numbers[i - 2]);
+
+		cout << "\n\t Fibonacci's nth: " << numbers[nth] << endl;
+	}
+}
+
+// Excercise 12 --------------------------------
+
+struct num {
+
+	int
+		answer,
+		guess;
+	//bool
+	//	status{ false };	// cow == true
+	num(int answer) {
+		this->answer = answer;
+	}
+	bool bull() {
+		return answer == guess;
+	}
+};
+
+
+void error_exc12() {
+
+	// bulls and cows
+
+	int
+		sequenceLength = 4;
+	vector<num>
+		sequence;
+
+	// generating sequence
+	for (int i = 0; i < sequenceLength;) {
+		int
+			number = rand() % 10;
+		auto
+			compare = [&]()->bool {
+			for (num s : sequence)
+				if (number == s.answer)
+					return false;
+			return true;
+		};
+		if (compare()) {
+			sequence.push_back(num(number));
+			++i;
+		}
+	}
+
+	//testing - preview the answer sequence
+	/*
+	cout
+		<< "\n\t";
+	for (num i : sequence)
+		cout
+		<< i.answer
+		<< ' ';
+	cout
+		<< endl;
+	*/
+
+	int
+		bulls{ 0 },
+		cows{ 0 };
+
+	// the round
+	
+	while (bulls < sequenceLength) {
+
+		bulls = cows = 0;
+
+		// player writing his guess
+		for (num& i : sequence) {
+			int
+				tmp;
+			if (cin >> tmp && tmp >= 0 && tmp < 10)
+				i.guess = tmp;
+		}
+
+		//testing - preview the guess sequence
+
+		//cout << "\n\t";
+		//for (num i : sequence) cout << i.guess << ' ';
+		//cout << endl;
+
+		// comparing guesses with anwswers
+		
+		for (int i = 0; i < sequenceLength; ++i) {
+			bool
+				temp = sequence[i].bull();
+			if (temp)
+				bulls++;
+			else {
+				for (int j = 0; j < sequenceLength; ++j) {
+					if (i != j && sequence[i].guess == sequence[j].answer) {
+						cows++;
+						break;
+					}
+				}
+			}
+		}		
+		cout << "\n\tbulls: " << bulls << " , cows: " << cows << endl;
+	}
+
+}
+
+
+void errors() { error_exc12(); }
