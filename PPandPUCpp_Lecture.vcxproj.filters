@@ -16,6 +16,9 @@
     <Filter Include="Source Files\_1_Basics">
       <UniqueIdentifier>{5c645894-06da-4b33-a1ab-157d29195dcd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\_1_Basics">
+      <UniqueIdentifier>{4cff2206-bdcb-438d-802f-526e61f3b27a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -33,6 +36,9 @@
     <ClCompile Include="_5_errors.cpp">
       <Filter>Source Files\_1_Basics</Filter>
     </ClCompile>
+    <ClCompile Include="_6_programming.cpp">
+      <Filter>Source Files\_1_Basics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -42,7 +48,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="_1_basics.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\_1_Basics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

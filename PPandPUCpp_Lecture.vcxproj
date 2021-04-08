@@ -144,6 +144,7 @@
     <ClCompile Include="_3_objects_types_values.cpp" />
     <ClCompile Include="_4_computation.cpp" />
     <ClCompile Include="_5_errors.cpp" />
+    <ClCompile Include="_6_programming.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />

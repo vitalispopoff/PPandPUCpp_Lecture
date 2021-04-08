@@ -20,13 +20,12 @@ int main() {
 	//	keep_window_open();
 	//	return 2;
 	//}
-
-
-	//drill
-
+	
+	/*
 	try {
 	
-		errors();
+		computation();
+		//errors();
 
 		keep_window_open();
 		return 0;
@@ -42,7 +41,8 @@ int main() {
 		keep_window_open();
 		return 2;
 	}
+	*/
 
-
+	programming();
 
 }

@@ -945,24 +945,12 @@ void error_exc12() {
 		}
 	}
 
-	//testing - preview the answer sequence
-	/*
-	cout
-		<< "\n\t";
-	for (num i : sequence)
-		cout
-		<< i.answer
-		<< ' ';
-	cout
-		<< endl;
-	*/
-
 	int
 		bulls{ 0 },
 		cows{ 0 };
 
 	// the round
-	
+
 	while (bulls < sequenceLength) {
 
 		bulls = cows = 0;
@@ -975,14 +963,8 @@ void error_exc12() {
 				i.guess = tmp;
 		}
 
-		//testing - preview the guess sequence
-
-		//cout << "\n\t";
-		//for (num i : sequence) cout << i.guess << ' ';
-		//cout << endl;
-
 		// comparing guesses with anwswers
-		
+
 		for (int i = 0; i < sequenceLength; ++i) {
 			bool
 				temp = sequence[i].bull();
@@ -996,11 +978,73 @@ void error_exc12() {
 					}
 				}
 			}
-		}		
+		}
 		cout << "\n\tbulls: " << bulls << " , cows: " << cows << endl;
 	}
 
 }
 
+// Excercise 14 --------------------------------
 
-void errors() { error_exc12(); }
+void error_exc14() {
+
+	vector<int>
+		rejected, monday, tuesday, wednesday, thursday, friday, saturday, sunday;
+	string
+		s{ "" };
+	int
+		value{ 0 };
+	vector<string>
+		glossary{ "monday", "tuesday", "wednesday","thursday", "friday", "saturday", "sunday", "mon", "tue", "wed", "thu", "fri", "sat", "sun"};
+	auto
+		searchGlossary = [&]()-> int {
+		for (int i = 0; i < glossary.size(); ++i)
+			if (s == glossary[i])
+				return 1 + (i % 7);
+		return -1;
+	};
+	while (cin >> s >> value) {
+		auto
+			toLower = [&] {
+			for (char& c : s) {
+				c = tolower(c);
+			}
+		};
+		toLower();
+		int
+			switcher = searchGlossary();
+		switch (switcher) {
+		case 1: monday.push_back(value); break;
+		case 2: tuesday.push_back(value); break;
+		case 3: wednesday.push_back(value); break;
+		case 4: thursday.push_back(value); break;
+		case 5: friday.push_back(value); break;
+		case 6: saturday.push_back(value); break;
+		case 7: sunday.push_back(value); break;
+		default: rejected.push_back(value);
+		}
+		if (s == "_end")
+			break;
+	}
+	auto
+		sumDay = [&](vector<int> day) -> int {
+		int
+			result{ 0 };
+		for (int i : day)
+			result += i;
+		return result;
+	};
+	cout 
+		<< "\n\tmonday:\t" << sumDay(monday)
+		<< "\n\ttuesday:\t" << sumDay(tuesday)
+		<< "\n\twednesday:\t" << sumDay(wednesday)
+		<< "\n\tthursday:\t" << sumDay(thursday)
+		<< "\n\tfriday:\t" << sumDay(friday)
+		<< "\n\tsaturday:\t" << sumDay(saturday)
+		<< "\n\tsunday:\t" << sumDay(sunday)
+		<< "\n\n\trejected data entries:\t" << rejected.size()
+		<< endl;
+}
+
+
+void errors() { error_exc14(); }
