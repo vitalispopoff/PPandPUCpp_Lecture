@@ -39,6 +39,9 @@
     <ClCompile Include="_6_programming.cpp">
       <Filter>Source Files\_1_Basics</Filter>
     </ClCompile>
+    <ClCompile Include="calculator_6.cpp">
+      <Filter>Source Files\_1_Basics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">

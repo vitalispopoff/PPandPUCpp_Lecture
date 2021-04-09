@@ -1,10 +1,12 @@
 
-void helloWorld();
+//void helloWorld();
 
-void objectsTypesValues();
+//void objectsTypesValues();
 
-void computation();
+//void computation();
 
-void errors();
+//void errors();
 
-void programming();
+//void programming();
+
+int calculatorMain();
