@@ -1,5 +1,11 @@
 #include "std_lib_facilities.h"
 
+const char
+number = '8',
+quit = 'q',
+print = '=';
+
+
 class Token {
 public:
 	char kind;
@@ -38,7 +44,7 @@ Token Token_stream::get() {	// using cin in this implementation already falsifie
 	char ch;
 	cin >> ch;
 	switch (ch) {
-	case 'x': case '=': case '!': case '{': case '}': case '(': case ')':
+	case quit: case print: case '!': case '{': case '}': case '(': case ')':
 		return Token(ch);
 	case '+': case '-':
 		return Token(ch);
@@ -48,7 +54,7 @@ Token Token_stream::get() {	// using cin in this implementation already falsifie
 		cin.putback(ch);
 		double val;
 		cin >> val;
-		return Token('8', val);
+		return Token(number, val);
 	}
 	default: error("Bad token");
 	}
@@ -78,7 +84,7 @@ double primary() {
 			error("')' expected");
 		return d;
 	}
-	case '8':
+	case number:
 		return t.value;
 	case'-':
 		return -primary();
@@ -166,15 +172,22 @@ int calculatorMain() {
 
 		while (cin) {
 
+			cout << ">";
 			Token
 				t = ts.get();
-			if (t.kind == 'x')
+
+			//if (t.kind == print)
+			while (t.kind == print)
+				t = ts.get();
+			if (t.kind == quit)
+			{
+				keep_window_open();
 				return 0;
-			if (t.kind == '=')
-				cout << "=" << t.value << '\n';
-			else
+			}
+			//else
 				ts.putback(t);
-			t.value = expression();
+			/*t.value = expression();*/
+				cout << "=" << expression() << '\n';
 		}
 		keep_window_open();
 	}
