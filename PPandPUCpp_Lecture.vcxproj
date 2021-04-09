@@ -148,6 +148,7 @@
     <ClCompile Include="_6_programming.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="calculator_6_.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="std_lib_facilities.h" />
     <ClInclude Include="_1_basics.h" />

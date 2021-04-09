@@ -44,18 +44,39 @@ Token Token_stream::get() {	// using cin in this implementation already falsifie
 	char ch;
 	cin >> ch;
 	switch (ch) {
-	case quit: case print: case '!': case '{': case '}': case '(': case ')':
+
+	case quit: 
+	case print: 
+	//case '!': 
+	case '{': 
+	case '}': 
+	case '(': 
+	case ')':		
+	case '+': 
+	case '-':
+		
+	case '*': 
+	case '/': 
+	case '%':
 		return Token(ch);
-	case '+': case '-':
-		return Token(ch);
-	case '*': case '/': case '%':
-		return Token(ch);
-	case '.': case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9': {
+
+	case '.': 
+	case '0': 
+	case '1': 
+	case '2': 
+	case '3': 
+	case '4': 
+	case '5': 
+	case '6': 
+	case '7': 
+	case '8': 
+	case '9': {
 		cin.putback(ch);
 		double val;
 		cin >> val;
 		return Token(number, val);
 	}
+
 	default: error("Bad token");
 	}
 }
@@ -167,17 +188,6 @@ void calculate() {
 
 int calculatorMain() {
 	try {
-		/*while (cin) {
-			cout << prompt;
-			Token
-				t = ts.get();
-			while (t.kind == print) t = ts.get();
-			if (t.kind == quit) {
-				keep_window_open();
-			}
-			ts.putback(t);
-			cout << result << expression() << endl;
-		}*/
 		calculate();
 		keep_window_open();
 		return 0;

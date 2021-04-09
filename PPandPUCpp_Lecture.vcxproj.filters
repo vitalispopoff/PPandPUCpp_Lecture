@@ -53,6 +53,9 @@
     <ClInclude Include="_1_basics.h">
       <Filter>Header Files\_1_Basics</Filter>
     </ClInclude>
+    <ClInclude Include="calculator_6_.h">
+      <Filter>Header Files\_1_Basics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PPandPUCpp_Lecture.rc">
