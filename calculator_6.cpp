@@ -1,10 +1,10 @@
 #include "std_lib_facilities.h"
 
-const char
-number = '8',
-quit = 'q',
-print = '=';
-
+const char number = '8';
+const char quit = 'q';
+const char print = '=';
+const string prompt = "> ";
+const string result = "= ";
 
 class Token {
 public:
@@ -19,8 +19,8 @@ public:
 class Token_stream {
 private:
 	bool full{ false };
-public:
 	Token buffer;
+public:
 	Token_stream();
 	Token get();
 	void putback(Token t);
@@ -48,7 +48,7 @@ Token Token_stream::get() {	// using cin in this implementation already falsifie
 		return Token(ch);
 	case '+': case '-':
 		return Token(ch);
-	case '*': case '/': case '%' :
+	case '*': case '/': case '%':
 		return Token(ch);
 	case '.': case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9': {
 		cin.putback(ch);
@@ -152,44 +152,35 @@ double expression() {
 	}
 }
 
+void calculate() {
+
+	while (cin) {
+		cout << prompt;
+		Token
+			t = ts.get();
+		while (t.kind == print) t = ts.get();
+		if (t.kind == quit) return;
+		ts.putback(t);
+		cout << result << expression() << endl;
+	}
+}
+
 int calculatorMain() {
 	try {
-
-		/*cout
-			<< "\n\tWelcome to our simple calculator"
-			<< "\n\tPlease enter expressions using floating-point numbers."
-			<< "\n\t----------------------------------------------------"
-			<< "\n\t use signs for respective operations:\n"
-			<< "\n\t\t+\taddition"
-			<< "\n\t\t-\tsubtraction"
-			<< "\n\t\t*\tmultiplication"
-			<< "\n\t\t/\tdivision (remeber to avoid dividing by 0.0)"
-			<< "\n\tand\t=\tfor a result."
-			<< "\n\tUse\tx\t to exit."
-			<< "\n\t----------------------------------------------------"
-			<< "\n\tAfter each element of the expression hit enter."
-			<< endl;*/
-
-		while (cin) {
-
-			cout << ">";
+		/*while (cin) {
+			cout << prompt;
 			Token
 				t = ts.get();
-
-			//if (t.kind == print)
-			while (t.kind == print)
-				t = ts.get();
-			if (t.kind == quit)
-			{
+			while (t.kind == print) t = ts.get();
+			if (t.kind == quit) {
 				keep_window_open();
-				return 0;
 			}
-			//else
-				ts.putback(t);
-			/*t.value = expression();*/
-				cout << "=" << expression() << '\n';
-		}
+			ts.putback(t);
+			cout << result << expression() << endl;
+		}*/
+		calculate();
 		keep_window_open();
+		return 0;
 	}
 	catch (exception& e) {
 		cerr << "error: " << e.what() << '\n';
