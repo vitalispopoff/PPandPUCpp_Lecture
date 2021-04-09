@@ -13,8 +13,8 @@ public:
 class Token_stream {
 private:
 	bool full{ false };
-	Token buffer;
 public:
+	Token buffer;
 	Token_stream();
 	Token get();
 	void putback(Token t);
@@ -42,7 +42,7 @@ Token Token_stream::get() {	// using cin in this implementation already falsifie
 		return Token(ch);
 	case '+': case '-':
 		return Token(ch);
-	case '*': case '/':
+	case '*': case '/': case '%' :
 		return Token(ch);
 	case '.': case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9': {
 		cin.putback(ch);
@@ -80,6 +80,10 @@ double primary() {
 	}
 	case '8':
 		return t.value;
+	case'-':
+		return -primary();
+	case'+':
+		return primary();
 	default:
 		error("primary expected");
 	}
@@ -102,6 +106,13 @@ double term() {
 			if (d == 0)
 				error("divide by zero");
 			left /= d;
+			t = ts.get();
+			break;
+		}
+		case '%': {
+			double d = primary();
+			if (d == 0) error("divide by zero");
+			left = fmod(left, d);
 			t = ts.get();
 			break;
 		}
@@ -154,6 +165,7 @@ int calculatorMain() {
 			<< endl;*/
 
 		while (cin) {
+
 			Token
 				t = ts.get();
 			if (t.kind == 'x')
