@@ -1,45 +1,47 @@
 #include "std_lib_facilities.h"
 
-const char
-number{'8'},
-quit{'q'},
-print{'='};
+const char 
+	number{'8'}, 
+	quit{'q'}, 
+	print{'='},
+	name{'a'},
+	let{'L'};
+const string 
+	prompt{"> "}, 
+	result{"= "},
+	declKey{"let"};
 
-const string
-prompt{"> "},
-result{"= "};
+// Token ---------------------------------------
 
 class Token
 {
-public:
+	public:
 
-	char kind;
-	double value;
+		char kind;
+		double value;
 
-	Token(char ch)
-		: kind(ch),value(0) { }
-
-	Token(char ch,double val)
-		: kind(ch),value(val) {}
+		Token(char ch) : kind(ch), value(0) {}
+		Token(char ch,double val) : kind(ch), value(val) {}
 };
+
+// Tokenstream ---------------------------------
 
 class Token_stream
 {
-private:
-	bool
-		full{false};
-	Token
-		buffer;
-public:
-	Token_stream();
+	private:
+		bool
+			full{false};
+		Token
+			buffer;
+	public:
+		Token_stream();
 
-	void putback(Token t);
-	void ignore(char c);
-	Token get();
+		void putback(Token t);
+		void ignore(char c);
+		Token get();
 };
 
-Token_stream::Token_stream()
-	:full(false),buffer(0) {}
+Token_stream::Token_stream() : full(false), buffer(0) {}
 
 void Token_stream::putback(Token t)
 {
@@ -79,38 +81,89 @@ Token Token_stream::get() 						// using cin in this implementation already fals
 
 	switch(ch)
 	{
-	case quit:
-	case print:
+		case quit:
+		case print:
 
-	case '{': case '}':
-	case '(': case ')':
+		case '{': case '}':
+		case '(': case ')':
 
-	case '+': case '-':
-	case '*': case '/':
-	case '%':
-	{
-		return Token(ch);
-	}
+		case '+': case '-':
+		case '*': case '/':
+		case '%':
+		{
+			return Token(ch);
+		}
 
-	case '.': case '0':
-	case '1': case '2': case '3':
-	case '4': case '5': case '6':
-	case '7': case '8': case '9':
-	{
-		cin.putback(ch);
+		case '.': case '0':
+		case '1': case '2': case '3':
+		case '4': case '5': case '6':
+		case '7': case '8': case '9':
+		{
+			cin.putback(ch);
 
-		double val;
+			double val;
 
-		cin >> val;
-		return Token(number,val);
-	}
+			cin >> val;
+			return Token(number,val);
+		}
 
-	default:
-		error("Bad token");
+		default:
+			error("Bad token");
 	}
 }
 
+// Variable ------------------------------------
+
+class Variable
+{
+	public:
+		string name;
+		double value;
+
+		Variable(string n, double v)
+		: name(n), value(v) {}
+};
+
+// global variables ----------------------------
+
 Token_stream ts;
+vector<Variable> var_table;
+
+bool is_declared(string var)
+{
+	for(const Variable& v : var_table)
+		if (v.name == var) return true;
+	return false;
+}
+
+double define_name(string name, double value)
+{
+	if (is_declared(name)) 
+		error(name, " declared twice");
+	
+	var_table.push_back(Variable(name, value));
+}
+
+
+
+double get_value(string s)
+{
+	for(const Variable& v : var_table)
+		if(v.name == s)
+			return v.value;
+	error("get: undefined variable ",s);
+}
+
+void set_value(string s,double d)
+{
+	for(Variable& v : var_table)
+		if(v.name == s)
+		{
+			v.value = d;
+			return;
+		}
+	error("set: undefined variable ",s);
+}
 
 double expression();
 
@@ -244,6 +297,40 @@ double expression()
 	}
 }
 
+double declaration()
+{
+	Token 
+		t = ts.get();
+	if(t.kind != name)
+		error("name expected in declaration");
+
+	Token 
+		t2 = ts.get();
+	if(t2.kind != '=') 
+		error("= missing in declaration of ", var_name);
+
+	double
+		d = expression();
+	define_name(var_name, d);
+	return d;
+}
+
+double statement()
+{
+	Token
+		t = ts.get();
+	switch(t.kind)
+	{
+	case let:
+		return declaration();
+	default:
+		ts.putback(t);
+		return expression();
+
+	}
+
+}
+
 void clean_up_mess()
 {
 	ts.ignore(print);
@@ -254,7 +341,7 @@ void calculate()
 	while(cin){
 		try
 		{
-			cout 
+			cout
 				<< prompt;
 			Token
 				t = ts.get();
@@ -270,12 +357,13 @@ void calculate()
 			cout
 				<< result
 				<< expression()
+				//<< statement()
 				<< endl;
 		}
 		catch(exception& e)
 		{
-			cerr 
-				<< e.what() 
+			cerr
+				<< e.what()
 				<< endl;
 
 			clean_up_mess();
@@ -289,19 +377,19 @@ int calculatorMain() {
 		keep_window_open();
 		return 0;
 	}
-	catch(exception& e) 
+	catch(exception& e)
 	{
-		cerr 
-			<< "error: " 
-			<< e.what() 
+		cerr
+			<< "error: "
+			<< e.what()
 			<< endl;
 
 		keep_window_open();
 		return 1;
 	}
-	catch(...) 
+	catch(...)
 	{
-		cerr 
+		cerr
 			<< "Oops: unknown exception!\n";
 
 		keep_window_open();

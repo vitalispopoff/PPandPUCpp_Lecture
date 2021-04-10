@@ -18,10 +18,18 @@
 
 	The grammar for input is : 
 	
-		Statement : 
-			Expression
+		Calculation:
+			Statement
 			Print
-			Quit			
+			Quit
+			Calculation Stamement
+
+		Statement : 
+			Declaration
+			Expression
+
+		Declaration
+			"let" Name "=" Expression
 
 		Print:
 			; 
