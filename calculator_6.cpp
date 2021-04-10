@@ -19,9 +19,13 @@ class Token
 
 		char kind;
 		double value;
+		string name;
 
-		Token(char ch) : kind(ch), value(0) {}
-		Token(char ch,double val) : kind(ch), value(val) {}
+		//Token(char ch) : kind(ch), value(0) {}
+		Token(char ch) : kind{ch} {}			// yet another way to implement a constructor, innit?
+		//Token(char ch,double val) : kind(ch), value(val) {}
+		Token(char ch, double val) : kind{ch}, value{val} {}
+		Token(char ch, string n) : kind{ch}, name{n} {}
 };
 
 // Tokenstream ---------------------------------
@@ -108,6 +112,20 @@ Token Token_stream::get() 						// using cin in this implementation already fals
 		}
 
 		default:
+			if(isalpha(ch))		// is ch a letter?
+			{
+				string s;
+				s += ch;
+				while(cin.get(ch) && (isalpha(ch) || isdigit(ch))) //cin.get() - read the istream input into the get() input; doesn't skip ' ';
+					s += ch;
+
+				cin.putback(ch);
+				//string s;
+				//cin >> s;
+				if(s == declKey)
+					return Token{let};
+				return Token{name, s};
+			}
 			error("Bad token");
 	}
 }
@@ -307,11 +325,13 @@ double declaration()
 	Token 
 		t2 = ts.get();
 	if(t2.kind != '=') 
-		error("= missing in declaration of ", var_name);
+		//error("= missing in declaration of ", var_name);
+		error("= missing in declaration of ",name); // is it to be like this?
 
 	double
 		d = expression();
 	define_name(var_name, d);
+
 	return d;
 }
 
@@ -373,6 +393,9 @@ void calculate()
 
 int calculatorMain() {
 	try {
+		define_name("pi", 3.1415926535);
+		define_name("e", 2.7182818284);
+
 		calculate();
 		keep_window_open();
 		return 0;
