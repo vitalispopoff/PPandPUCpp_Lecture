@@ -146,6 +146,7 @@
     <ClCompile Include="_4_computation.cpp" />
     <ClCompile Include="_5_errors.cpp" />
     <ClCompile Include="_6_programming.cpp" />
+    <ClCompile Include="_7_drill.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="calculator_6_.h" />

@@ -19,23 +19,24 @@
 	The grammar for input is : 
 	
 		Calculation:
-			Statement
 			Print
 			Quit
 			Calculation Stamement
-
-		Statement : 
-			Declaration
-			Expression
-
-		Declaration
-			"let" Name "=" Expression
+			Statement
 
 		Print:
-			; 
+			;
+
 		Quit:
 			q
-		
+
+		Statement : 
+			// Declaration
+			Expression
+
+		// Declaration
+			// "let" Name "=" Expression
+
 		Expression:
 			Term
 			Expression + Term

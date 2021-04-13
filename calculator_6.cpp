@@ -1,5 +1,5 @@
 #include "std_lib_facilities.h"
-
+/*
 const char 
 	number{'8'}, 
 	quit{'q'}, 
@@ -330,7 +330,7 @@ double declaration()
 
 	double
 		d = expression();
-	define_name(var_name, d);
+	//define_name(var_name, d); // WTF!
 
 	return d;
 }
@@ -391,7 +391,7 @@ void calculate()
 	}
 }
 
-int calculatorMain() {
+int calculatorMain_6() {
 	try {
 		define_name("pi", 3.1415926535);
 		define_name("e", 2.7182818284);
@@ -419,3 +419,4 @@ int calculatorMain() {
 		return 2;
 	}
 }
+*/
