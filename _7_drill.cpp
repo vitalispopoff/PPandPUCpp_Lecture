@@ -167,12 +167,12 @@ double primary()
 				expression();		// wy d is not used anywhere?
 			prim_t = 
 				ts.get();
-			if(prim_t.kind != ')') error("'(' expected");
+			if(prim_t.kind != ')') error("'(' expected"); else return prim_d;
 		}
 		case '-':
 			return -primary();
 		case number:
-			return prim_t.value;
+			return prim_t.value;	// why not ts.unget(prim_t) ?
 		case name:
 			return get_value(prim_t.tokenName);
 		default:
