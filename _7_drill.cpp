@@ -10,7 +10,8 @@
 
 		4. prepare a set of inputs for testing
 			1+1;	.
-			1+1*0;	!
+			1+1*0;	.
+			(1);
 */
 
 #include "std_lib_facilities.h"
@@ -89,9 +90,9 @@ Token Token_stream::get()
 				while(cin.get(ch) && (isalpha(ch) || isdigit(ch)))	//why while ?
 					s = ch;
 				cin.unget();
-				if(s == "let")
+				if(s == "let") 
 					return Token(let);
-				if(s == "quit")
+				if(s == "quit") 
 					return Token(name);
 				return Token(name,s);
 			}
@@ -156,16 +157,17 @@ double expression();
 
 double primary()
 {
-	Token
-		prim_t = ts.get();					//cout << "t.kind " << t.kind << endl;
+	Token prim_t = 
+		ts.get();
 	switch(prim_t.kind)
 	{
 		case '(':
 		{
-			double prim_d = expression();		// wy d is not used anywhere?
-			prim_t = ts.get();
-			if(prim_t.kind != ')')
-				error("'(' expected");
+			double prim_d = 
+				expression();		// wy d is not used anywhere?
+			prim_t = 
+				ts.get();
+			if(prim_t.kind != ')') error("'(' expected");
 		}
 		case '-':
 			return -primary();
@@ -180,25 +182,28 @@ double primary()
 
 double term()
 {
-	double
-		term_left = primary();
+	double term_left = 
+		primary();
 	while(true)
 	{
-		Token term_t = ts.get();
+		Token term_t = 
+			ts.get();
 		switch(term_t.kind)
 		{
 			case '*':
 			{
-				term_left *= primary();
+				term_left *= 
+					primary();
 				break;
 			}
 			case '/':
 			{
-				double
-					term_d = primary();
-				if(term_d == 0)
+				double term_d = 
+					primary();
+				if(term_d == 0) 
 					error("divide by zero");
-				term_left /= term_d;
+				term_left /= 
+					term_d;
 				break;
 			}
 			default:
@@ -215,17 +220,20 @@ double expression()
 	double expr_left = term();
 	while(true)
 	{
-		Token expr_t = ts.get();
+		Token expr_t = 
+			ts.get();
 		switch(expr_t.kind)
 		{
 			case '+':
 			{
-				expr_left += term();
+				expr_left += 
+					term();
 				break;
 			}
 			case '-':
 			{
-				expr_left -= term();
+				expr_left -= 
+					term();
 				break;
 			}
 			default:
@@ -239,24 +247,30 @@ double expression()
 
 double declaration()
 {
-	Token decl_t = ts.get();
-	if(decl_t.kind != 'a')
+	Token decl_t = 
+		ts.get();
+	if(decl_t.kind != 'a') 
 		error("name expected in declaration");
-	string name = decl_t.tokenName;
-	if(is_declared(name))
+	string name = 
+		decl_t.tokenName;
+	if(is_declared(name)) 
 		error(name," declared twice");
-	Token decl_t2 = ts.get();
-	if(decl_t2.kind != '=')
+	Token decl_t2 = 
+		ts.get();
+	if(decl_t2.kind != '=') 
 		error("= missing in declaration of ",name);
-	double decl_d = expression();
-	names.push_back(Variable(name,decl_d));
+	double decl_d = 
+		expression();
+	names.push_back(
+		Variable(name,decl_d));
 	return decl_d;
 }
 
 
 double statement()
 {
-	Token stat_t = ts.get();
+	Token stat_t = 
+		ts.get();
 	switch(stat_t.kind)
 	{
 		//case let: 
@@ -282,10 +296,13 @@ void calculate()
 	while(true) try
 	{
 		cout << prompt;
-		Token calc_t = ts.get();
+		Token calc_t = 
+			ts.get();
 		while(calc_t.kind == print)
-			calc_t = ts.get();
-		if(calc_t.kind == quit)
+			calc_t = 
+				ts.get();
+
+		if(calc_t.kind == quit) 
 			return;
 		ts.unget(calc_t);
 		cout 
@@ -295,8 +312,8 @@ void calculate()
 	}
 	catch(runtime_error &e)
 	{
-		cerr
-			<< e.what()
+		cerr 
+			<< e.what() 
 			<< endl;
 		clean_up_mess();
 	}
@@ -311,9 +328,12 @@ int calculatorMain()
 	}
 	catch(exception &e)
 	{
-		cerr << "exception: " << e.what() << endl;
+		cerr 
+			<< "exception: " 
+			<< e.what() 
+			<< endl;
 		char c;
-		while(cin >> c && c != ';');
+		while(cin >> c && c != ';'){};
 		return 1;
 	}
 	catch(...)
