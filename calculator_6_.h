@@ -28,7 +28,7 @@
 			;
 
 		Quit:
-			q
+			quit
 
 		Statement : 
 			// Declaration
@@ -47,15 +47,19 @@
 			Term * Primary
 			Term / Primary
 			Term % Primary
+			power(Primary, Integral)
 		
 		Primary : 
 			Number
 			(Expression)                    
 			–  Primary 
 			+ Primary
+			sqrt(Primary)	 : drill 7 & 8
 		
 		Number : 
 			floating-point-literal
+		Integral :
+			integral-literal
 			
 		Input comes from cin through the Token_stream called ts.		
 */

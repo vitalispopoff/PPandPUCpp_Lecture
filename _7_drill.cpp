@@ -1,4 +1,4 @@
-/*	
+/*
 	7 : Drills
 		1. get the code to compile
 
@@ -25,6 +25,8 @@ const char name = 'a';
 const char number = '8';
 const char print = ';';
 const char quit = 'Q';
+const char squareRoot = 'R';
+const char power = 'P';
 
 struct Token
 {
@@ -41,9 +43,9 @@ class Token_stream
 {
 	private:
 	bool full;
-	Token buffer;
 
 	public:
+	Token buffer;
 	Token_stream(): full{false},buffer(0) {}	// what does buffer(0) actually do? how does it initialize?
 
 	void unget(Token);
@@ -94,13 +96,17 @@ Token Token_stream::get()
 				while(cin.get(ch) && (isalpha(ch) || isdigit(ch)))
 					s += ch;
 				cin.unget();
-				if(s == "let") 
+				if(s == "let")
 					return Token(let);
-				if(s == "quit") 
+				if(s == "quit")
 					return Token(quit);
+				if(s == "sqrt")
+					return Token(squareRoot);
+				if(s == "power")
+					return Token(power);
 				return Token(name,s);
-			}
-		error("Bad token");
+			};	
+			error("Bad token");
 		}
 	}
 }
@@ -138,20 +144,29 @@ double get_value(string s)
 
 void set_value(string s,double d)
 {
-	for(int i = 0; i <= names.size(); ++i)	// why not range for loop ?
-		if(names[i].name == s)
+	for(Variable var : names)
+		if (var.name == s)
 		{
-			names[i].value = d;
+			var.value = d;
 			return;
 		}
+	//for(int i = 0; i <= names.size(); ++i)	// why not range for loop ?
+	//	if(names[i].name == s)
+	//	{
+	//		names[i].value = d;
+	//		return;
+	//	}
 	error("set: undefined name ",s);
 }
 
 bool is_declared(string s)
 {
-	for(int i = 0; i < names.size(); ++i)	// why not range for loop ?
-		if(names[i].name == s)
-			return true;
+	for(Variable var: names)
+		if(var.name == s)
+			return true;		
+	//for(int i = 0; i < names.size(); ++i)	// why not range for loop ?
+	//	if(names[i].name == s)
+	//		return true;
 	return false;
 }
 
@@ -159,27 +174,43 @@ Token_stream ts;
 
 double expression();
 
+double performPower(double d,int i)
+{
+	double result = d;
+	for(; i > 0 ; --i)
+		result *= d;
+	return result;
+}
+
 double primary()
 {
-	Token prim_t = 
+	Token prim_t =
 		ts.get();
 	switch(prim_t.kind)
 	{
 		case '(':
-		{
-			double prim_d = 
+		{	
+			double prim_d =
 				expression();		// wy d is not used anywhere?
-			prim_t = 
+			prim_t =
 				ts.get();
-			if(prim_t.kind != ')') 
-				error("'(' expected"); 
-			else 
+			if(prim_t.kind != ')')
+				error("'(' expected");
+			else
 				return prim_d;
+		}
+		case squareRoot:
+		{
+			double prim_d =
+				primary();
+			if(prim_d < 0)
+				error("positive number for the root expected (imaginary numbers are not supported).");
+			return sqrt(prim_d);
 		}
 		case '-':
 			return -primary();
 		case number:
-			return prim_t.value;	// why not ts.unget(prim_t) ?
+			return prim_t.value;
 		case name:
 			return get_value(prim_t.tokenName);
 		default:
@@ -189,25 +220,25 @@ double primary()
 
 double term()
 {
-	double term_left = 
+	double term_left =
 		primary();
 	while(true)
 	{
-		Token term_t = 
+		Token term_t =
 			ts.get();
 		switch(term_t.kind)
 		{
 			case '*':
 			{
-				term_left *= 
+				term_left *=
 					primary();
 				break;
 			}
 			case '/':
 			{
-				double term_d = 
+				double term_d =
 					primary();
-				if(term_d == 0) 
+				if(term_d == 0)
 					error("divide by zero");
 				term_left /= term_d;
 				break;
@@ -223,23 +254,23 @@ double term()
 
 double expression()
 {
-	double expr_left = 
+	double expr_left =
 		term();
 	while(true)
 	{
-		Token expr_t = 
+		Token expr_t =
 			ts.get();
 		switch(expr_t.kind)
 		{
 			case '+':
 			{
-				expr_left += 
+				expr_left +=
 					term();
 				break;
 			}
 			case '-':
 			{
-				expr_left -= 
+				expr_left -=
 					term();
 				break;
 			}
@@ -254,19 +285,19 @@ double expression()
 
 double declaration()
 {
-	Token decl_t = 
+	Token decl_t =
 		ts.get();
-	if(decl_t.kind != 'a') 
+	if(decl_t.kind != 'a')
 		error("name expected in declaration");
-	string name = 
+	string name =
 		decl_t.tokenName;
-	if(is_declared(name)) 
+	if(is_declared(name))
 		error(name," declared twice");
-	Token decl_t2 = 
+	Token decl_t2 =
 		ts.get();
-	if(decl_t2.kind != '=') 
+	if(decl_t2.kind != '=')
 		error("= missing in declaration of ",name);
-	double decl_d = 
+	double decl_d =
 		expression();
 	names.push_back(
 		Variable(name,decl_d));
@@ -276,11 +307,11 @@ double declaration()
 
 double statement()
 {
-	Token stat_t = 
+	Token stat_t =
 		ts.get();
 	switch(stat_t.kind)
 	{
-		case let: 
+		case let:
 			return declaration();
 		default:
 		{
@@ -300,30 +331,27 @@ const string result = "= ";
 
 void calculate()
 {
-
-	// drill 6:
-	names.push_back(Variable("k",1000));
-
+	//names.push_back(Variable("k",1000)); // drill 6:
 	while(true) try
 	{
 		cout << prompt;
-		Token calc_t = 
+		Token calc_t =
 			ts.get();
 		while(calc_t.kind == print)
-			calc_t = 
-				ts.get();
-		if(calc_t.kind == quit) 
+			calc_t =
+			ts.get();
+		if(calc_t.kind == quit)
 			return;
 		ts.unget(calc_t);
-		cout 
+		cout
 			<< result
 			<< statement()		// this is where we jump to grammar lower levels
 			<< endl;
 	}
 	catch(runtime_error &e)
 	{
-		cerr 
-			<< e.what() 
+		cerr
+			<< e.what()
 			<< endl;
 		clean_up_mess();
 	}
@@ -338,12 +366,12 @@ int calculatorMain()
 	}
 	catch(exception &e)
 	{
-		cerr 
-			<< "exception: " 
-			<< e.what() 
+		cerr
+			<< "exception: "
+			<< e.what()
 			<< endl;
 		char c;
-		while(cin >> c && c != ';'){};
+		while(cin >> c && c != ';') {};
 		return 1;
 	}
 	catch(...)
