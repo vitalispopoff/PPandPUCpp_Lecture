@@ -1,7 +1,3 @@
-/*
-	exc 2: imlpent '=' for overwritting values of names variables.
-*/
-
 #include "std_lib_facilities.h"
 
 const char let = 'L';
@@ -50,48 +46,65 @@ Token Token_stream::get()
 		full = false;
 		return buffer;
 	}
-	char ch;
-	cin >> ch;
-	switch(ch)
+	char c;
+	cin >> c;
+	switch(c)
 	{
 		case '(': case ')':
 		case '+': case '-':
 		case '*': case '/': case '%':
 		case ';': case '=':
 		{
-			return Token(ch);
+			return Token(c);
 		};
-		case '.': case '0':
-		case '1': case '2': case '3':
-		case '4': case '5': case '6':
-		case '7': case '8': case '9':
-		{
-			cin.unget();
-			double val;
-			cin >> val;
-			return Token(number,val);
-		};
+
+		//case '.': case '0':
+		//case '1': case '2': case '3':
+		//case '4': case '5': case '6':
+		//case '7': case '8': case '9':
+		//{
+			//cin.unget();
+			//double d;
+			//cin >> d;
+			//return Token(number,d);
+		//};
+
 		case '#':
 			return Token(let);
+		
 		default:
 		{
-			if(isalpha(ch) || ch =='_')
+			if (c == '.' || isdigit(c))
+			{
+				cin.unget();
+				double d;
+				cin >> d;
+				return Token(number,d);
+			};
+
+			if (c == '_' || isalpha(c))
 			{
 				string s;
-				s += ch;
-				while(cin.get(ch) && (isalpha(ch) || isdigit(ch) || ch == '_'))
-					s += ch;
+				s += c;
+				while(cin.get(c) && (isalpha(c) || isdigit(c) || c == '_'))
+					s += c;
+				
 				cin.unget();
 				if(s == "let")
 					return Token(let);
+
 				if(s == "quit" || s == "exit")
 					return Token(quit);
+
 				if(s == "sqrt")
 					return Token(squareRoot);
-				if(s == "pow")		// syntax suggested in the drill
+
+				if(s == "pow")
 					return Token(power);
+
 				return Token(name,s);
 			};
+
 			error("Bad token");
 		}
 	}
@@ -125,9 +138,6 @@ double get_value(string s)
 	for(Variable var : names)
 		if(var.name == s)
 			return var.value;
-	//for(int i = 0; i < names.size(); ++i)	// why not range for loop ?
-	//	if(names[i].name == s)
-			//return names[i].value;
 	error("get: undefined name ",s);
 }
 
@@ -154,9 +164,9 @@ Token_stream ts;
 
 double expression();
 
-double performPower(double d, int i)
+double performPower(double d,int i)
 {
-	if (i == 0) 
+	if(i == 0)
 		return 1;
 	double result = 1;
 	for(; i > 0 ; --i)
@@ -166,17 +176,16 @@ double performPower(double d, int i)
 
 double primary()
 {
-	Token prim_t =
-		ts.get();
-	switch(prim_t.kind)
+	Token t = ts.get();
+	switch(t.kind)
 	{
 		case '(':
 		{
 			double prim_d =
 				expression();		// wy d is not used anywhere?
-			prim_t =
+			t =
 				ts.get();
-			if(prim_t.kind != ')')
+			if(t.kind != ')')
 				error("'(' expected");
 			else
 				return prim_d;
@@ -192,9 +201,9 @@ double primary()
 		case '-':
 			return -primary();
 		case number:
-			return prim_t.value;
+			return t.value;
 		case name:
-			return get_value(prim_t.tokenName);
+			return get_value(t.tokenName);
 		case power:
 		{
 			char c;
@@ -219,33 +228,31 @@ double primary()
 
 double term()
 {
-	double term_left =
-		primary();
+	double d = primary();
 	while(true)
 	{
-		Token term_t =
+		Token t =
 			ts.get();
-		switch(term_t.kind)
+		switch(t.kind)
 		{
 			case '*':
 			{
-				term_left *=
-					primary();
-				break;
-			}
+				d *= primary(); break;
+			}			
+
 			case '/':
 			{
-				double term_d =
-					primary();
-				if(term_d == 0)
+				double denominator = primary();
+				if(denominator == 0)
 					error("divide by zero");
-				term_left /= term_d;
+				d /= denominator;
 				break;
 			}
+
 			default:
 			{
-				ts.unget(term_t);
-				return term_left;
+				ts.unget(t);
+				return d;
 			}
 		}
 	}
@@ -253,30 +260,22 @@ double term()
 
 double expression()
 {
-	double expr_left =
-		term();
+	double d = term();
 	while(true)
 	{
-		Token expr_t =
-			ts.get();
-		switch(expr_t.kind)
+		Token t = ts.get();
+		switch(t.kind)
 		{
 			case '+':
-			{
-				expr_left +=
-					term();
-				break;
-			}
+				d += term(); break;
+
 			case '-':
-			{
-				expr_left -=
-					term();
-				break;
-			}
+				d -= term(); break;
+
 			default:
 			{
-				ts.unget(expr_t);
-				return expr_left;
+				ts.unget(t);
+				return d;
 			}
 		}
 	}
@@ -284,30 +283,28 @@ double expression()
 
 double declaration()
 {
-	Token decl_t =
-		ts.get();
-	if(decl_t.kind != 'a')
+	Token token = ts.get();
+	if(token.kind != 'a')
 		error("name expected in declaration");
-	string name =
-		decl_t.tokenName;
+
+	string name = token.tokenName;
 	if(is_declared(name))
 		error(name," declared twice");
-	Token decl_t2 =
-		ts.get();
-	if(decl_t2.kind != '=')
+
+	Token token2 = ts.get();
+	if(token2.kind != '=')
 		error("= missing in declaration of ",name);
-	double decl_d =
-		expression();
+
+	double d = expression();
 	names.push_back(
-		Variable(name,decl_d));
-	return decl_d;
+		Variable(name,d));
+	return d;
 }
 
 
 double statement()
 {
-	Token stat_t =
-		ts.get();
+	Token stat_t = ts.get();
 	switch(stat_t.kind)
 	{
 		case let:
@@ -315,15 +312,10 @@ double statement()
 		case name:
 		{
 			char c;
-			if(cin>>c && c =='=')
+			if(cin >> c && c == '=' && is_declared(stat_t.tokenName))
 			{
-				//cout << stat_t.tokenName;
-				//check if name.tokenName is in names
-				if(is_declared(stat_t.tokenName))
-				{
-					double d = expression();
-					set_value(stat_t.tokenName, d);
-				}
+				double d = expression();
+				set_value(stat_t.tokenName,d);
 				return get_value(stat_t.tokenName);
 			}
 			cin.unget();
@@ -336,47 +328,37 @@ double statement()
 	}
 }
 
-void clean_up_mess()
-{
-	ts.ignore(print);
-}
-
 const string prompt = "> ";
 const string result = "= ";
 
 void calculate()
 {
-	//names.push_back(Variable("k",1000)); // drill 6:
-	names.push_back(Variable("_",0));	// exc 2;
-	while(true) try
+	while(true)
+		try
 	{
 		cout << prompt;
-		Token calc_t =
-			ts.get();
+		Token calc_t = ts.get();
+
 		while(calc_t.kind == print)
-			calc_t =
-			ts.get();
+			calc_t = ts.get();
+
 		if(calc_t.kind == quit)
 			return;
+
 		ts.unget(calc_t);
 		cout
-			<< result
-			<< statement()		// this is where we jump to grammar lower levels
-			<< endl;
+			<< result << statement() << endl;
 	}
 	catch(runtime_error &e)
 	{
 		cerr
-			<< e.what()
-			<< endl;
-		clean_up_mess();
+			<< e.what() << endl;
+		ts.ignore(print);
 	}
 }
 
 int calculatorMain()
 {
-	
-
 	try
 	{
 		calculate();
@@ -385,11 +367,10 @@ int calculatorMain()
 	catch(exception &e)
 	{
 		cerr
-			<< "exception: "
-			<< e.what()
-			<< endl;
+			<< "exception: " << e.what() << endl;
 		char c;
 		while(cin >> c && c != ';') {};
+
 		return 1;
 	}
 	catch(...)
@@ -398,6 +379,7 @@ int calculatorMain()
 			<< "exception\n";
 		char c;
 		while(cin >> c && c != ';') {};
+
 		return 2;
 	}
 }
