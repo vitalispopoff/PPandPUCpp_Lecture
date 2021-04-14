@@ -87,6 +87,8 @@ Token Token_stream::get()
 			cin >> val;
 			return Token(number,val);
 		};
+		case '#':
+			return Token(let);
 		default:
 		{
 			if(isalpha(ch))		//testes whether ch is a letter
@@ -96,16 +98,16 @@ Token Token_stream::get()
 				while(cin.get(ch) && (isalpha(ch) || isdigit(ch)))
 					s += ch;
 				cin.unget();
-				if(s == "let")
-					return Token(let);
-				if(s == "quit")
+				//if(s == "let")
+					//return Token(let);
+				if(s == "quit" || s == "exit")
 					return Token(quit);
 				if(s == "sqrt")
 					return Token(squareRoot);
-				if(s == "power")
+				if(s == "pow")		// syntax suggested in the drill
 					return Token(power);
 				return Token(name,s);
-			};	
+			};
 			error("Bad token");
 		}
 	}
@@ -136,37 +138,31 @@ vector<Variable> names;
 
 double get_value(string s)
 {
-	for(int i = 0; i < names.size(); ++i)	// why not range for loop ?
-		if(names[i].name == s)
-			return names[i].value;
+	for(Variable var : names)
+		if(var.name == s)
+			return var.value;
+	//for(int i = 0; i < names.size(); ++i)	// why not range for loop ?
+	//	if(names[i].name == s)
+			//return names[i].value;
 	error("get: undefined name ",s);
 }
 
 void set_value(string s,double d)
 {
 	for(Variable var : names)
-		if (var.name == s)
+		if(var.name == s)
 		{
 			var.value = d;
 			return;
 		}
-	//for(int i = 0; i <= names.size(); ++i)	// why not range for loop ?
-	//	if(names[i].name == s)
-	//	{
-	//		names[i].value = d;
-	//		return;
-	//	}
 	error("set: undefined name ",s);
 }
 
 bool is_declared(string s)
 {
-	for(Variable var: names)
+	for(Variable var : names)
 		if(var.name == s)
-			return true;		
-	//for(int i = 0; i < names.size(); ++i)	// why not range for loop ?
-	//	if(names[i].name == s)
-	//		return true;
+			return true;
 	return false;
 }
 
@@ -174,9 +170,11 @@ Token_stream ts;
 
 double expression();
 
-double performPower(double d,int i)
+double performPower(double d, int i)
 {
-	double result = d;
+	if (i == 0) 
+		return 1;
+	double result = 1;
 	for(; i > 0 ; --i)
 		result *= d;
 	return result;
@@ -189,7 +187,7 @@ double primary()
 	switch(prim_t.kind)
 	{
 		case '(':
-		{	
+		{
 			double prim_d =
 				expression();		// wy d is not used anywhere?
 			prim_t =
@@ -213,6 +211,23 @@ double primary()
 			return prim_t.value;
 		case name:
 			return get_value(prim_t.tokenName);
+		case power:
+		{
+			char c;
+			if(cin >> c && c == '(')
+			{
+				double prim_d;
+				cin >> prim_d;
+				if(cin >> c && c == ',')
+				{
+					int i;
+					cin >> i;
+					if(cin >> c && c == ')')
+						return performPower(prim_d,i);
+				}
+				error("something's wrong with your power");
+			}
+		}
 		default:
 			error("primary expected");
 	}

@@ -47,7 +47,6 @@
 			Term * Primary
 			Term / Primary
 			Term % Primary
-			power(Primary, Integral)
 		
 		Primary : 
 			Number
@@ -55,6 +54,7 @@
 			–  Primary 
 			+ Primary
 			sqrt(Primary)	 : drill 7 & 8
+			power(Number, Integral)	: drill 9
 		
 		Number : 
 			floating-point-literal
