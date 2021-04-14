@@ -14,11 +14,13 @@
 			1+1*0;	.
 			(1);	.
 			(1*0.5)/-0.1;	.
+			quit	.
+
 */
 
 #include "std_lib_facilities.h"
 
-const char let = 'l';
+const char let = 'L';
 const char name = 'a';
 const char number = '8';
 const char print = ';';
@@ -89,13 +91,13 @@ Token Token_stream::get()
 			{
 				string s;
 				s += ch;
-				while(cin.get(ch) && (isalpha(ch) || isdigit(ch)))	//why while ?
-					s = ch;
+				while(cin.get(ch) && (isalpha(ch) || isdigit(ch)))
+					s += ch;
 				cin.unget();
 				if(s == "let") 
 					return Token(let);
 				if(s == "quit") 
-					return Token(name);
+					return Token(quit);
 				return Token(name,s);
 			}
 		error("Bad token");
@@ -298,6 +300,10 @@ const string result = "= ";
 
 void calculate()
 {
+
+	// drill 6:
+	names.push_back(Variable("k",1000));
+
 	while(true) try
 	{
 		cout << prompt;
