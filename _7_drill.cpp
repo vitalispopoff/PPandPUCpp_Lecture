@@ -1,21 +1,5 @@
 /*
-	7 : Drills
-		1. get the code to compile
-
-		2. comment the code /skipped
-			Token_stream > Token_stream()
-			Token_stream :: get() > switch > default > while
-			Token_stram :: ignore() >
-
-		3. fix the found errors / skipped
-
-		4. prepare a set of inputs for testing
-			1+1;	.
-			1+1*0;	.
-			(1);	.
-			(1*0.5)/-0.1;	.
-			quit	.
-
+	exc 2: imlpent '=' for overwritting values of names variables.
 */
 
 #include "std_lib_facilities.h"
@@ -82,7 +66,7 @@ Token Token_stream::get()
 		case '4': case '5': case '6':
 		case '7': case '8': case '9':
 		{
-			cin.unget();		// used in place of cin.putback()
+			cin.unget();
 			double val;
 			cin >> val;
 			return Token(number,val);
@@ -91,15 +75,15 @@ Token Token_stream::get()
 			return Token(let);
 		default:
 		{
-			if(isalpha(ch))		//testes whether ch is a letter
+			if(isalpha(ch) || ch =='_')
 			{
 				string s;
 				s += ch;
-				while(cin.get(ch) && (isalpha(ch) || isdigit(ch)))
+				while(cin.get(ch) && (isalpha(ch) || isdigit(ch) || ch == '_'))
 					s += ch;
 				cin.unget();
-				//if(s == "let")
-					//return Token(let);
+				if(s == "let")
+					return Token(let);
 				if(s == "quit" || s == "exit")
 					return Token(quit);
 				if(s == "sqrt")
@@ -149,7 +133,7 @@ double get_value(string s)
 
 void set_value(string s,double d)
 {
-	for(Variable var : names)
+	for(Variable &var : names)
 		if(var.name == s)
 		{
 			var.value = d;
@@ -328,6 +312,22 @@ double statement()
 	{
 		case let:
 			return declaration();
+		case name:
+		{
+			char c;
+			if(cin>>c && c =='=')
+			{
+				//cout << stat_t.tokenName;
+				//check if name.tokenName is in names
+				if(is_declared(stat_t.tokenName))
+				{
+					double d = expression();
+					set_value(stat_t.tokenName, d);
+				}
+				return get_value(stat_t.tokenName);
+			}
+			cin.unget();
+		}
 		default:
 		{
 			ts.unget(stat_t);
@@ -347,6 +347,7 @@ const string result = "= ";
 void calculate()
 {
 	//names.push_back(Variable("k",1000)); // drill 6:
+	names.push_back(Variable("_",0));	// exc 2;
 	while(true) try
 	{
 		cout << prompt;
@@ -374,6 +375,8 @@ void calculate()
 
 int calculatorMain()
 {
+	
+
 	try
 	{
 		calculate();

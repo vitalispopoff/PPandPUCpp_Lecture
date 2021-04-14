@@ -31,11 +31,12 @@
 			quit
 
 		Statement : 
-			// Declaration
+			Declaration
 			Expression
 
-		// Declaration
-			// "let" Name "=" Expression
+		Declaration
+			"let" Name "=" Expression
+			Name = Expression		// ? , exc 2
 
 		Expression:
 			Term
@@ -53,8 +54,8 @@
 			(Expression)                    
 			–  Primary 
 			+ Primary
-			sqrt(Primary)	 : drill 7 & 8
-			power(Number, Integral)	: drill 9
+			sqrt(Primary)				// drill 7 & 8
+			power(Number, Integral)		// drill 9
 		
 		Number : 
 			floating-point-literal
