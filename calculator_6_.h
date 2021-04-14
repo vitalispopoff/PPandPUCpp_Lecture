@@ -55,7 +55,7 @@
 			–  Primary 
 			+ Primary
 			sqrt(Primary)				// drill 7 & 8
-			power(Number, Integral)		// drill 9
+			//	power(Number, Integral)		// drill 9
 		
 		Number : 
 			floating-point-literal
