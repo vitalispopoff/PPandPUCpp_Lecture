@@ -1,4 +1,5 @@
-/*	7 : Drills
+/*	
+	7 : Drills
 		1. get the code to compile
 
 		2. comment the code /skipped
@@ -11,7 +12,8 @@
 		4. prepare a set of inputs for testing
 			1+1;	.
 			1+1*0;	.
-			(1);
+			(1);	.
+			(1*0.5)/-0.1;	.
 */
 
 #include "std_lib_facilities.h"
@@ -167,7 +169,10 @@ double primary()
 				expression();		// wy d is not used anywhere?
 			prim_t = 
 				ts.get();
-			if(prim_t.kind != ')') error("'(' expected"); else return prim_d;
+			if(prim_t.kind != ')') 
+				error("'(' expected"); 
+			else 
+				return prim_d;
 		}
 		case '-':
 			return -primary();
@@ -202,8 +207,7 @@ double term()
 					primary();
 				if(term_d == 0) 
 					error("divide by zero");
-				term_left /= 
-					term_d;
+				term_left /= term_d;
 				break;
 			}
 			default:
@@ -217,7 +221,8 @@ double term()
 
 double expression()
 {
-	double expr_left = term();
+	double expr_left = 
+		term();
 	while(true)
 	{
 		Token expr_t = 
@@ -273,8 +278,8 @@ double statement()
 		ts.get();
 	switch(stat_t.kind)
 	{
-		//case let: 
-			//return declaration();
+		case let: 
+			return declaration();
 		default:
 		{
 			ts.unget(stat_t);
@@ -301,7 +306,6 @@ void calculate()
 		while(calc_t.kind == print)
 			calc_t = 
 				ts.get();
-
 		if(calc_t.kind == quit) 
 			return;
 		ts.unget(calc_t);
