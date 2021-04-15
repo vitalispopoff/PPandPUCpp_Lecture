@@ -1,5 +1,11 @@
 #include "std_lib_facilities.h"
 
+/*
+	exc 6
+
+	write help section available at 'H' and 'h'
+*/
+
 
 
 struct Variable
@@ -12,56 +18,6 @@ struct Variable
 		Variable(string n, double v) : name(n), value(v), readOnly(false) {}
 		Variable(string n, double v, bool b) : name(n), value(v), readOnly(b) {}
 };
-
-//vector<Variable> names;
-
-//double get_value(string s)
-//{
-//	for(Variable var : names)
-//		if(var.name == s)
-//			return var.value;
-//
-//	error("get: undefined name ",s);
-//}
-
-//void set_value(string s,double d)
-//{
-//	for(Variable &var : names)
-//		if(var.name == s)
-//		{
-//			if(var.readOnly)
-//				cout << "\n\tthe variable is read-only.\n";
-//			else
-//				var.value = d;
-//			return;
-//		}
-//	error("set: undefined name ",s);
-//}
-
-//void set_value(string s, double d, bool b)
-//{
-//	for(Variable &var : names)
-//		if(var.name == s)
-//		{
-//			if(var.readOnly)
-//				cout << "\n\tthe variable is read-only.\n";
-//			else
-//			{
-//				var.value = d;
-//				var.readOnly = b;
-//			}
-//			return;
-//		}
-//	error("set: undefined name ",s);
-//}
-
-//bool is_declared(string s)
-//{
-//	for(Variable var : names)
-//		if(var.name == s)
-//			return true;
-//	return false;
-//}
 
 
 
@@ -81,15 +37,15 @@ SymbolTable table;
 
 double SymbolTable::get(string s)
 {
-	for(Variable var : varTable)
-		if(var.name == s)
+	for (Variable var : varTable)
+		if (var.name == s)
 			return var.value;
 	error("undefined name for a variable: ", s);
 }
 
 void SymbolTable::set(string s, double d, bool b)
 {
-	for(Variable &var : varTable)
+	for (Variable &var : varTable)
 	{
 		if (var.readOnly)
 			cout << "\n\tThis variable is read-only.\n";
@@ -115,8 +71,6 @@ void SymbolTable::declare(Variable v)
 {
 	varTable.push_back(v);
 }
-
-
 
 
 
@@ -174,12 +128,8 @@ Token Token_stream::get()
 		case '('	:	case '+'	:	case '*'	:
 		case ')'	:	case '-'	:	case '/'	:
 		case '='	:	case ';'	:	case '%'	:
+		case '#'	:
 			return Token(c);
-
-		case '#':	// temp - gotta move it back
-		{
-			return Token(c);
-		}
 
 		default	:
 		{
@@ -222,12 +172,10 @@ Token Token_stream::get()
 void Token_stream::ignore(char c)
 {
 	full = false;
-
 	if (c== buffer.kind)
 		return;
 
 	char input;
-
 	while(cin >> input)
 		if (input == c)		
 			return;
@@ -238,19 +186,6 @@ Token_stream ts;
 
 
 double expression();
-
-//double performPower(double d,int i)
-//{
-//	if(i == 0)
-//		return 1;
-//
-//	double result = 1;
-//	
-//	for(; i > 0 ; --i)
-//		result *= d;
-//	
-//	return result;
-//}
 
 double primary()
 {
@@ -306,7 +241,6 @@ double primary()
 
 		case name:
 			return table.get(t.tokenName);
-			//return get_value(t.tokenName);
 
 		default:
 			error("primary expected");
@@ -322,10 +256,7 @@ double term()
 		switch(t.kind)
 		{
 			case '*' :
-			{
-				d *= primary(); 
-				break;
-			}
+				d *= primary(); break;
 
 			case '/' :
 			{
@@ -349,11 +280,9 @@ double term()
 double expression()
 {
 	double d = term();
-
 	while(true)
 	{
 		Token t = ts.get();
-
 		switch(t.kind)
 		{
 			case '+':
@@ -378,33 +307,23 @@ double declaration()
 		" declared twice",
 		"= missing in declaration of ",
 	};
-	//Token t = ts.get();
 	Token t1 = ts.get();
 
 	if(t1.kind != 'a')
 		error(messages[0]);
 
 	string name = t1.tokenName;
-
-	if(
-		table.isDeclared(name) 
-		//|| is_declared(name) //temp
-		)
+	if (table.isDeclared(name))
 		error(name, messages[1]);
 
 	Token t2 = ts.get();
-
 	if(t2.kind != '=')
 		error(messages[2], name);
 
 	double d = expression();
-
 	Variable v = Variable(name, d);
-
 	table.declare(v);
-	//names.push_back(v);	// temp
-	return d;
-	 
+	return d;	 
 }
 
 double statement()
@@ -422,44 +341,43 @@ double statement()
 				t = ts.get();
 				b = true;
 			}
+
 			case name :
 			{
 				char c;
-				if(cin >> c && c == '=' 
-				   && table.isDeclared(t.tokenName))
-				   //&& is_declared(t.tokenName))
+				if(cin >> c && c == '=' && table.isDeclared(t.tokenName))
 				{
 					double d = expression();
 					table.set(t.tokenName, d, b);
-					//set_value(t.tokenName, d, b);	// temp
-					return 
-						table.get(t.tokenName);
-						//get_value(t.tokenName);	// temp
+					return table.get(t.tokenName);
 				}
 				cin.unget();
 			}
+
 			default:
 			{
 				ts.unget(t);
 				return expression();
 			}
-		}
+		};
 }
 
 const string prompt = "> ";
 const string result = "= ";
 
+void setConstants()
+{
+	table.declare(Variable("pi",3.141592628,true));
+}
+
 void calculate()
 {
-	//names.push_back(Variable("b", 0));
-	table.declare(Variable("b",0,false));
-
+	setConstants();	
 	while(true)
 		try
 	{
 		cout << prompt;
 		Token t = ts.get();
-
 		while(t.kind == print)
 			t = ts.get();
 
