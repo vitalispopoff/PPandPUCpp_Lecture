@@ -6,7 +6,17 @@
 	write help section available at 'H' and 'h'
 */
 
-
+void getHelp()
+{
+	cout
+		<< "\n\t help: \n\t-------\n"
+		<< "\n\tbasic operations:\t+\t-\t*\t/\t%/"
+		<< "\n\tadvanced operations:\tsqrt(VALUE)\tpow(VALUE; VALUE)"
+		<< "\n\texecution of expressions:\t;"
+		<< "\n\tvariables: saving:\tlet NAME = VALUE\t\treading:\tNAME\n"
+		<< "\n\tsaving variables as constants:\t# NAME = VALUE\t (this is permanent)\n"
+		<< "\n\tquit\tquit\n";
+}
 
 struct Variable
 {
@@ -74,13 +84,15 @@ void SymbolTable::declare(Variable v)
 
 
 
+//const char help		{'H'};
 const char let		{'L'};
 const char name		{'a'};
 const char number	{'8'};
 const char print	{';'};
-const char quit		{'Q'};
-const char root		{'R'};
 const char power	{'P'};
+const char quit		{'Q'};
+const char remember	{'#'};
+const char root		{'R'};
 
 struct Token
 {
@@ -107,6 +119,8 @@ class Token_stream
 		Token get();
 		void ignore(char);
 };
+
+Token_stream ts;
 
 void Token_stream::unget(Token t)
 {
@@ -161,6 +175,12 @@ Token Token_stream::get()
 				if (s == "pow")
 					return Token(power);
 
+				if (s == "h" || s == "H" || "help")
+				{
+					getHelp();
+					return ts.get();
+				}
+
 				return Token(name,s);
 			};
 
@@ -181,7 +201,6 @@ void Token_stream::ignore(char c)
 			return;
 }
 
-Token_stream ts;
 
 
 
@@ -333,10 +352,11 @@ double statement()
 	while(true)
 		switch(t.kind)
 		{
+
 			case let :		
 				return declaration();
 
-			case '#' :
+			case remember :
 			{
 				t = ts.get();
 				b = true;
@@ -354,6 +374,7 @@ double statement()
 				cin.unget();
 			}
 
+
 			default:
 			{
 				ts.unget(t);
@@ -369,6 +390,9 @@ void setConstants()
 {
 	table.declare(Variable("pi",3.141592628,true));
 }
+
+
+
 
 void calculate()
 {
