@@ -7,8 +7,10 @@ struct Variable
 	public:
 		string name;
 		double value;
+		bool readOnly;
 		
-		Variable(string n,double v) : name(n), value(v) {}
+		Variable(string n, double v) : name(n), value(v), readOnly(false) {}
+		Variable(string n, double v, bool b) : name(n), value(v), readOnly(b) {}
 };
 
 vector<Variable> names;
@@ -27,11 +29,32 @@ void set_value(string s,double d)
 	for(Variable &var : names)
 		if(var.name == s)
 		{
-			var.value = d;
+			if(var.readOnly)
+				cout << "\n\tthe variable is read-only.\n";
+			else
+				var.value = d;
 			return;
 		}
 	error("set: undefined name ",s);
 }
+
+void set_value(string s, double d, bool b)
+{
+	for(Variable &var : names)
+		if(var.name == s)
+		{
+			if(var.readOnly)
+				cout << "\n\tthe variable is read-only.\n";
+			else
+			{
+				var.value = d;
+				var.readOnly = b;
+			}
+			return;
+		}
+	error("set: undefined name ",s);
+}
+
 
 bool is_declared(string s)
 {
@@ -97,13 +120,14 @@ Token Token_stream::get()
 		case '('	:	case '+'	:	case '*'	:
 		case ')'	:	case '-'	:	case '/'	:
 		case '='	:	case ';'	:	case '%'	:
-		{
 			return Token(c);
-		};
 
-		case '#' :
-			return Token(let);
-		
+		case '#':
+		{
+
+			return Token(c);
+		}
+
 		default	:
 		{
 			if (c == '.' || isdigit(c))
@@ -111,7 +135,6 @@ Token Token_stream::get()
 				cin.unget();
 				double d;
 				cin >> d;
-
 				return Token(number,d);
 			};
 
@@ -121,8 +144,7 @@ Token Token_stream::get()
 				s += c;
 				while (cin.get(c) && (isalpha(c) || isdigit(c) || c == '_'))	// this needs serious refactoring
 					s += c;
-				
-				
+								
 				cin.unget();
 				if (s == "let")
 					return Token(let);
@@ -164,18 +186,18 @@ Token_stream ts;
 
 double expression();
 
-double performPower(double d,int i)
-{
-	if(i == 0)
-		return 1;
-
-	double result = 1;
-	
-	for(; i > 0 ; --i)
-		result *= d;
-	
-	return result;
-}
+//double performPower(double d,int i)
+//{
+//	if(i == 0)
+//		return 1;
+//
+//	double result = 1;
+//	
+//	for(; i > 0 ; --i)
+//		result *= d;
+//	
+//	return result;
+//}
 
 double primary()
 {
@@ -194,6 +216,13 @@ double primary()
 			else
 				return d;
 		}
+				
+		case '-':
+			return -primary();
+
+		case number:
+			return t.value;
+
 		case root:
 		{
 			double d =
@@ -204,14 +233,6 @@ double primary()
 
 			return sqrt(d);
 		}
-		case '-':
-			return -primary();
-
-		case number:
-			return t.value;
-
-		case name:
-			return get_value(t.tokenName);
 
 		case power:
 		{
@@ -231,6 +252,9 @@ double primary()
 			
 			return pow(d1, d2);
 		}
+
+		case name:
+			return get_value(t.tokenName);
 
 		default:
 			error("primary expected");
@@ -304,6 +328,7 @@ double declaration()
 		" declared twice",
 		"= missing in declaration of ",
 	};
+	//Token t = ts.get();
 	Token t1 = ts.get();
 
 	if(t1.kind != 'a')
@@ -323,34 +348,41 @@ double declaration()
 
 	names.push_back(Variable(name, d));
 	return d;
+	
 }
-
 
 double statement()
 {
 	Token t = ts.get();
-	switch(t.kind)
-	{
-		case let:
-			return declaration();
+	bool b {false};
+	while(true)
+		switch(t.kind)
+		{
+			case let :		
+				return declaration();
 
-		case name:
-		{
-			char c;
-			if(cin >> c && c == '=' && is_declared(t.tokenName))
+			case '#' :
 			{
-				double d = expression();
-				set_value(t.tokenName,d);
-				return get_value(t.tokenName);
+				t = ts.get();
+				b = true;
 			}
-			cin.unget();
+			case name :
+			{
+				char c;
+				if(cin >> c && c == '=' && is_declared(t.tokenName))
+				{
+					double d = expression();
+					set_value(t.tokenName, d, b);
+					return get_value(t.tokenName);
+				}
+				cin.unget();
+			}
+			default:
+			{
+				ts.unget(t);
+				return expression();
+			}
 		}
-		default:
-		{
-			ts.unget(t);
-			return expression();
-		}
-	}
 }
 
 const string prompt = "> ";
@@ -358,6 +390,8 @@ const string result = "= ";
 
 void calculate()
 {
+/*	temporarily : */ names.push_back(Variable("b", 0));
+
 	while(true)
 		try
 	{

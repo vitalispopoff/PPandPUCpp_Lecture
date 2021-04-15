@@ -35,8 +35,9 @@
 			Expression
 
 		Declaration
-			"let" Name "=" Expression
-			Name = Expression		// ? , exc 2
+			let Name = Expression
+			# Name = Expression
+			Name = Expression
 
 		Expression:
 			Term
@@ -54,13 +55,13 @@
 			(Expression)                    
 			–  Primary 
 			+ Primary
-			sqrt(Primary)				// drill 7 & 8
-			//	power(Number, Integral)		// drill 9
+			sqrt(Primary)
+			pow(Expression; Expression)
+
 		
 		Number : 
 			floating-point-literal
-		Integral :
-			integral-literal
+
 			
 		Input comes from cin through the Token_stream called ts.		
 */
