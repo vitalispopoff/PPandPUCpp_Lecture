@@ -10,3 +10,5 @@
 //void programming();
 
 int calculatorMain();
+
+void technicalitiesMain();

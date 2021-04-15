@@ -140,6 +140,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="calculator_6.cpp" />
+    <ClCompile Include="ch8_exc1.cpp" />
+    <ClCompile Include="my.cpp" />
+    <ClCompile Include="use.cpp" />
     <ClCompile Include="_2_hello_world.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="_3_objects_types_values.cpp" />
@@ -147,12 +150,16 @@
     <ClCompile Include="_5_errors.cpp" />
     <ClCompile Include="_6_programming.cpp" />
     <ClCompile Include="_7_drill.cpp" />
+    <ClCompile Include="_8_drill_3.cpp" />
+    <ClCompile Include="_8_swap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="calculator_6_.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="my.h" />
     <ClInclude Include="std_lib_facilities.h" />
     <ClInclude Include="_1_basics.h" />
+    <ClInclude Include="_8_technicalities.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PPandPUCpp_Lecture.rc" />

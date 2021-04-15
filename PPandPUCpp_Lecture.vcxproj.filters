@@ -19,6 +19,12 @@
     <Filter Include="Header Files\_1_Basics">
       <UniqueIdentifier>{4cff2206-bdcb-438d-802f-526e61f3b27a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\_1_Basics\_8_technicalities">
+      <UniqueIdentifier>{82d9b4e9-2253-4c1c-a480-359a32d01fbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\_1_Basics\_8_technicalities">
+      <UniqueIdentifier>{42ea03de-b654-43b2-96af-bc89115f7bad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -45,6 +51,21 @@
     <ClCompile Include="_7_drill.cpp">
       <Filter>Source Files\_1_Basics</Filter>
     </ClCompile>
+    <ClCompile Include="my.cpp">
+      <Filter>Source Files\_1_Basics\_8_technicalities</Filter>
+    </ClCompile>
+    <ClCompile Include="use.cpp">
+      <Filter>Source Files\_1_Basics\_8_technicalities</Filter>
+    </ClCompile>
+    <ClCompile Include="_8_swap.cpp">
+      <Filter>Source Files\_1_Basics\_8_technicalities</Filter>
+    </ClCompile>
+    <ClCompile Include="_8_drill_3.cpp">
+      <Filter>Source Files\_1_Basics\_8_technicalities</Filter>
+    </ClCompile>
+    <ClCompile Include="ch8_exc1.cpp">
+      <Filter>Source Files\_1_Basics\_8_technicalities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -58,6 +79,12 @@
     </ClInclude>
     <ClInclude Include="calculator_6_.h">
       <Filter>Header Files\_1_Basics</Filter>
+    </ClInclude>
+    <ClInclude Include="my.h">
+      <Filter>Header Files\_1_Basics\_8_technicalities</Filter>
+    </ClInclude>
+    <ClInclude Include="_8_technicalities.h">
+      <Filter>Header Files\_1_Basics\_8_technicalities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
