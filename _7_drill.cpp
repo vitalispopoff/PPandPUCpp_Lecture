@@ -122,6 +122,7 @@ Token Token_stream::get()
 				while (cin.get(c) && (isalpha(c) || isdigit(c) || c == '_'))	// this needs serious refactoring
 					s += c;
 				
+				
 				cin.unget();
 				if (s == "let")
 					return Token(let);
@@ -138,7 +139,7 @@ Token Token_stream::get()
 				return Token(name,s);
 			};
 
-			error("Bad token");
+			error("Bad token: ");
 		}
 	}
 }
@@ -184,7 +185,8 @@ double primary()
 	{
 		case '(':
 		{
-			double d = expression();
+			double d;
+			cin>>d;
 			t = ts.get();
 
 			if(t.kind != ')')
@@ -219,8 +221,8 @@ double primary()
 				
 			double d1 = expression();
 			t = ts.get();
-			if(t.kind != ',')
-				error("',' expected");
+			if(t.kind != ';')	// temporarily into ';'
+				error("';' expected");
 
 			double d2 = expression();
 			t = ts.get();
@@ -326,8 +328,8 @@ double declaration()
 
 double statement()
 {
-	Token stat_t = ts.get();
-	switch(stat_t.kind)
+	Token t = ts.get();
+	switch(t.kind)
 	{
 		case let:
 			return declaration();
@@ -335,17 +337,17 @@ double statement()
 		case name:
 		{
 			char c;
-			if(cin >> c && c == '=' && is_declared(stat_t.tokenName))
+			if(cin >> c && c == '=' && is_declared(t.tokenName))
 			{
 				double d = expression();
-				set_value(stat_t.tokenName,d);
-				return get_value(stat_t.tokenName);
+				set_value(t.tokenName,d);
+				return get_value(t.tokenName);
 			}
 			cin.unget();
 		}
 		default:
 		{
-			ts.unget(stat_t);
+			ts.unget(t);
 			return expression();
 		}
 	}
@@ -360,15 +362,15 @@ void calculate()
 		try
 	{
 		cout << prompt;
-		Token calc_t = ts.get();
+		Token t = ts.get();
 
-		while(calc_t.kind == print)
-			calc_t = ts.get();
+		while(t.kind == print)
+			t = ts.get();
 
-		if(calc_t.kind == quit)
+		if(t.kind == quit)
 			return;
 
-		ts.unget(calc_t);
+		ts.unget(t);
 		cout
 			<< result << statement() << endl;
 	}
