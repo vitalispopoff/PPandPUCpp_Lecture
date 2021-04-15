@@ -65,6 +65,52 @@ bool is_declared(string s)
 }
 
 
+class SymbolTable
+{
+	private:
+		vector<Variable> varTable;
+
+	public:
+		double get(string);
+		void set(string, double, bool);
+		bool isDeclared(string);
+		//void declare();
+};
+
+double SymbolTable::get(string s)
+{
+	for(Variable var : varTable)
+		if(var.name == s)
+			return var.value;
+	error("undefined name for a variable: ", s);
+}
+
+void SymbolTable::set(string s, double d, bool b)
+{
+	for(Variable &var : varTable)
+	{
+		if (var.readOnly)
+			cout << "\n\tThis variable is read-only.\n";
+		else
+		{
+			var.value = d;
+			var.readOnly = b;
+		}
+		return;
+	}
+	error("Undefined name for a variable to set: ", s);
+}
+
+bool SymbolTable::isDeclared(string s)
+{
+	for (Variable var : varTable)
+		if (var.name == s)
+			return true;
+	return false;
+}
+
+
+
 
 const char let		{'L'};
 const char name		{'a'};
