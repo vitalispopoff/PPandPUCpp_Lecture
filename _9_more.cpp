@@ -22,13 +22,38 @@ namespace ch9_lib
 			}
 	};
 
-	void temp()
+	void ch9_2()
 	{
 		X 
 			x;
 		int
 			y = x.f(2);		
 	}
+
+
+
+	struct Date
+	{
+		int
+			y,
+			m,
+			d;
+
+		Date(int y, int m, int d){};
+		void init_day(Date &dd, int y, int m, int d){};
+		void add_day(int n){}; 
+
+
+
+	};
+
+	void ch9_3()
+	{
+
+
+
+	}
+
 }
 
 void ch09Main()
