@@ -1,4 +1,5 @@
 #include "std_lib_facilities.h"
+#include "_9_more.h"
 
 namespace ch9_lib
 {
@@ -32,27 +33,27 @@ namespace ch9_lib
 
 
 
-	class Date
-	{
-		public:
-			Date(int, int, int);
+	//class Date
+	//{
+	//	public:
+	//		Date(int, int, int);
 
-			//void add_day(int n){}
-			
-			void year(int);
-			void month(int);
-			void day(int);
-			
-			int year();
-			int month();
-			int day();
-		
-		private:
-			int
-				y, m, d;		
-	};
+	//		//void add_day(int n){}
+	//		
+	//		void year(int);
+	//		void month(int);
+	//		void day(int);
+	//		
+	//		int year();
+	//		int month();
+	//		int day();
+	//	
+	//	private:
+	//		int
+	//			y, m, d;		
+	//};
 
-	Date::Date(int iy,int im,int id) : y(iy), m(im), d(id) {};
+	//Date::Date(int iy,int im,int id) : y(iy), m(im), d(id) {};
 	void Date::year(int i) { y = i; }
 	void Date::month(int i) { m = i; }
 	void Date::day(int i) { d = i; }
@@ -71,6 +72,8 @@ namespace ch9_lib
 	}
 
 }
+
+ch9_lib::Date::Date(int iy,int im,int id) : y(iy),m(im),d(id) {};
 
 void ch09Main()
 {
