@@ -6,18 +6,6 @@ give the Token_stram constructor an istream& parameter
 
 */
 
-void getHelp()
-{
-	cout
-		<< "\n\t help: \n\t-------\n"
-		<< "\n\tbasic operations:\t+\t-\t*\t/\t%/"
-		<< "\n\tadvanced operations:\tsqrt(VALUE)\tpow(VALUE; VALUE)"
-		<< "\n\texecution of expressions:\t;"
-		<< "\n\tvariables: saving:\tlet NAME = VALUE\t\treading:\tNAME\n"
-		<< "\n\tsaving variables as constants:\t# NAME = VALUE\t (this is permanent)\n"
-		<< "\n\tquit\tquit\n";
-}
-
 struct Variable
 {
 	public:
@@ -43,11 +31,9 @@ class SymbolTable
 	void declare(Variable);
 };
 
-SymbolTable table;
-
 double SymbolTable::get(string s)
 {
-	for(Variable var : varTable)
+	for(const Variable &var : varTable)
 		if(var.name == s)
 			return var.value;
 	error("undefined name for a variable: ",s);
@@ -58,12 +44,12 @@ void SymbolTable::set(string s,double d,bool b)
 	for(Variable &var : varTable)
 	{
 		if(var.readOnly)
-			cout << "\n\tThis variable is read-only.\n";
-		else
 		{
-			var.value = d;
-			var.readOnly = b;
+			cout << "\n\tThis variable is read-only.\n";
+			return;
 		}
+		var.value = d;
+		var.readOnly = b;
 		return;
 	}
 	error("Undefined name for a variable to set: ",s);
@@ -71,7 +57,7 @@ void SymbolTable::set(string s,double d,bool b)
 
 bool SymbolTable::isDeclared(string s)
 {
-	for(Variable var : varTable)
+	for(const Variable &var : varTable)
 		if(var.name == s)
 			return true;
 	return false;
@@ -84,15 +70,14 @@ void SymbolTable::declare(Variable v)
 
 
 
-//const char help		{'H'};
-const char let{'L'};
-const char name{'a'};
-const char number{'8'};
-const char print{';'};
-const char power{'P'};
-const char quit{'Q'};
-const char remember{'#'};
-const char root{'R'};
+const char let		{'L'};
+const char name		{'a'};
+const char number	{'8'};
+const char print	{';'};
+const char power	{'P'};
+const char quit		{'Q'};
+const char remember	{'#'};
+const char root		{'R'};
 
 struct Token
 {
@@ -109,35 +94,39 @@ struct Token
 class Token_stream
 {
 	private:
-	bool full;
-	Token buffer;
-	istream& inputStream = cin;
+		bool full;
+		Token buffer;
+		istream& inputStream;
 
 	public:
-	Token_stream(): full{false},buffer(0) {}
+		Token_stream(): full{false}, buffer(0), inputStream(cin) {}
 
-	void unget(Token);
-	Token get();
-	void ignore(char);
+		istream& getInputStream();
+		void unget(Token);
+		Token get();
+		void ignore(char);
 };
 
-Token_stream ts;
+istream& Token_stream::getInputStream()
+{
+	return inputStream;
+}
 
 void Token_stream::unget(Token t)
 {
-	buffer = t;
-	full = true;
+	this->buffer = t;
+	this->full = true;
 }
 
 Token Token_stream::get()
 {
 	if(full)
 	{
-		full = false;
+		this->full = false;
 		return buffer;
 	}
 	char c;
-	cin >> c;
+	inputStream >> c;
 	switch(c)
 	{
 		case '(':	case '+':	case '*':
@@ -150,9 +139,9 @@ Token Token_stream::get()
 		{
 			if(c == '.' || isdigit(c))
 			{
-				cin.unget();
+				inputStream.unget();
 				double d;
-				cin >> d;
+				inputStream >> d;
 				return Token(number,d);
 			};
 
@@ -160,10 +149,10 @@ Token Token_stream::get()
 			{
 				string s;
 				s += c;
-				while(cin.get(c) && (isalpha(c) || isdigit(c) || c == '_'))	// this needs serious refactoring
+				while(inputStream.get(c) && (isalpha(c) || isdigit(c) || c == '_'))					// this needs serious refactoring
 					s += c;
 
-				cin.unget();
+				inputStream.unget();
 				if(s == "let")
 					return Token(let);
 
@@ -176,15 +165,8 @@ Token Token_stream::get()
 				if(s == "pow")
 					return Token(power);
 
-				if(s == "h" || s == "H" || "help")
-				{
-					getHelp();
-					return ts.get();
-				}
-
 				return Token(name,s);
 			};
-
 			error("Bad token: ");
 		}
 	}
@@ -193,21 +175,21 @@ Token Token_stream::get()
 void Token_stream::ignore(char c)
 {
 	full = false;
+
 	if(c == buffer.kind)
 		return;
 
 	char input;
-	while(cin >> input)
+	while(inputStream >> input)
 		if(input == c)
 			return;
 }
 
 
 
+double expression(Token_stream &, SymbolTable &);
 
-double expression();
-
-double primary()
+double primary(Token_stream &ts, SymbolTable &table)
 {
 	Token t = ts.get();
 
@@ -215,8 +197,9 @@ double primary()
 	{
 		case '(':
 		{
-			double d;
-			cin >> d;
+		double d //;
+				= expression(ts, table);	//innit fix?
+			//ts.getInputStream() >> d;
 			t = ts.get();
 
 			if(t.kind != ')')
@@ -226,14 +209,14 @@ double primary()
 		}
 
 		case '-':
-			return -primary();
+			return -primary(ts, table);
 
 		case number:
 			return t.value;
 
 		case root:
 		{
-			double d = primary();
+			double d = primary(ts, table);
 
 			if(d < 0)
 				error("positive number for the root expected (imaginary numbers are not supported).");
@@ -246,12 +229,12 @@ double primary()
 			if(t.kind != '(')
 				error("'(' expected");
 
-			double d1 = expression();
+			double d1 = expression(ts, table);
 			t = ts.get();
 			if(t.kind != ';')	// temporarily into ';'
 				error("';' expected");
 
-			double d2 = expression();
+			double d2 = expression(ts, table);
 			t = ts.get();
 			if(t.kind != ')')
 				error("')' expected");
@@ -267,20 +250,20 @@ double primary()
 	}
 }
 
-double term()
+double term(Token_stream &ts,SymbolTable &table)
 {
-	double d = primary();
+	double d = primary(ts, table);
 	while(true)
 	{
 		Token t = ts.get();
 		switch(t.kind)
 		{
 			case '*':
-				d *= primary(); break;
+				d *= primary(ts, table); break;
 
 			case '/':
 			{
-				double denominator = primary();
+				double denominator = primary(ts, table);
 				if(denominator == 0)
 					error("divide by zero");
 
@@ -297,19 +280,19 @@ double term()
 	}
 }
 
-double expression()
+double expression(Token_stream &ts,SymbolTable &table)
 {
-	double d = term();
+	double d = term(ts, table);
 	while(true)
 	{
 		Token t = ts.get();
 		switch(t.kind)
 		{
 			case '+':
-				d += term(); break;
+				d += term(ts, table); break;
 
 			case '-':
-				d -= term(); break;
+				d -= term(ts, table); break;
 
 			default:
 			{
@@ -320,7 +303,7 @@ double expression()
 	}
 }
 
-double declaration()
+double declaration(Token_stream &ts,SymbolTable &table)
 {
 	vector<string>messages{
 		"name expected in declaration",
@@ -340,22 +323,21 @@ double declaration()
 	if(t2.kind != '=')
 		error(messages[2],name);
 
-	double d = expression();
+	double d = expression(ts, table);
 	Variable v = Variable(name,d);
 	table.declare(v);
 	return d;
 }
 
-double statement()
+double statement(Token_stream &ts,SymbolTable &table)
 {
 	Token t = ts.get();
 	bool b{false};
 	while(true)
 		switch(t.kind)
 		{
-
 			case let:
-				return declaration();
+				return declaration(ts,table);
 
 			case remember:
 			{
@@ -368,18 +350,17 @@ double statement()
 				char c;
 				if(cin >> c && c == '=' && table.isDeclared(t.tokenName))
 				{
-					double d = expression();
+					double d = expression(ts, table);
 					table.set(t.tokenName,d,b);
 					return table.get(t.tokenName);
 				}
-				cin.unget();
+				ts.getInputStream().unget();
 			}
-
 
 			default:
 			{
 				ts.unget(t);
-				return expression();
+				return expression(ts, table);
 			}
 		};
 }
@@ -387,7 +368,7 @@ double statement()
 const string prompt = "> ";
 const string result = "= ";
 
-void setConstants()
+void setConstants(SymbolTable &table)
 {
 	table.declare(Variable("pi",3.141592628,true));
 }
@@ -395,9 +376,8 @@ void setConstants()
 
 
 
-void calculate()
+void calculate(Token_stream ts,SymbolTable &table)
 {
-	setConstants();
 	while(true)
 		try
 	{
@@ -411,7 +391,8 @@ void calculate()
 
 		ts.unget(t);
 		cout
-			<< result << statement() << endl;
+			<< result << statement(ts, table) << endl;
+		ts.get();
 	}
 	catch(runtime_error &e)
 	{
@@ -425,7 +406,10 @@ int calculatorMain()
 {
 	try
 	{
-		calculate();
+		Token_stream ts;
+		SymbolTable table;
+		setConstants(table);
+		calculate(ts, table);
 		return 0;
 	}
 	catch(exception &e)

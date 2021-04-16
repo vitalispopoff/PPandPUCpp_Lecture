@@ -8,3 +8,7 @@ void swap_r(int&, int&);
 void swapMain();
 
 void ch_8_dr_3();
+
+
+	
+void ch8_exc2sqq_Main();

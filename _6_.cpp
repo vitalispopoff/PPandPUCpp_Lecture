@@ -247,7 +247,7 @@ double expression04() {
 }
 
 typedef double (*funk)();
-funk expression = expression04;
+//funk expression = expression04;
 
 //void calcMk01() {
 //

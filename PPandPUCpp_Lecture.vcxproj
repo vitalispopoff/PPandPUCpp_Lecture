@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="calculator_6.cpp" />
     <ClCompile Include="ch8_exc1.cpp" />
+    <ClCompile Include="ch8_exc2sqq.cpp" />
     <ClCompile Include="my.cpp" />
     <ClCompile Include="use.cpp" />
     <ClCompile Include="_2_hello_world.cpp" />

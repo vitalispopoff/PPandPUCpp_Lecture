@@ -66,6 +66,9 @@
     <ClCompile Include="ch8_exc1.cpp">
       <Filter>Source Files\_1_Basics\_8_technicalities</Filter>
     </ClCompile>
+    <ClCompile Include="ch8_exc2sqq.cpp">
+      <Filter>Source Files\_1_Basics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
