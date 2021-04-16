@@ -375,7 +375,7 @@ namespace Ch8_lib
 		result.minimum = double (v[0]);
 		result.maximum = double (v[last]);		
 		result.median = last & 1 
-			? double (v[middle] + v[middle - 1]) / 2.
+			? 0.5 * double (v[middle] + v[middle - 1])
 			: double (v[middle]);
 		result.mean = 0.;
 		for(int i : v)

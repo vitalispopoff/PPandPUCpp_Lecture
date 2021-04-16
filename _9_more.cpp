@@ -32,24 +32,40 @@ namespace ch9_lib
 
 
 
-	struct Date
+	class Date
 	{
-		int
-			y,
-			m,
-			d;
+		public:
+			Date(int, int, int);
 
-		Date(int y, int m, int d){};
-		void init_day(Date &dd, int y, int m, int d){};
-		void add_day(int n){}; 
-
-
-
+			//void add_day(int n){}
+			
+			void year(int);
+			void month(int);
+			void day(int);
+			
+			int year();
+			int month();
+			int day();
+		
+		private:
+			int
+				y, m, d;		
 	};
+
+	Date::Date(int iy,int im,int id) : y(iy), m(im), d(id) {};
+	void Date::year(int i) { y = i; }
+	void Date::month(int i) { m = i; }
+	void Date::day(int i) { d = i; }
+
+	int Date::year() { return y; }
+	int Date::month() { return m; }
+	int Date::day() { return d; }
+
+
 
 	void ch9_3()
 	{
-
+		Date d{1972, 2, 21};
 
 
 	}
