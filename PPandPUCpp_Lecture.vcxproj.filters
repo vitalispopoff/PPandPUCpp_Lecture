@@ -22,8 +22,8 @@
     <Filter Include="Source Files\_1_Basics\_8_technicalities">
       <UniqueIdentifier>{82d9b4e9-2253-4c1c-a480-359a32d01fbc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\_1_Basics\_8_technicalities">
-      <UniqueIdentifier>{42ea03de-b654-43b2-96af-bc89115f7bad}</UniqueIdentifier>
+    <Filter Include="Source Files\_1_Basics\_9_moreTechnicalities">
+      <UniqueIdentifier>{f36c2ca2-f8ab-4152-908c-de8066bfba05}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +69,9 @@
     <ClCompile Include="ch8_exc2sqq.cpp">
       <Filter>Source Files\_1_Basics</Filter>
     </ClCompile>
+    <ClCompile Include="_9_more.cpp">
+      <Filter>Source Files\_1_Basics\_9_moreTechnicalities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -83,11 +86,14 @@
     <ClInclude Include="calculator_6_.h">
       <Filter>Header Files\_1_Basics</Filter>
     </ClInclude>
-    <ClInclude Include="my.h">
-      <Filter>Header Files\_1_Basics\_8_technicalities</Filter>
-    </ClInclude>
     <ClInclude Include="_8_technicalities.h">
-      <Filter>Header Files\_1_Basics\_8_technicalities</Filter>
+      <Filter>Header Files\_1_Basics</Filter>
+    </ClInclude>
+    <ClInclude Include="my.h">
+      <Filter>Header Files\_1_Basics</Filter>
+    </ClInclude>
+    <ClInclude Include="_9_more.h">
+      <Filter>Header Files\_1_Basics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

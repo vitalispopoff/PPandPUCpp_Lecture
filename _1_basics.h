@@ -12,3 +12,5 @@
 int calculatorMain();
 
 void technicalitiesMain();
+
+void ch09Main();

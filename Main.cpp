@@ -11,18 +11,11 @@ void fuck(vector<int> v)
 
 
 
+
 int main() {
 
 	//srand(time(NULL));
+
+	ch09Main();
 	
-	//foo = 7;
-	
-	//technicalitiesMain();
-
-	//swapMain();
-	//ch_8_dr_3();
-
-	//calculatorMain();
-
-	ch8_exc2sqq_Main();
 }

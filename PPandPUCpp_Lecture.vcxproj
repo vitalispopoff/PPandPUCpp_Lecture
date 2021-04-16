@@ -153,6 +153,7 @@
     <ClCompile Include="_7_drill.cpp" />
     <ClCompile Include="_8_drill_3.cpp" />
     <ClCompile Include="_8_swap.cpp" />
+    <ClCompile Include="_9_more.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="calculator_6_.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="std_lib_facilities.h" />
     <ClInclude Include="_1_basics.h" />
     <ClInclude Include="_8_technicalities.h" />
+    <ClInclude Include="_9_more.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PPandPUCpp_Lecture.rc" />
