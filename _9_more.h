@@ -1,24 +1,37 @@
 
 namespace ch9_lib
 {
-class  Date
-{
-	public:
-	Date(int,int,int);
+	/* in-class implementations 
+	* (called inlined functions) force compiler to
+	* generate code at each call separately
+	* which boosts the performance, but
+	* require a full recompilation of entire code
+	* with each
+	* change of the implementation.
+	* reasonable for tiny simple functions
+	* that get used a lot
+	*/
+	class  Date
+	{
+		public:
+			class Invalid { };		// class used as exception
+			
+			Date(int, int, int);
 
-	//void add_day(int n){}
+			void year	(int);
+			void month	(int);
+			void day	(int);
 
-	void year(int);
-	void month(int);
-	void day(int);
+			int year	();
+			int month	();
+			int day		();
 
-	int year();
-	int month();
-	int day();
+			void add_day	(int);
+			bool is_valid	();
 
-	private:
-	int
-		y,m,d;
-};
+		private:
+			int
+				y,m,d;
+	};
 
 }

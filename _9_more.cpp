@@ -31,53 +31,58 @@ namespace ch9_lib
 			y = x.f(2);		
 	}
 
+	
+	class Date;		// declaration of the class moved to the header file.
 
-
-	//class Date
-	//{
-	//	public:
-	//		Date(int, int, int);
-
-	//		//void add_day(int n){}
-	//		
-	//		void year(int);
-	//		void month(int);
-	//		void day(int);
-	//		
-	//		int year();
-	//		int month();
-	//		int day();
-	//	
-	//	private:
-	//		int
-	//			y, m, d;		
-	//};
-
-	//Date::Date(int iy,int im,int id) : y(iy), m(im), d(id) {};
-	void Date::year(int i) { y = i; }
+	void Date::year	(int i)	{ y = i; }
 	void Date::month(int i) { m = i; }
-	void Date::day(int i) { d = i; }
+	void Date::day	(int i)	{ d = i; }
 
-	int Date::year() { return y; }
-	int Date::month() { return m; }
-	int Date::day() { return d; }
+	int Date::year	()	{ return y; }
+	int Date::month	()	{ return m; }
+	int Date::day	()	{ return d; }
+
+	void Date::add_day	(int i)	{ d += i;}
+	bool Date::is_valid	()		{ return 1 <= m && m <= 12; }
+	
 
 
+	void ch9_4	()	{ Date d {1972, 2, 21}; }
 
-	void ch9_3()
+	void ch9_4_6(int x,int y)
 	{
-		Date d{1972, 2, 21};
-
-
+		try
+		{
+			Date 
+				dxy {2004, x, y};
+			cout
+				//<< dxy	// operand not implemented.
+				<< endl;
+			dxy.add_day(2);
+		}
+		catch (Date::Invalid)
+		{
+			error("invalid date");
+		}
 	}
-
 }
 
-ch9_lib::Date::Date(int iy,int im,int id) : y(iy),m(im),d(id) {};
+ch9_lib::Date::Date(int iy,int im,int id) : y{iy}, m{im}, d{id} 
+{ 
+	if (!is_valid())
+	{	
+		cout << "BOINK!";
+		throw Invalid{};
+	}	
+}
+
+
 
 void ch09Main()
 {
 	using namespace ch9_lib;
+	
+	ch9_4();
 
 
 }
