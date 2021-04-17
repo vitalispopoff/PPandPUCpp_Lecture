@@ -34,47 +34,73 @@ namespace ch9_lib
 	
 	class Date;		// declaration of the class moved to the header file.
 
-	void Date::year	(int i)	{ y = i; }
-	void Date::month(int i) { m = i; }
-	void Date::day	(int i)	{ d = i; }
+	Date::Date(int i1, Month i2,int i3) : y{i1}, m{i2}, d{i3}
+	{ 
+		if (!is_valid())
+		{	
+			cout << "BOINK!";
+			throw Invalid{};
+		}	
+	}
 
-	int Date::year	()	{ return y; }
-	int Date::month	()	{ return m; }
-	int Date::day	()	{ return d; }
+	void Date::year	(int i)		{ y = i; }
+	void Date::month(Month m)	{ this -> m = m; }
+	void Date::day	(int i)		{ d = i; }
+
+	int Date::year	()		{ return y; }
+	Month Date::month	()	{ return m; }
+	int Date::day	()		{ return d; }
 
 	void Date::add_day	(int i)	{ d += i;}
-	bool Date::is_valid	()		{ return 1 <= m && m <= 12; }
+	bool Date::is_valid	() { return 1 <= int(m) && int(m) <= 12; }
 	
+	class Year;
 
 
-	void ch9_4	()	{ Date d {1972, 2, 21}; }
 
-	void ch9_4_6(int x,int y)
+
+	enum Month;
+
+	Month int_to_month(int i)
 	{
-		try
-		{
-			Date 
-				dxy {2004, x, y};
-			cout
-				//<< dxy	// operand not implemented.
-				<< endl;
-			dxy.add_day(2);
-		}
-		catch (Date::Invalid)
-		{
-			error("invalid date");
-		}
+		if (i < int(Month::Jan) || int(Month::Dec) < i)
+			error("unavailable month value");
+		return Month(i);
 	}
+
+	Month operator++(Month &m)
+	{
+		m = (m == Month::Dec) ? Month::Jan : Month(int(m) + 1);
+		return m;
+	}
+
+	Month operator--(Month &m)
+	{
+		m = (m == Month::Jan) ? Month::Dec : Month(int(m) - 1);
+		return m;
+	}
+
+
+
+
+	//void ch9_4_6(int x,int y)
+	//{
+	//	try
+	//	{
+	//		Date 
+	//			dxy {2004, x, y};
+	//		cout
+	//			//<< dxy	// operand not implemented.
+	//			<< endl;
+	//		dxy.add_day(2);
+	//	}
+	//	catch (Date::Invalid)
+	//	{
+	//		error("invalid date");
+	//	}
+	//}
 }
 
-ch9_lib::Date::Date(int iy,int im,int id) : y{iy}, m{im}, d{id} 
-{ 
-	if (!is_valid())
-	{	
-		cout << "BOINK!";
-		throw Invalid{};
-	}	
-}
 
 
 
@@ -82,7 +108,8 @@ void ch09Main()
 {
 	using namespace ch9_lib;
 	
-	ch9_4();
+	//ch9_4();
 
+	
 
 }

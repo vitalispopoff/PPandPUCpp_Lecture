@@ -16,22 +16,73 @@ namespace ch9_lib
 		public:
 			class Invalid { };		// class used as exception
 			
-			Date(int, int, int);
+			Date(int, Month, int);
 
 			void year	(int);
-			void month	(int);
+			void month	(Month);
 			void day	(int);
 
 			int year	();
-			int month	();
+			Month month	();
 			int day		();
 
 			void add_day	(int);
 			bool is_valid	();
 
 		private:
-			int
-				y,m,d;
+			int		y;
+			Month	m;
+			int		d;
+	};
+
+	class Year
+	{
+		
+		public:
+			class Invalid{ };
+			
+			Year (int);
+			
+			int	year();
+
+		private:
+			static const int 
+				min{1800},
+				max{2200};
+			int 
+				y;
+	};
+
+	enum class Month
+	{
+		//jan = 1,	// sets the value assigned to the literal;
+		Jan,	// by default starts with 0 obviously
+		Feb,
+		Mar,
+		Spr,
+		May,
+		Jun,
+		Jul,
+		Aug,
+		Sep,
+		Oct,
+		Nov,
+		Dec
+	};
+
+	Month int_to_month(int);
+	Month operator++(Month&);
+	Month operator--(Month&);
+
+	enum Day
+	{
+		mon,
+		tue,
+		wed,
+		thu,
+		fri,
+		sat,
+		sun
 	};
 
 }
