@@ -1,6 +1,4 @@
 
-namespace ch9_lib
-{
 	/* in-class implementations 
 	* (called inlined functions) force compiler to
 	* generate code at each call separately
@@ -11,33 +9,12 @@ namespace ch9_lib
 	* reasonable for tiny simple functions
 	* that get used a lot
 	*/
-	class  Date
-	{
-		public:
-			class Invalid { };		// class used as exception
-			
-			Date(Year, Month, int);
 
-			void year	(Year);
-			void month	(Month);
-			void day	(int);
-
-			Year year	();
-			Month month	();
-			int day		();
-
-			void add_day	(int);
-			bool is_valid	();
-
-		private:
-			Year	y;
-			Month	m;
-			int		d;
-	};
+namespace ch9_lib
+{
 
 	class Year
-	{
-		
+	{	
 		public:
 			class Invalid{ };
 			
@@ -70,6 +47,35 @@ namespace ch9_lib
 		Nov,
 		Dec
 	};
+
+	class  Date
+	{
+		public:
+			class Invalid { };		// class used as exception
+			
+			/*Default constructor secures declarations like for vectors*/
+			Date	();
+
+			Date	(Year, Month, int);
+
+			void year	(Year);
+			void month	(Month);
+			void day	(int);
+
+			Year year	();
+			Month month	();
+			int day		();
+
+			void add_day	(int);
+			bool is_valid	();
+
+		private:
+			Year	y;
+			Month	m;
+			int		d;
+
+	};
+
 
 	Month int_to_month(int);
 	Month operator++(Month&);

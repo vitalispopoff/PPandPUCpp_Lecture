@@ -35,6 +35,8 @@ namespace ch9_lib
 	
 	class Date;		// declaration of the class moved to the header file.
 
+	Date::Date() : y{2001}, m{Month::Jan}, d{1} {}
+
 	Date::Date(Year i1, Month i2,int i3) : y{i1}, m{i2}, d{i3}
 	{ 
 		if (!is_valid())
@@ -71,9 +73,7 @@ namespace ch9_lib
 
 
 
-
-
-	enum Month;
+	// enum Month; // unscoped ENUM redeclaring ? no no no
 
 	Month int_to_month(int i)
 	{
@@ -120,7 +120,5 @@ void ch09Main()
 	using namespace ch9_lib;
 	
 	//ch9_4();
-
-	
 
 }
