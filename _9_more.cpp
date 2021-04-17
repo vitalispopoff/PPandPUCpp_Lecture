@@ -31,10 +31,11 @@ namespace ch9_lib
 			y = x.f(2);		
 	}
 
+
 	
 	class Date;		// declaration of the class moved to the header file.
 
-	Date::Date(int i1, Month i2,int i3) : y{i1}, m{i2}, d{i3}
+	Date::Date(Year i1, Month i2,int i3) : y{i1}, m{i2}, d{i3}
 	{ 
 		if (!is_valid())
 		{	
@@ -43,18 +44,31 @@ namespace ch9_lib
 		}	
 	}
 
-	void Date::year	(int i)		{ y = i; }
+	void Date::year	(Year y)	{ this -> y = y; }
 	void Date::month(Month m)	{ this -> m = m; }
-	void Date::day	(int i)		{ d = i; }
+	void Date::day	(int d)		{ this -> d = d; }
 
-	int Date::year	()		{ return y; }
+	Year Date::year	()		{ return y; }
 	Month Date::month	()	{ return m; }
 	int Date::day	()		{ return d; }
 
 	void Date::add_day	(int i)	{ d += i;}
-	bool Date::is_valid	() { return 1 <= int(m) && int(m) <= 12; }
+	bool Date::is_valid	()		{ return 1 <= int(m) && int(m) <= 12; }
 	
+
+
 	class Year;
+
+	Year::Year(int i) : y{i}
+	{
+		if( i < min || max <= i)
+			throw Invalid();
+	}
+
+	void Year::year	(int i)	{ y = i; }
+	
+	int Year::year	()		{ return y; }
+
 
 
 
@@ -79,9 +93,6 @@ namespace ch9_lib
 		m = (m == Month::Jan) ? Month::Dec : Month(int(m) - 1);
 		return m;
 	}
-
-
-
 
 	//void ch9_4_6(int x,int y)
 	//{

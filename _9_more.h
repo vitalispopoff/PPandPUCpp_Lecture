@@ -16,13 +16,13 @@ namespace ch9_lib
 		public:
 			class Invalid { };		// class used as exception
 			
-			Date(int, Month, int);
+			Date(Year, Month, int);
 
-			void year	(int);
+			void year	(Year);
 			void month	(Month);
 			void day	(int);
 
-			int year	();
+			Year year	();
 			Month month	();
 			int day		();
 
@@ -30,7 +30,7 @@ namespace ch9_lib
 			bool is_valid	();
 
 		private:
-			int		y;
+			Year	y;
 			Month	m;
 			int		d;
 	};
@@ -43,7 +43,8 @@ namespace ch9_lib
 			
 			Year (int);
 			
-			int	year();
+			int	year	();
+			void year	(int);
 
 		private:
 			static const int 
