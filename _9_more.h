@@ -20,8 +20,8 @@ namespace ch9_lib
 			
 			Year (int);
 			
-			int	year	();
-			void year	(int);
+			void setValue	(int);
+			int	getValue	();
 
 		private:
 			static const int 
@@ -37,7 +37,7 @@ namespace ch9_lib
 		Jan,	// by default starts with 0 obviously
 		Feb,
 		Mar,
-		Spr,
+		Apr,
 		May,
 		Jun,
 		Jul,
@@ -47,6 +47,10 @@ namespace ch9_lib
 		Nov,
 		Dec
 	};
+
+	Month int_to_month(int);
+	Month operator++(Month&);
+	Month operator--(Month&);
 
 	class  Date
 	{
@@ -58,16 +62,27 @@ namespace ch9_lib
 
 			Date	(Year, Month, int);
 
-			void year	(Year);
-			void month	(Month);
-			void day	(int);
+			void setYear	(Year);
+			void setMonth	(Month);
+			void setDay	(int);
 
-			Year year	();
-			Month month	();
-			int day		();
+			Year getYear	();
+			Month getMonth	();
+			int getDay		();
 
 			void add_day	(int);
 			bool is_valid	();
+
+
+			/*This one apparently has to be implemented inside the class declaration
+				for whatever reason the function doesn't like returning 'const'
+			*/
+			static Date& defaultDate()
+			{
+				static Date 
+					dd{2001, Month::Jan, 1};
+				return dd;
+			};
 
 		private:
 			Year	y;
@@ -76,20 +91,5 @@ namespace ch9_lib
 
 	};
 
-
-	Month int_to_month(int);
-	Month operator++(Month&);
-	Month operator--(Month&);
-
-	enum Day
-	{
-		mon,
-		tue,
-		wed,
-		thu,
-		fri,
-		sat,
-		sun
-	};
 
 }
