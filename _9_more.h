@@ -19,6 +19,10 @@ namespace ch9_lib
 	class Year
 		{	
 			public:			
+				static const int 
+					min{1800},
+					max{2200};
+
 				Year (int);
 			
 				void setValue	(int);
@@ -27,11 +31,13 @@ namespace ch9_lib
 				class Invalid{ };
 
 			private:
-				static const int 
-					min{1800},
-					max{2200};
 				int y;
 		};
+
+		istream& operator>>(istream&, Year&);
+
+		bool isValidYear(int);
+		bool isLeapYear	(int);
 
 		enum class Month
 		{
@@ -49,9 +55,13 @@ namespace ch9_lib
 			Dec
 		};
 
-		Month int_to_month(int);
 		Month operator++(Month&);
 		Month operator--(Month&);
+
+		bool isValidMonth(int);
+		Month int_to_month(int);
+
+		bool isValidDay	(int);
 
 		class  Date
 		{
@@ -78,16 +88,21 @@ namespace ch9_lib
 					return dd;
 				};
 
-				// friend function - we're way ahead here
-				friend ostream& operator<<(ostream&, Date&);	
-
 			private:
 				Year	y;
 				Month	m;
 				int		d;
-
+				
 				bool	isValid	()	const;
 		};
+
+		ostream& operator	<<	(ostream &, const Date &);
+		istream& operator	>>	(istream &, Date&);
+		bool	operator	==	(const Date &, const Date &);
+		bool	operator	!=	(const Date &, const Date &);
+		
+		bool isValidDate	(int, int, int);		
+
 	}
 
 	using namespace Chronou;

@@ -24,7 +24,72 @@ namespace ch9_lib
 	
 	namespace Chronou
 	{
-		class Date;
+		//	class Year;
+
+		Year::Year(int i) : y{i}
+		{
+			if( i < min || max <= i)
+				throw Invalid();
+		}
+
+		void	Year::setValue	(int i)	{ y = i; }	
+		int		Year::getValue	() const{ return y; }
+
+		istream& operator>>(istream& is, Year& y)
+		{
+			int i;
+			is >> i;
+			if (isValidYear(i))
+				y.setValue(i);
+			else
+				throw Year::Invalid{};
+			return is;
+		}
+
+		bool isValidYear(int i)
+		{
+			return Year::min <= i && i < Year::max;
+		}
+		bool isLeapYear	(int i)
+		{
+			return 
+				(i % 4 == 0 && i % 100 != 0)
+				|| i % 400 == 0;
+		}
+
+		Month operator++(Month &m)
+		{
+			return 
+				(m == Month::Dec) ? Month::Jan : Month(int(m) + 1);
+		}
+		Month operator--(Month &m)
+		{
+			return 
+				(m == Month::Jan) ? Month::Dec : Month(int(m) - 1);
+		}
+
+		bool isValidMonth	(int i)
+		{
+			return 
+				int(Month::Jan) <= i
+				&& i <= int(Month::Dec);
+		}
+		Month int_to_month	(int i)
+		{
+			if (i < int(Month::Jan) || int(Month::Dec) < i)
+				error("unavailable month value");
+			return Month(i);
+		}
+
+
+		bool isValidDay(int i)
+		{
+			return 1 <= i && i <= 31;
+		}
+
+
+
+		//	class Date; 
 
 		Date::Date() :
 			y {defaultDate().getYear()},
@@ -53,48 +118,69 @@ namespace ch9_lib
 				&& int(m) <= int(Month::Dec); 
 		}
 		
-		ostream& operator<<(ostream& os, Date & d)
+		ostream& operator<<(ostream& os, const Date & d)
 		{
-			os 
-				<< d.getYear().getValue()
-				<< '.'
-				<< int(d.getMonth())
-				<< '.'
-				<< d.getDay();
-			return os;
+			return
+				os 
+					<< d.getYear().getValue()
+					<< '.'
+					<< int(d.getMonth())
+					<< '.'
+					<< d.getDay();
+		}
+		istream& operator>>(istream &is, Date &date)
+		{
+			int 
+				y, m, d;
+			char 
+				c1{0}, c2{0};
+			auto 
+				separators = [&] { return c1 == '.' && c2 == '.'; };
+			is 
+				>> y 
+				>> c1 
+				>> m 
+				>> c2 
+				>> d;
+			if(/*isValidYear(y) && isValidMonth(m) && isValidDay(d) */ isValidDate(y, m, d) && separators())
+			{
+				date.setYear(y);
+				date.setMonth(Month(m));
+				date.setDay(d);
+			}
+			else cout << "wrong data for date.\ndate set to" << endl;
+
+			return is;
 		}
 
-
-
-		class Year;
-
-		Year::Year(int i) : y{i}
+		bool operator==(const Date &a, const Date &b)
 		{
-			if( i < min || max <= i)
-				throw Invalid();
+			return
+				a.getYear().getValue() == b.getYear().getValue()
+				&& int(a.getMonth()) == int(b.getMonth())
+				&& a.getDay() == b.getDay();
+		}
+		bool operator!=(const Date &a, const Date &b)
+		{
+			return
+				a.getDay() != b.getDay()
+				|| int(a.getMonth()) != int(b.getMonth())
+				|| a.getYear().getValue() != b.getYear().getValue();
 		}
 
-		void Year::setValue	(int i)	{ y = i; }
-	
-		int Year::getValue	() const{ return y; }
-
-		Month int_to_month(int i)
+		bool isValidDate(int y, int m, int d)
 		{
-			if (i < int(Month::Jan) || int(Month::Dec) < i)
-				error("unavailable month value");
-			return Month(i);
-		}
-
-		Month operator++(Month &m)
-		{
-			return 
-				(m == Month::Dec) ? Month::Jan : Month(int(m) + 1);
-		}
-
-		Month operator--(Month &m)
-		{
-			return 
-				(m == Month::Jan) ? Month::Dec : Month(int(m) - 1);
+			bool
+				isYear {isValidYear(y)},
+				isMonth {isValidMonth(m)};
+			auto isDay = [&]
+			{
+				return 1 <= d && (
+						(d <= int (isLeapYear(y) + 28) && m == 2)
+						|| (d <= 30 && (m==1 || m==3 || m==5 || m==7 || m==8 || m==10 || m==12))
+						|| (d <= 31 && (m==4 || m==6 || m==19 || m==11)));
+			};
+			return isYear && isMonth && isDay();
 		}
 	}
 
@@ -109,8 +195,7 @@ namespace ch9_lib
 	void example_02()
 	{
 		Chronou::Date
-			d{1972, Chronou::Month(2), 21};					//Month moved from 'int' to 'enum'
-			//d{1972, static_cast<Chronou::Month>(2), 21};	//it might be cast as well... just leaving it here/
+			d{1972, Chronou::Month(2), 21};
 	}
 
 	void example_03(int x, int y)
@@ -176,7 +261,13 @@ namespace ch9_lib
 		int a {startOfTerm.getDay()};
 	}
 
+	void example_11()
+	{
+		Date d;
+		cin >> d;
+		cout << d;
 
+	}
 }
 
 void ch09Main()
@@ -187,11 +278,11 @@ void ch09Main()
 		d {};
 
 	//example_01();
-	example_02();
+	//example_02();
 	//example_03(1, 2);
 	//example_07();
 	//example_08();
 	//example_09(d, Chronou::Date{});	// reference to non-const must be lvalue, hence 'd'.
 	//example_10(d);
-
+	example_11();
 }
