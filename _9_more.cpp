@@ -5,13 +5,13 @@ namespace ch9_lib
 {	
 	class X
 	{	
-		int	m;
-		int mf(int v)
-		{
-			int old = m;
-			m = v;
-			return old;
-		}
+			int	m;
+			int mf(int v)
+			{
+				int old = m;
+				m = v;
+				return old;
+			}
 
 		public:
 			int f(int i)
@@ -20,13 +20,6 @@ namespace ch9_lib
 				return mf(i);
 			}
 	};
-
-	void ch9_2()
-	{
-		X	x;
-		int	y = x.f(2);		
-	}
-
 
 	
 	namespace Chronou
@@ -103,83 +96,24 @@ namespace ch9_lib
 			return 
 				(m == Month::Jan) ? Month::Dec : Month(int(m) - 1);
 		}
-
-		//void ch9_4_6(int x,int y)
-		//{
-		//	try
-		//	{
-		//		Date 
-		//			dxy{};
-		//		cout
-		//			<< dxy
-		//			<< endl;
-		//		dxy.addDay(2);
-		//	}
-		//	catch (Date::Invalid)
-		//	{
-		//		error("invalid date");
-		//	}
-		//}
-
-		//void example_7()
-		//{
-		//	Date
-		//		d1{},
-		//		d2{};
-
-		//	d1.setYear(2021);
-		//	d1.setMonth(Month::Apr);
-
-		//	int
-		//		i1 = d1.getYear().getValue(),
-		//		i2 = d2.getYear().getValue();
-		//	bool
-		//		b = i1 == i2;
-
-		//	cout << b;
-		//}
-
-//		/*declaring vector<Date> because default constructor*/
-		//void example_8()
-		//{
-		//	/*use of () instead {} in the vector definition is by convention rather*/
-		//	vector<Date>
-		//		birthdays(10);
-		//	cout 
-		//		<< "\n\tsize of the vector: " 
-		//		<< birthdays.size();
-		//	for(Date d : birthdays)
-		//		cout 
-		//			<< "\n\tyear: " << d.getYear().getValue()
-		//			<< "\tmonth: " << int(d.getMonth())
-		//			<< "\tday: " << d.getDay();
-		//	cout 
-		//		<< endl;
-		//}
-
-//		/* 'startOfTerm' refuses to pass its member to 'b' directly - 'const' prevents	
-//		it has no problem with passing itself tho, so it's rather a 'const' vs 'getDay()' */
-		//void example_09(Date &d, const Date &startOfTerm)
-		//{
-		//	int a	{d.getDay()};
-		//	Date tmp{startOfTerm};
-		//	int b	{tmp.getDay()};
-		//}
-
-		// making 'tmp' const prevents it from passing its member to 'b'
-		//void example_09(Date &d,Date &startOfTerm)
-		//{
-		//	int a{d.getDay()};
-		//	const Date tmp{startOfTerm};
-		//	int b{tmp.getDay()};
-		//}
-		void example_10(Date &startOfTerm)
-		{
-			int a {startOfTerm.getDay()};
-		}
 	}
 
-	void ch9_4_6(int x, int y)
+
+
+	void example_01()
+	{
+		X	x;
+		int	y = x.f(2);		
+	}
+
+	void example_02()
+	{
+		Chronou::Date
+			d{1972, Chronou::Month(2), 21};					//Month moved from 'int' to 'enum'
+			//d{1972, static_cast<Chronou::Month>(2), 21};	//it might be cast as well... just leaving it here/
+	}
+
+	void example_03(int x, int y)
 	{
 		try
 		{
@@ -223,15 +157,11 @@ namespace ch9_lib
 			<< "\n\tsize of the vector: "
 			<< birthdays.size();
 		for(Date d : birthdays)
-			cout << d;
-		cout << endl;
+			cout 
+				<< d 
+				<< endl;
 	}
 
-	/* 'startOfTerm' refuses to pass its member to 'b' directly - 'const' prevents
-		it has no problem with passing itself tho, so it's rather a 'const' vs 'getDay()' 
-		solution is to declare the function 'const'.
-		but - only class member functions may be declared 'const'
-	*/
 	void example_09(Chronou::Date &d, const Chronou::Date &statOfTerm)
 	{
 		int a	{d.getDay()};
@@ -241,7 +171,6 @@ namespace ch9_lib
 		int	b	{tmp.getDay()};
 	}
 
-	/* it is the 'const' that secures the input, by authorizing only processing the functions clearly declared non-invasive.*/
 	void example_10(Chronou::Date &startOfTerm)
 	{
 		int a {startOfTerm.getDay()};
@@ -254,10 +183,15 @@ void ch09Main()
 {
 	using namespace ch9_lib;
 	
+	Chronou::Date 
+		d {};
 
-	//ch9_4();
-	//example7();
-	//example_8();
-
+	//example_01();
+	example_02();
+	//example_03(1, 2);
+	//example_07();
+	//example_08();
+	//example_09(d, Chronou::Date{});	// reference to non-const must be lvalue, hence 'd'.
+	//example_10(d);
 
 }

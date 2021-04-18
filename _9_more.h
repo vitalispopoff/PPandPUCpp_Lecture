@@ -12,9 +12,11 @@
 
 namespace ch9_lib
 {
+	
 	namespace Chronou
 	{
-		class Year
+	
+	class Year
 		{	
 			public:			
 				Year (int);
@@ -33,8 +35,18 @@ namespace ch9_lib
 
 		enum class Month
 		{
-			Jan = 1,	Feb,		Mar,		Apr,		May,		Jun,
-			Jul,		Aug,		Sep,		Oct,		Nov,		Dec
+			Jan = 1,
+			Feb,
+			Mar,
+			Apr,
+			May,
+			Jun,
+			Jul,
+			Aug,
+			Sep,
+			Oct,
+			Nov,
+			Dec
 		};
 
 		Month int_to_month(int);
@@ -66,7 +78,8 @@ namespace ch9_lib
 					return dd;
 				};
 
-			friend ostream& operator<<(ostream&, Date&);	// friend function - we're way ahead here
+				// friend function - we're way ahead here
+				friend ostream& operator<<(ostream&, Date&);	
 
 			private:
 				Year	y;
@@ -77,10 +90,39 @@ namespace ch9_lib
 		};
 	}
 
-	void ch9_4_6(int, int);
+	using namespace Chronou;
+
+	/* 9.2:
+		declaring class,
+		access modifiers,
+	*/
+	void example_01();
+	
+	/* ch9_4
+		initialization of a class object,
+		passing an enum member as an input variable
+		keeping in mind the namespace structure.
+	*/
+	void example_02();
+
+	/* ch9_4_6
+	*/
+	void example_03(int, int);
+	
+	
 	void example_07();
+	
+	
 	void example_08();
-	void example_09(Chronou::Date&,const Chronou::Date&);
 
+	/* 'startOfTerm' refuses to pass its member to 'b' directly - 'const' prevents
+	it has no problem with passing itself tho, so it's rather a 'const' vs 'getDay()'
+	solution is to declare the function 'const'.
+	but - only class member functions may be declared 'const'
+	*/
+	void example_09(Date&,const Date&);
 
+	/* it is the 'const' that secures the input, by authorizing only processing the functions clearly declared non-invasive.
+	*/
+	void example_10(Date&);
 }
