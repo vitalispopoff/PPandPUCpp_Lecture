@@ -126,8 +126,7 @@ namespace ch9_lib
 	//	}
 	//}
 
-	/*	static defaultDate returns static Date. is it unique to each call ?
-	*/
+	/*	static defaultDate returns static Date. is it unique to each call ?*/
 	void example_7()
 	{
 		Date
@@ -146,6 +145,45 @@ namespace ch9_lib
 		cout << b;
 	}
 
+	/*declaring vector<Date> because default constructor*/
+	void example_8()
+	{
+		/*use of () instead {} in the vector definition is by convention rather*/
+		vector<Date>
+			birthdays(10);
+		cout 
+			<< "\n\tsize of the vector: " 
+			<< birthdays.size();
+		for(Date d : birthdays)
+			cout 
+				<< "\n\tyear: " << d.getYear().getValue()
+				<< "\tmonth: " << int(d.getMonth())
+				<< "\tday: " << d.getDay();
+		cout 
+			<< endl;
+	}
+
+	/* 'startOfTerm' refuses to pass its member to 'b' directly - 'const' prevents	
+	it has no problem with passing itself tho, so it's rather a 'const' vs 'getDay()' */
+	void example_09(Date &d, const Date &startOfTerm)
+	{
+		int a	{d.getDay()};
+		Date tmp{startOfTerm};
+		int b	{tmp.getDay()};
+	}
+
+	// making 'tmp' const prevents it from passing its member to 'b'
+	//void example_09(Date &d,Date &startOfTerm)
+	//{
+	//	int a{d.getDay()};
+	//	const Date tmp{startOfTerm};
+	//	int b{tmp.getDay()};
+	//}
+	void example_10(Date &startOfTerm)
+	{
+		int a {startOfTerm.getDay()};
+	}
+
 
 }
 
@@ -157,8 +195,7 @@ void ch09Main()
 	using namespace ch9_lib;
 	
 	//ch9_4();
-
-	//Date date{2001, Month::Jan, 1}; // error
-	//Date date (2001, Month::Jan, 1);
+	//example7();
+	//example_8();
 
 }

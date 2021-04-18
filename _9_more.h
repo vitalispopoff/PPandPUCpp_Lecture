@@ -33,10 +33,11 @@ namespace ch9_lib
 
 	enum class Month
 	{
-		//jan = 1,	// sets the value assigned to the literal;
-		Jan,	// by default starts with 0 obviously
+		//Jan,	// by default starts with 0 obviously
+		Jan = 1, // but a different value may be assigned;
 		Feb,
 		Mar,
+		//Mar = 5, to every enum member
 		Apr,
 		May,
 		Jun,
@@ -73,13 +74,12 @@ namespace ch9_lib
 			void add_day	(int);
 			bool is_valid	();
 
-
 			/*This one apparently has to be implemented inside the class declaration
 				for whatever reason the function doesn't like returning 'const'
 			*/
 			static Date& defaultDate()
 			{
-				static Date 
+				static Date
 					dd{2001, Month::Jan, 1};
 				return dd;
 			};
