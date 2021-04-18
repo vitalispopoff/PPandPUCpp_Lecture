@@ -65,14 +65,14 @@ namespace ch9_lib
 
 			void setYear	(Year);
 			void setMonth	(Month);
-			void setDay	(int);
+			void setDay		(int);
 
-			Year getYear	();
-			Month getMonth	();
-			int getDay		();
+			Year	getYear	()	const;	// 'const' declares a non invasive function
+			Month	getMonth()	const;
+			int		getDay	()	const;
+			bool	isValid	()	const;
 
 			void add_day	(int);
-			bool is_valid	();
 
 			/*This one apparently has to be implemented inside the class declaration
 				for whatever reason the function doesn't like returning 'const'

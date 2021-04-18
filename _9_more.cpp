@@ -45,7 +45,7 @@ namespace ch9_lib
 
 	Date::Date(Year i1, Month i2,int i3) : y{i1}, m{i2}, d{i3}
 	{ 
-		if (!is_valid())
+		if (!isValid())
 		{	
 			cout << "BOINK!";
 			throw Invalid{};
@@ -53,23 +53,22 @@ namespace ch9_lib
 	}
 
 	void Date::setYear	(Year y)	{ this -> y = y; }
-	void Date::setMonth(Month m)	{ this -> m = m; }
+	void Date::setMonth	(Month m)	{ this -> m = m; }
 	void Date::setDay	(int d)		{ this -> d = d; }
 
-	Year Date::getYear	()		{ return y; }
-	Month Date::getMonth	()	{ return m; }
-	int Date::getDay	()		{ return d; }
-
-	void Date::add_day	(int i)	
-	{ 
-		d += i;
-	}
-	
-	bool Date::is_valid	()		
+	Year	Date::getYear	() const { return y; } 
+	Month	Date::getMonth	() const { return m; }
+	int		Date::getDay	() const { return d; }
+	bool	Date::isValid	() const 
 	{ 
 		return 
 			int(Month::Jan) <= int(m) 
 			&& int(m) <= int(Month::Dec); 
+	}
+
+	void Date::add_day	(int i) 	
+	{ 
+		d += i;
 	}
 
 
