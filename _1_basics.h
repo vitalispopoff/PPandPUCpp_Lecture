@@ -9,8 +9,10 @@
 
 //void programming();
 
-int calculatorMain();
+//int calculatorMain();
 
-void technicalitiesMain();
+//void technicalitiesMain();
 
-void ch09Main();
+//void ch09Main();
+
+void ch09Excercises();

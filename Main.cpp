@@ -15,7 +15,8 @@ void fuck(vector<int> v)
 int main() {
 
 	//srand(time(NULL));
+	//ch09Main();
 
-	ch09Main();
+	ch09Excercises();
 	
 }

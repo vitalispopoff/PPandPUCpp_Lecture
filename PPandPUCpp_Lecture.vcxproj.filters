@@ -72,6 +72,9 @@
     <ClCompile Include="_9_more.cpp">
       <Filter>Source Files\_1_Basics\_9_moreTechnicalities</Filter>
     </ClCompile>
+    <ClCompile Include="_9_excs.cpp">
+      <Filter>Source Files\_1_Basics\_9_moreTechnicalities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -93,6 +96,9 @@
       <Filter>Header Files\_1_Basics</Filter>
     </ClInclude>
     <ClInclude Include="_9_more.h">
+      <Filter>Header Files\_1_Basics</Filter>
+    </ClInclude>
+    <ClInclude Include="_9_excs.h">
       <Filter>Header Files\_1_Basics</Filter>
     </ClInclude>
   </ItemGroup>
