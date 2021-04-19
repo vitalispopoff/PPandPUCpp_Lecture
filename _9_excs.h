@@ -9,15 +9,14 @@ using namespace std;
 		public:
 		Name_pairs();
 
-		void addPair(string, double);
+		//void addPair(string, double);
 
 		void read_names();
 
 
 			vector<string>name;
-		private:
 			vector<double>age;
-			const static vector<char> letters;
+		private:
 
 
 			bool nameIsValid(string);

@@ -10,24 +10,24 @@ namespace ch09_exc02
 
 	Name_pairs::Name_pairs() : name(), age() {}
 
-	void Name_pairs::addPair(string s, double d)
-	{
-		auto notInBase = [&]
-		{
-			for(int i = 0; i < name.size(); ++i)
-				if(s == name[i] && d == age[i])
-					return false;
-			return true;
-		};
+	//void Name_pairs::addPair(string s, double d)
+	//{
+	//	auto notInBase = [&]
+	//	{
+	//		for(int i = 0; i < name.size(); ++i)
+	//			if(s == name[i] && d == age[i])
+	//				return false;
+	//		return true;
+	//	};
 
-		if(nameIsValid(s) && ageIsValid(d) && notInBase())
-		{
-			name.push_back(s);
-			age.push_back(d);
-		}
-		else
-			cout << "wrong name, wrong age, or both already in the base\n";
-	}
+	//	if(nameIsValid(s) && ageIsValid(d) && notInBase())
+	//	{
+	//		name.push_back(s);
+	//		age.push_back(d);
+	//	}
+	//	else
+	//		cout << "wrong name, wrong age, or both already in the base\n";
+	//}
 
 	void Name_pairs::read_names()
 	{
@@ -72,9 +72,9 @@ void ch09Excercises()
 	using namespace ch09_exc02;
 
 	Name_pairs np;
-	np.addPair("zbyszek", 47);
-	np.addPair("marzena", 56);
-	np.addPair("seba", 31);
+	//np.addPair("zbyszek", 47);
+	//np.addPair("marzena", 56);
+	//np.addPair("seba", 31);
 
 	for(string n : np.name)
 		cout << "\n\t" << n;
