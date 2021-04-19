@@ -11,14 +11,18 @@ using namespace std;
 
 		void addPair(string, double);
 
+		void read_names();
+
 
 			vector<string>name;
+		private:
 			vector<double>age;
 			const static vector<char> letters;
 
-		private:			
 
 			bool nameIsValid(string);
 			bool ageIsValid(double);
+			bool nameNotInBase(string);
+
 	};
 }
