@@ -34,15 +34,16 @@ using namespace std;
 		*/
 		void read_ages();
 
-		/*
-			prints all names with the ages from respective vectors.
-		*/
-		void print();
 
 		/*
 			sorts name vector alphabetically, and base on that shuffles the age vector.
 		*/
 		void sort();
+
+		/*
+			prints all names with the ages from respective vectors.
+		*/
+		ostream& print(ostream&) const;
 
 		private:
 			vector<string>name;
@@ -51,6 +52,14 @@ using namespace std;
 			bool ageIsValid(double);
 			bool nameIsInBase(string);
 			bool isInBase(string, double);
-
 	};
+
+	/*
+		cheapest reimplementation of the print() function possible
+	*/
+	ostream& operator<<(ostream&, Name_pairs);
+
+
+
+
 }

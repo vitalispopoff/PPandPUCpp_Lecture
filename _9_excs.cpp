@@ -40,30 +40,6 @@ namespace ch09_exc02
 		}
 	}
 
-	void Name_pairs::read_names()
-	{
-		cout 
-			<< "enter name only, or 'exit'\n";
-		string
-			s;
-		while(cin>>s)
-		{
-			if(s == "exit")
-				break;
-			if(nameIsInBase(s))
-			{	
-				cout 
-					<< "This user is aldeady in base";
-				continue;
-			}
-		name.push_back(s);
-		age.push_back(-1);
-		cout
-			<< "\n\t"
-			<< s 
-			<< " is saved with age set as -1.\n";
-		}
-	}
 
 	void Name_pairs::read_ages()
 	{
@@ -119,18 +95,19 @@ namespace ch09_exc02
 		}
 	}
 
-	void Name_pairs::print()
+	ostream& Name_pairs::print(ostream& os) const
 	{
-		cout 
+		os 
 			<< "\n\tnames with ages:";
 		for(int i = 0; i < name.size(); ++i)
-			cout
+			os
 				<< "\n\tname: " 
 				<< name[i]
 				<< "\t, age: " 
 				<< age[i];
-		cout 
+		os 
 			<< endl;
+		return os;
 	}
 
 	bool Name_pairs::isInBase(string s, double d)
@@ -182,7 +159,45 @@ namespace ch09_exc02
 			}
 		}
 	}
+
+	void Name_pairs::read_names()
+	{
+		cout 
+			<< "enter name only, or 'exit'\n";
+		string
+			s;
+		while(cin>>s)
+		{
+			if(s == "exit")
+				break;
+			if(nameIsInBase(s))
+			{	
+				cout 
+					<< "This user is aldeady in base";
+				continue;
+			}
+		name.push_back(s);
+		age.push_back(-1);
+		cout
+			<< "\n\t"
+			<< s 
+			<< " is saved with age set as -1.\n";
+		}
+	}
+
+	ostream& operator<<(ostream& os, Name_pairs np)
+	{
+		return np.print(os);
+	}
+
+
+		
+
+
 }
+
+
+
 void ch09Excercises()
 {
 	using namespace ch09_exc02;
@@ -193,8 +208,7 @@ void ch09Excercises()
 	//np.read_names();
 	//np.read_pairs();
 	//np.read_ages();
-	np.print();
-	np.sort();
-	cout << "sorted\n";
-	np.print();
+
+	cout << np;
+
 }
