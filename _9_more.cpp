@@ -48,7 +48,7 @@ namespace ch9_lib
 
 		bool isValidYear(int i)
 		{
-			return Year::min <= i && i < Year::max;
+			return Year::min <= i && i < Year::max && i!= 0;
 		}
 		bool isLeapYear	(int i)
 		{

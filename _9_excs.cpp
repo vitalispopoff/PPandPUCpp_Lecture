@@ -212,39 +212,55 @@ namespace ch09_exc04
 	
 	struct X 
 	{
-		void f(int x)
+		// would return 1 but it's void, it doesn't change anything - not using a single global or variable passed by reference/poitnter
+		void f(int x)	
 		{
 			struct Y 
 			{
-				int f() { return 1; } 
-				int m; 
+				int 
+					m; 
+				int f() 
+				{ return 1; } 
 			};
 
-			int m;
-			m = x; 
-			Y m2;
-			return f(m2.f()); 
-		}
-		int m; 
+			Y 
+				m2;
+			int 
+				m = x; 
 
-		void g(int m)
+			return f(m2.f());	// m2.f() == 1 ; f(m2.f()) == 1;
+		}
+
+		int 
+			m; 
+
+		void g (int m)
 		{
 			if (m) 
-				f (m+2); 
+				f (m+2); // returns 1.
 			else 
-				g(m+2); 
+				g(m+2); // returns void
 		}
 
-		X() {} 
+		X() {}	// X default constructor
 
-		void m3(){}
+		void m3(){} // an empty function not even returning
 
+		// rebranded main function - still inside the struct...
 		void exc04() 
 		{
 			X a; 
 			a.f(2);
-		}
+		} 
 	};
+}
+
+namespace ch09_exc05
+{
+
+
+
+
 }
 
 
@@ -252,7 +268,5 @@ namespace ch09_exc04
 void ch09Excercises()
 {
 	//ch09_exc02::exc02();
-
-	ch09_exc04::exc04();
 
 }

@@ -1,4 +1,5 @@
 #include <string>
+#include "_9_more.h"
 
 namespace ch09_exc02
 {
@@ -60,7 +61,97 @@ using namespace std;
 	ostream& operator<<(ostream&, Name_pairs);
 }
 
-namespace ch09_exc03
+namespace ch09_exc05
 {
+	struct ISBN
+	{
+		int
+			n1, n2, n3;
+		char
+			x;		
+		ISBN (string);
+		string toString();
+		static bool validate(string);
+	};
+
+	enum Genre
+	{
+		fiction,
+		nonfiction,
+		periodical,
+		biography,
+		chindren
+	};
+
+	struct Author
+	{
+		string
+			lastName,
+			firstName;
+
+			Author(string, string);
+
+		vector<Book> books;
+	};
+
+	struct Book
+	{
+		string
+			isbn,
+			title;
+		Author
+			author;
+		Genre
+			genre;
+		ch9_lib::Chronou::Date
+			copyrightDate;
+		bool
+			checkedOut{false};
+		Book(Author, string, string, Genre, ch9_lib::Chronou::Date);
+
+	};
+
+	bool operator==(const Book&, const Book&);
+	bool operator!=(const Book&, const Book&);
+	ostream& operator<<(ostream&, const Book&);
+
+	class Patron
+	{
+		public:
+			Patron(int, string, string);
+
+			double getLibraryFees();
+
+		private:
+			int
+				libraryCardNumber;
+			string 
+				lastName,
+				firstName;
+			double
+				libraryFees {0.};
+	};
+
+	bool userOwesAFee(const Patron&);
+
+	struct Transaction
+	{
+		Book 
+			book;
+		Patron
+			patron;
+		ch9_lib::Chronou::Date
+			date;
+	};
+
+	class Library
+	{
+		
+		vector<Transaction> transactions;
+		vector<Patron> users;
+		vector<Book> books;
+	}
+
+
 
 }

@@ -20,7 +20,7 @@ namespace ch9_lib
 		{	
 			public:			
 				static const int 
-					min{1800},
+					min{-5000},	// extended due to use in ch09.exc05 sqq
 					max{2200};
 
 				Year (int);
