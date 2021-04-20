@@ -9,18 +9,17 @@ using namespace std;
 		public:
 		Name_pairs();
 
-		//void addPair(string, double);
-
+		void read_users();
 		void read_names();
+		void read_ages();
+		void read_pairs();
 
-
+		private:
 			vector<string>name;
 			vector<double>age;
-		private:
 
-
-			bool nameIsValid(string);
 			bool ageIsValid(double);
+			bool nameIsInBase(string);
 			bool isInBase(string, double);
 
 	};

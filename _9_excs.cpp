@@ -7,14 +7,12 @@ namespace ch09_exc02
 
 	Name_pairs::Name_pairs() : name(), age() {}
 
-	void Name_pairs::read_names()
+	void Name_pairs::read_users()
 	{
 		cout 
 			<< "enter name, or 'exit'\n";
 		string 
 			s;
-		char 
-			c;
 		double 
 			d;
 		while(cin >> s)
@@ -39,7 +37,89 @@ namespace ch09_exc02
 				<< " is saved as " 
 				<< d 
 				<< " years old\n";
-		};
+		}
+	}
+
+	void Name_pairs::read_names()
+	{
+		cout 
+			<< "enter name, or 'exit'\n";
+		string
+			s;
+		while(cin>>s)
+		{
+			if(s == "exit")
+				break;
+			if(nameIsInBase(s))
+			{	
+				cout 
+					<< "This user is aldeady in base";
+				continue;
+			}
+		name.push_back(s);
+		age.push_back(-1);
+		cout
+			<< "\n\t"
+			<< s 
+			<< " is saved with age set as -1.\n";
+		}
+	}
+
+	void Name_pairs::read_pairs()
+	{
+		cout 
+			<< "\n\tnames with ages:";
+		for(int i = 0; i < name.size(); ++i)
+			cout
+				<< "\n\tname: " 
+				<< name[i]
+				<< "\t, age: " 
+				<< age[i];
+		cout 
+			<< endl;
+	}
+
+	void Name_pairs::read_ages()
+	{
+		cout 
+			<< "Wanna edit everyone's age ('y') or just the missing ones ('n')?\t";
+		char 
+			c{'y'};
+		//cin >> c;
+		double d;
+		switch(c)
+		{
+			case 'y':
+			{
+				for(int i = 0; i < name.size(); ++i)
+				{
+					cout 
+						<< "\n\t" << name[i] << " , age: " << age[i] << " ;\t set it to :\t";
+					cin 
+						>> d;
+					if(ageIsValid(d))
+					{	
+						double 
+							&target = age[i];
+						target = d;
+					}	
+				}
+				break;
+			}
+			case 'n':
+			{
+				for(int i = 0; i < name.size(); ++i)
+				{
+					if(age[i] < 0)
+					{
+						cout
+							<< "\n\t" << name[i] << " , age: " << age[i] << " ;\t set it to :\t";
+						cin >> d;						
+					}
+				}
+				break;
+			}
+		}
 	}
 
 	bool Name_pairs::isInBase(string s, double d)
@@ -50,13 +130,14 @@ namespace ch09_exc02
 		return false;
 	}
 
-	bool Name_pairs::nameIsValid(string s)
+	bool Name_pairs::nameIsInBase(string s)
 	{
-		for(unsigned char c : s)
-			if(!isalpha(c))
-				return false;
-		return true;
+		for(string n : name)
+			if(s == n)
+				return true;
+		return false;
 	}
+
 
 	bool Name_pairs::ageIsValid(double d)
 	{
@@ -68,13 +149,10 @@ void ch09Excercises()
 	using namespace ch09_exc02;
 
 	Name_pairs np;
-	//np.addPair("zbyszek", 47);
-	//np.addPair("marzena", 56);
-	//np.addPair("seba", 31);
 
-	np.read_names();
-
-	for(string n : np.name)
-		cout << "\n\t" << n;
-
+	np.read_users();
+	//np.read_names();
+	np.read_pairs();
+	np.read_ages();
+	np.read_pairs();
 }
