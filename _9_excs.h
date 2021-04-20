@@ -21,7 +21,7 @@ using namespace std;
 
 			bool nameIsValid(string);
 			bool ageIsValid(double);
-			bool nameNotInBase(string);
+			bool isInBase(string, double);
 
 	};
 }
