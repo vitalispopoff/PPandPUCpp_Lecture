@@ -43,7 +43,7 @@ namespace ch09_exc02
 	void Name_pairs::read_names()
 	{
 		cout 
-			<< "enter name, or 'exit'\n";
+			<< "enter name only, or 'exit'\n";
 		string
 			s;
 		while(cin>>s)
@@ -65,28 +65,16 @@ namespace ch09_exc02
 		}
 	}
 
-	void Name_pairs::read_pairs()
-	{
-		cout 
-			<< "\n\tnames with ages:";
-		for(int i = 0; i < name.size(); ++i)
-			cout
-				<< "\n\tname: " 
-				<< name[i]
-				<< "\t, age: " 
-				<< age[i];
-		cout 
-			<< endl;
-	}
-
 	void Name_pairs::read_ages()
 	{
 		cout 
 			<< "Wanna edit everyone's age ('y') or just the missing ones ('n')?\t";
 		char 
-			c{'y'};
-		//cin >> c;
-		double d;
+			c{' '};
+		cin 
+			>> c;
+		double 
+			d;
 		switch(c)
 		{
 			case 'y':
@@ -99,10 +87,11 @@ namespace ch09_exc02
 						>> d;
 					if(ageIsValid(d))
 					{	
-						double 
-							&target = age[i];
+						double &
+							target = age[i];
 						target = d;
-					}	
+					}
+					else continue;
 				}
 				break;
 			}
@@ -114,12 +103,34 @@ namespace ch09_exc02
 					{
 						cout
 							<< "\n\t" << name[i] << " , age: " << age[i] << " ;\t set it to :\t";
-						cin >> d;						
+						cin 
+							>> d;		
+						if(ageIsValid(d))
+						{
+							double &
+								target = age[i];
+							target = d;
+						}
+						else continue;
 					}
 				}
 				break;
 			}
 		}
+	}
+
+	void Name_pairs::read_pairs()
+	{
+		cout 
+			<< "\n\tnames with ages:";
+		for(int i = 0; i < name.size(); ++i)
+			cout
+				<< "\n\tname: " 
+				<< name[i]
+				<< "\t, age: " 
+				<< age[i];
+		cout 
+			<< endl;
 	}
 
 	bool Name_pairs::isInBase(string s, double d)
@@ -138,10 +149,38 @@ namespace ch09_exc02
 		return false;
 	}
 
-
 	bool Name_pairs::ageIsValid(double d)
 	{
 		return 0 <= d && d < 1024;
+	}
+
+	void Name_pairs::sort()
+	{
+		vector<string> 
+			&source = name,
+			sorted = name;
+		vector<double>
+			&sortingAge = age;
+
+		std::sort(sorted.begin(), sorted.end());
+
+		for(int i = 0; i < name.size(); ++i)
+		{
+			for(int j = i + 1; j < name.size(); ++j)
+			{
+				if(sorted[i] == source[j])
+				{
+					double 
+						tempAge = sortingAge[i];
+					sortingAge[i] = sortingAge[j];
+					sortingAge[j] = tempAge;
+					string
+						tempName = source[i];
+					source[i] = source[j];
+					source[j] = tempName;
+				}
+			}
+		}
 	}
 }
 void ch09Excercises()
@@ -152,7 +191,10 @@ void ch09Excercises()
 
 	np.read_users();
 	//np.read_names();
+	//np.read_pairs();
+	//np.read_ages();
 	np.read_pairs();
-	np.read_ages();
+	np.sort();
+	cout << "sorted\n";
 	np.read_pairs();
 }
