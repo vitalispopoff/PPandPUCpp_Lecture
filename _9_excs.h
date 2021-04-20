@@ -58,8 +58,9 @@ using namespace std;
 		cheapest reimplementation of the print() function possible
 	*/
 	ostream& operator<<(ostream&, Name_pairs);
+}
 
-
-
+namespace ch09_exc03
+{
 
 }
