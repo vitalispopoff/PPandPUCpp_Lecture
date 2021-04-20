@@ -119,7 +119,7 @@ namespace ch09_exc02
 		}
 	}
 
-	void Name_pairs::read_pairs()
+	void Name_pairs::print()
 	{
 		cout 
 			<< "\n\tnames with ages:";
@@ -193,8 +193,8 @@ void ch09Excercises()
 	//np.read_names();
 	//np.read_pairs();
 	//np.read_ages();
-	np.read_pairs();
+	np.print();
 	np.sort();
 	cout << "sorted\n";
-	np.read_pairs();
+	np.print();
 }

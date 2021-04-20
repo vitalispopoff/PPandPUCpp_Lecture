@@ -37,7 +37,7 @@ using namespace std;
 		/*
 			prints all names with the ages from respective vectors.
 		*/
-		void read_pairs();
+		void print();
 
 		/*
 			sorts name vector alphabetically, and base on that shuffles the age vector.
