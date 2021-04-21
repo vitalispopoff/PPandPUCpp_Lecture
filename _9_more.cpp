@@ -1,7 +1,7 @@
 #include "std_lib_facilities.h"
 #include "_9_more.h"
 
-namespace ch9_lib
+namespace ch09_lib
 {	
 	class X
 	{	
@@ -272,7 +272,7 @@ namespace ch9_lib
 
 void ch09Main()
 {
-	using namespace ch9_lib;
+	using namespace ch09_lib;
 	
 	Chronou::Date 
 		d {};

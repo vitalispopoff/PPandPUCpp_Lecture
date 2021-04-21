@@ -257,10 +257,156 @@ namespace ch09_exc04
 
 namespace ch09_exc05
 {
+	//	struct ISBN;
+
+	ISBN::ISBN(string input)
+	{
+		string 
+			s;
+		int 
+			index {0};
+		for(char c : input) 
+		{
+			if(c != '-' && index < 3)
+				s += c;
+			else
+			{
+				switch (index)
+				{
+					case 0:
+						state = stoi(s);
+						break;
+					case 1:
+						publisher = stoi(s);
+						break;
+					case 2:
+						number = stoi(s);
+						break;
+					case 3:
+						controlSum = c;
+				}
+				s = "";
+				++index;
+			}
+		}
+	}
+
+	string ISBN::toString()
+	{
+		string 
+			result;
+		result += numberToString(state) ;
+		result += '-';
+		result += numberToString(publisher);
+		result += '-';
+		result += numberToString(number);
+		result += '-';
+		result += controlSum;
+		return result;
+	}
+	string ISBN::numberToString(int i)
+	{
+		stringstream ss;
+		ss << i;
+		string s;
+		ss >> s;
+		return s;
+	}
+
+	bool ISBN::isValid()
+	{
+		return isalpha(controlSum) || isdigit(controlSum);
+	}
+
+	bool operator==(const ISBN &c1,const ISBN &c2)
+	{
+		return
+			c1.state == c2.state
+			&& c1.publisher==c2.publisher
+			&& c1.number == c2.number
+			&& c1.controlSum == c2.controlSum;
+	}
+	bool operator!=(const ISBN &c1, const ISBN &c2)
+	{
+		return
+			c1.state != c2.state
+			|| c1.publisher != c2.publisher
+			|| c1.number != c2.number
+			|| c1.controlSum != c2.controlSum;
+	}
 
 
 
+	
+	//	struct Author;
 
+	Author::Author(string l, string f) : lastName{l}, firstName{f} {} 
+
+	ostream &operator<<(ostream &os,const Author & a)
+	{
+		os
+			<< a.lastName 
+			<< ' '
+			<< a.firstName;
+		return os;
+	}
+
+	//	struct Book;
+
+	Book::Book(Author a, string code, string t, Genre g, ch09_lib::Chronou::Date d) 
+		: author{a}, title{t}, genre{g}, copyrightDate{d} 
+	{
+		if(ISBN(code).isValid())
+			isbn=code;
+		else isbn = "";	
+	}
+
+	bool operator==(const Book& b1, const Book& b2)
+	{
+		return ISBN(b1.isbn) == ISBN(b2.isbn);
+	}
+	bool operator!=(const Book& b1, const Book& b2)
+	{
+		return ISBN(b1.isbn) != ISBN(b2.isbn);
+	}
+
+	ostream & operator<<(ostream & os, const Book & b)
+	{
+		os
+			<< endl
+			<< b.author
+			<< endl
+			<< b.title
+			<< endl
+			<< b.isbn
+			<< endl;
+		return os;
+	}
+
+	//	tests, sketches, other
+
+	void sketch01()
+	{
+		Book
+			b1{
+				Author("imie","naŸwisko"),
+				"1-2-3-x",
+				"tytu³",
+				Genre::nonfiction,
+				ch09_lib::Chronou::Date(1973, ch09_lib::Chronou::Month::Feb, 2)
+			},
+			b2{
+				Author("imie","naŸwisko"),
+				"1-2-3-x",
+				"tytu³",
+				Genre::nonfiction,
+				ch09_lib::Chronou::Date(1973, ch09_lib::Chronou::Month::Feb, 2)
+			};
+		cout 
+			<< (b1 == b2) 
+			<< endl
+			<< b1;
+	}
 }
 
 
@@ -268,5 +414,9 @@ namespace ch09_exc05
 void ch09Excercises()
 {
 	//ch09_exc02::exc02();
+
+	using namespace ch09_exc05;
+
+	sketch01();
 
 }

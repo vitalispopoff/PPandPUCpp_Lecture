@@ -66,14 +66,22 @@ namespace ch09_exc05
 	struct ISBN
 	{
 		int
-			n1, n2, n3;
+			state{0}, 
+			publisher{0},
+			number{0};
 		char
-			x;		
+			controlSum{'0'};
 		ISBN (string);
-		string toString();
-		static bool validate(string);
-	};
 
+		string toString();
+		//static bool validate(string);
+		string numberToString(int);
+		bool isValid();
+	};
+	
+	bool operator==(const ISBN &, const ISBN &);
+	bool operator!=(const ISBN &, const ISBN &);
+		
 	enum Genre
 	{
 		fiction,
@@ -88,70 +96,74 @@ namespace ch09_exc05
 		string
 			lastName,
 			firstName;
-
+			
 			Author(string, string);
 
-		vector<Book> books;
+		//vector<Book> books;
 	};
+
+	ostream & operator<<(ostream &, const Author &);
 
 	struct Book
 	{
+		Author
+			author;
 		string
 			isbn,
 			title;
-		Author
-			author;
 		Genre
 			genre;
-		ch9_lib::Chronou::Date
+		ch09_lib::Chronou::Date
 			copyrightDate;
 		bool
 			checkedOut{false};
-		Book(Author, string, string, Genre, ch9_lib::Chronou::Date);
+		Book(Author, string, string, Genre, ch09_lib::Chronou::Date);
 
 	};
 
-	bool operator==(const Book&, const Book&);
-	bool operator!=(const Book&, const Book&);
-	ostream& operator<<(ostream&, const Book&);
+	bool operator==(const Book &, const Book &);
+	bool operator!=(const Book &, const Book &);
+	ostream & operator<<(ostream &, const Book &);
 
 	class Patron
 	{
-		public:
-			Patron(int, string, string);
+		//public:
+		//	Patron(int, string, string);
 
-			double getLibraryFees();
+		//	double getLibraryFees();
 
-		private:
-			int
-				libraryCardNumber;
-			string 
-				lastName,
-				firstName;
-			double
-				libraryFees {0.};
+		//private:
+		//	int
+		//		libraryCardNumber;
+		//	string 
+		//		lastName,
+		//		firstName;
+		//	double
+		//		libraryFees {0.};
 	};
 
 	bool userOwesAFee(const Patron&);
 
 	struct Transaction
 	{
-		Book 
-			book;
-		Patron
-			patron;
-		ch9_lib::Chronou::Date
-			date;
+		//Book 
+		//	book;
+		//Patron
+		//	patron;
+		//ch9_lib::Chronou::Date
+		//	date;
 	};
 
 	class Library
 	{
 		
-		vector<Transaction> transactions;
-		vector<Patron> users;
-		vector<Book> books;
-	}
+		//vector<Transaction> transactions;
+		//vector<Patron> users;
+		//vector<Book> books;
+	};
 
 
+
+	
 
 }

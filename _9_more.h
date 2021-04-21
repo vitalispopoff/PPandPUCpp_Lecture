@@ -10,7 +10,7 @@
 * that get used a lot
 */
 
-namespace ch9_lib
+namespace ch09_lib
 {
 	
 	namespace Chronou
