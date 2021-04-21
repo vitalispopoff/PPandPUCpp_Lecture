@@ -73,12 +73,11 @@ namespace ch09_exc05
 		ISBN (string);
 
 		string toString();
-		//static bool validate(string);
 		string numberToString(int);
 		bool isValid();
 	};
 	
-	bool operator==(const ISBN &, const ISBN &);
+	bool operator==(/*const */ISBN &, /*const */ISBN &);
 	bool operator!=(const ISBN &, const ISBN &);
 		
 	enum class Genre
@@ -110,23 +109,23 @@ namespace ch09_exc05
 		string
 			authorLastName,
 			authorFirstName,			
-			title,
-			isbn;
-		Genre
-			genre;
-		Date
-			copyrightDate;
+			title;//,
+			//isbn;
+		//Genre
+		//	genre;
+		//Date
+		//	copyrightDate;
 		bool
 			isCheckedOut{true};
 
 		Book();
-		Book(string last, string first, string title, string isbn, Genre, Date);
 		Book(string last, string first, string title);
+//		Book(string last, string first, string title/*, string isbn, Genre, Date*/);
 
 		static Book & defaultBook()
 		{
 			Book 
-				db{"", "", "", "", Genre::N_A, Date::defaultDate()};
+				db{"", "", ""/*, "0-0-0-0", Genre::N_A, Date::defaultDate()*/};
 			return db;
 		}
 
@@ -142,7 +141,7 @@ namespace ch09_exc05
 			Patron();
 			Patron(int, string, string);
 
-			double getFeeAccount();
+			double getFeeAccount(); //{ return feeAccount; }
 			void addToFeeAccount(double);
 			string getLastName() { return lastName;}
 			string getFirstName() { return firstName;}
@@ -163,9 +162,9 @@ namespace ch09_exc05
 			double
 				feeAccount {0.};
 
-			bool is(string, string);
-			bool is(Patron & p);
-			bool is(int);
+			//bool is(string, string);
+			//bool is(Patron & p);
+			//bool is(int);
 	};
 
 	bool operator==(Patron & , Patron & );
@@ -180,12 +179,12 @@ namespace ch09_exc05
 			book;
 		Patron
 			patron;
-		Date
-			date;
+		//Date
+		//	date;
 
 		Transaction();
 		Transaction(Book & , Patron &);
-		Transaction(Book & , Patron & , Date &);
+//		Transaction(Book & , Patron & , Date &);
 
 		static Transaction & defaultTransaction()
 		{
@@ -210,19 +209,10 @@ namespace ch09_exc05
 			void addPatron(string last, string first);
 			void addTransaction(Book &, Patron &);
 
-			void checkOut(Book &,Patron &, Date &);
-
 			Book & findBook(string authorLastName, string AuthorFirstName, string title);
 			Patron & findPatron(string last, string first);
 			Transaction & findTransaction(Book &, Patron &);
 
-			
-
-			
+			void checkOut(Book &,Patron &);			
 	};
-
-
-
-	
-
 }

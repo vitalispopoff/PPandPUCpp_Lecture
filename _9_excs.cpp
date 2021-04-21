@@ -366,19 +366,22 @@ namespace ch09_exc05
 	//	struct Book;
 
 	Book::Book() 
-		: genre{Genre::N_A}, copyrightDate{1, /*ch09_lib::Chronou::*/Month::Jan, 1} {}
+		/*: genre{Genre::N_A}*/ {}
 	Book::Book(string last, string first, string t)
-		: authorLastName{last}, authorFirstName{first}, title{t}, isbn{defaultBook().isbn}, genre{defaultBook().genre}, copyrightDate{defaultBook().copyrightDate} {}
-	Book::Book(string last, string first, string t, string code, Genre g, /*ch09_lib::Chronou::*/Date d)
-		: authorLastName{last}, authorFirstName{first}, title{t}, genre{g}, isbn(makeISBN(code)), copyrightDate{d} {}
+		: authorLastName{last}, authorFirstName{first}, title{t}/*, isbn{defaultBook().isbn}, genre{defaultBook().genre}, copyrightDate{defaultBook().copyrightDate}*/ {}
+//	Book::Book(string last, string first, string t/*, string code, Genre g, Date d*/)
+//		: authorLastName{last}, authorFirstName{first}/*, title{t}, genre{g}, isbn(makeISBN(code)), copyrightDate{d}*/ {}
 
-	bool operator==(const Book& b1, const Book& b2)
+	bool operator==(Book& b1, Book& b2)
 	{
-		return ISBN(b1.isbn) == ISBN(b2.isbn);
+		Book
+			* temp1 = & b1,
+			* temp2 = & b2;
+		return temp1 == temp2;
 	}
 	bool operator!=(const Book& b1, const Book& b2)
 	{
-		return ISBN(b1.isbn) != ISBN(b2.isbn);
+		return false;//ISBN(b1.isbn) != ISBN(b2.isbn);
 	}
 
 	ostream & operator<<(ostream & os, const Book & b)
@@ -390,8 +393,8 @@ namespace ch09_exc05
 			<< b.authorFirstName
 			<< endl
 			<< b.title
-			<< endl
-			<< b.isbn
+			//<< endl
+			//<< b.isbn
 			<< endl;
 		return os;
 	}
@@ -417,25 +420,6 @@ namespace ch09_exc05
 		return p.getFeeAccount() <= 0.;
 	}
 
-	//bool Patron::is(string last, string first)
-	//{
-	//	return
-	//		lastName == last
-	//		&& firstName == first;
-	//}	
-	//bool Patron::is(Patron & p)
-	//{
-	//	return
-	//		lastName == p.lastName
-	//		&& firstName == p.firstName
-	//		&& CardNumber == p.CardNumber;
-	//}	
-	//bool Patron::is(int libraryCardNumber)
-	//{
-	//	return
-	//		CardNumber == libraryCardNumber;
-	//}
-
 	bool operator==(Patron & p1, Patron & p2)
 	{
 		Patron
@@ -450,8 +434,8 @@ namespace ch09_exc05
 	Transaction::Transaction() {}
 	Transaction::Transaction(Book & b, Patron & p) 
 		: book{b}, patron{p} {}
-	Transaction::Transaction(Book &b,Patron &p, Date & d)
-		: book{b},patron{p},date{d} {}
+//	Transaction::Transaction(Book &b,Patron &p, Date & d)
+//		: book{b},patron{p},date{d} {}
 
 	bool operator==(Transaction & t1, Transaction & t2)
 	{
@@ -480,7 +464,12 @@ namespace ch09_exc05
 	void Library::addTransaction(Book & book, Patron & patron)
 	{
 		if(findTransaction(book, patron) == Transaction::defaultTransaction())
+		{
 			transactions.push_back(Transaction(book, patron));
+			return;
+		}
+		cout
+			<< "Transaction already added.";
 	}
 
 	Book & Library::findBook(string last, string first, string title)
@@ -505,6 +494,17 @@ namespace ch09_exc05
 		return Transaction::defaultTransaction();
 	}
 
+	void Library::checkOut(Book & book, Patron & patron)
+	{
+		if (patron.getFeeAccount() < 0.)
+		{
+			cout
+				<< "Patron is due. Transaction cancelled. Sorry.";
+			return;
+		}
+		addTransaction(book, patron);
+	}
+		
 
 
 
@@ -520,18 +520,18 @@ namespace ch09_exc05
 			b1{
 				"imie",
 				"naŸwisko",
-				"1-2-3-x",
+				//"1-2-3-x",
 				"tytu³",
-				Genre::nonfiction,
-				ch09_lib::Chronou::Date(1973, ch09_lib::Chronou::Month::Feb, 2)
+				//Genre::nonfiction,
+				//Date(1973, ch09_lib::Chronou::Month::Feb, 2)
 			},
 			b2{
 				"imie",
 				"naŸwisko",
-				"1-2-3-x",
+				//"1-2-3-x",
 				"tytu³",
-				Genre::nonfiction,
-				ch09_lib::Chronou::Date(1973, ch09_lib::Chronou::Month::Feb, 2)
+				//Genre::nonfiction,
+				//Date(1973, ch09_lib::Chronou::Month::Feb, 2)
 			};
 		cout 
 			<< (b1 == b2) 
@@ -579,13 +579,32 @@ namespace ch09_exc05
 
 	void sketch04()
 	{
+
 		std::cout
 			<< "\n\t sketch04():\n";
+		string
+			patronFirst {"zbyszek"},
+			patronLast {"nanaziwskoromek"},
+			authorFirst {"twoja"},
+			authorLast {"stara"},
+			bookTitle {"yello pages"};//,
+			//isbn {"1-2-3-x"};
+		//Date
+		//	past {2020, Month::Oct, 2},
+		//	present {2021, Month::Mar, 15};
+		Library
+			lib;
+		lib.addBook(authorLast,authorFirst,bookTitle);
+		//lib.addPatron(patronLast, patronFirst);
+		//lib.checkOut(lib.findBook(authorLast, authorFirst, bookTitle), lib.findPatron(patronLast, patronFirst));
+		
 
 
+		for(Book book : lib.books)
+		{
+			cout << book.authorLastName << ' ' << book.authorFirstName << ",  " << bookTitle;
+		}
 	}
-
-
 }
 
 void ch09Excercises()
@@ -597,6 +616,5 @@ void ch09Excercises()
 	//sketch01();
 	//sketch02();
 	//sketch03();
-
 	sketch04();
 }
