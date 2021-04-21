@@ -3,8 +3,6 @@
 
 namespace ch09_exc02
 {
-using namespace std;
-
 	class Name_pairs
 	{
 		public:
@@ -34,7 +32,6 @@ using namespace std;
 			'n' - lists only names with invalid age values.
 		*/
 		void read_ages();
-
 
 		/*
 			sorts name vector alphabetically, and base on that shuffles the age vector.
@@ -108,19 +105,30 @@ namespace ch09_exc05
 
 	struct Book
 	{
-		Author
-			author;
+		//Author
+		//	author;
 		string
-			isbn,
-			title;
+			authorLastName,
+			authorFirstName,			
+			title,
+			isbn;
 		Genre
 			genre;
-		ch09_lib::Chronou::Date
+		Date
 			copyrightDate;
 		bool
-			checkedOut{true};
+			isCheckedOut{true};
+
 		Book();
-		Book(Author, string, string, Genre, ch09_lib::Chronou::Date);
+		Book(string last, string first, string title, string isbn, Genre, Date);
+		Book(string last, string first, string title);
+
+		static Book & defaultBook()
+		{
+			Book 
+				db{"", "", "", "", Genre::N_A, Date::defaultDate()};
+			return db;
+		}
 
 	};
 
@@ -136,6 +144,15 @@ namespace ch09_exc05
 
 			double getFeeAccount();
 			void addToFeeAccount(double);
+			string getLastName() { return lastName;}
+			string getFirstName() { return firstName;}
+
+			static Patron & defaultPatron()
+			{
+				static Patron
+					dp{INT_MIN, "", ""};
+				return dp;
+			}
 
 		private:
 			int
@@ -145,9 +162,17 @@ namespace ch09_exc05
 				firstName;
 			double
 				feeAccount {0.};
+
+			bool is(string, string);
+			bool is(Patron & p);
+			bool is(int);
 	};
 
-	bool userOwesAFee(const Patron&);
+	bool operator==(Patron & , Patron & );
+	
+
+
+	bool userOwesAFee(const Patron &);
 
 	struct Transaction
 	{
@@ -155,7 +180,7 @@ namespace ch09_exc05
 			book;
 		Patron
 			patron;
-		ch09_lib::Chronou::Date
+		Date
 			date;
 
 		Transaction();
@@ -163,16 +188,23 @@ namespace ch09_exc05
 
 	class Library
 	{		
+		public:
 		vector<Transaction> transactions;
 		vector<Patron> patrons;
 		vector<Book> books;
-
-		public:
+			
 			Library();
 
-			void addBook(Book &);
-			void addPatron(Patron &);			
-			void checkOut(Patron &, Book &, 
+			void addBook(string authorLastName, string authorFirstName, string title);
+			void addPatron(string last, string first);			
+			void checkOut(Book &,Patron &, Date &);
+
+			Book & findBook(string authorLastName, string AuthorFirstName, string title);
+			Patron & findPatron(string last, string first);
+
+			
+
+			
 	};
 
 
