@@ -259,132 +259,20 @@ namespace ch09_exc05
 {
 	using namespace ch09_lib::Chronou;
 
-	//	struct ISBN;
-
-	ISBN::ISBN(string input)
-	{
-		string 
-			s;
-		int 
-			index {0};
-		for(char c : input) 
-		{
-			if(c != '-' && index < 3)
-				s += c;
-			else
-			{
-				switch (index)
-				{
-					case 0:
-						state = stoi(s);
-						break;
-					case 1:
-						publisher = stoi(s);
-						break;
-					case 2:
-						number = stoi(s);
-						break;
-					case 3:
-						controlSum = c;
-				}
-				s = "";
-				++index;
-			}
-		}
-	}
-
-	string ISBN::toString()
-	{
-		string 
-			result;
-		result += numberToString(state) ;
-		result += '-';
-		result += numberToString(publisher);
-		result += '-';
-		result += numberToString(number);
-		result += '-';
-		result += controlSum;
-		return result;
-	}
-	string ISBN::numberToString(int i)
-	{
-		stringstream ss;
-		ss << i;
-		string s;
-		ss >> s;
-		return s;
-	}
-
-	bool ISBN::isValid()
-	{
-		return isalpha(controlSum) || isdigit(controlSum);
-	}
-
-	bool operator==(const ISBN &c1,const ISBN &c2)
-	{
-		return
-			c1.state == c2.state
-			&& c1.publisher==c2.publisher
-			&& c1.number == c2.number
-			&& c1.controlSum == c2.controlSum;
-	}
-	bool operator!=(const ISBN &c1, const ISBN &c2)
-	{
-		return
-			c1.state != c2.state
-			|| c1.publisher != c2.publisher
-			|| c1.number != c2.number
-			|| c1.controlSum != c2.controlSum;
-	}
-
-
-	
-	//	struct Author;
-
-	Author::Author() {}
-	Author::Author(string l, string f) 
-		: lastName{l}, firstName{f} {} 
-
-	ostream &operator<<(ostream &os,const Author & a)
-	{
-		os
-			<< a.lastName 
-			<< ' '
-			<< a.firstName;
-		return os;
-	}
-
-
-
-	string makeISBN(string s)
-	{
-		if(ISBN(s).isValid())
-			return s;
-		return "";
-	}
-
 	//	struct Book;
 
-	Book::Book() 
-		/*: genre{Genre::N_A}*/ {}
+	Book::Book() {}
 	Book::Book(string last, string first, string t)
-		: authorLastName{last}, authorFirstName{first}, title{t}/*, isbn{defaultBook().isbn}, genre{defaultBook().genre}, copyrightDate{defaultBook().copyrightDate}*/ {}
-//	Book::Book(string last, string first, string t/*, string code, Genre g, Date d*/)
-//		: authorLastName{last}, authorFirstName{first}/*, title{t}, genre{g}, isbn(makeISBN(code)), copyrightDate{d}*/ {}
+		: authorLastName{last}, authorFirstName{first}, title{t} {}
 
-	bool operator==(Book& b1, Book& b2)
+	bool		operator ==	(Book& b1, Book& b2)
 	{
 		Book
 			* temp1 = & b1,
 			* temp2 = & b2;
 		return temp1 == temp2;
 	}
-	bool operator!=(const Book& b1, const Book& b2)
-	{
-		return false;//ISBN(b1.isbn) != ISBN(b2.isbn);
-	}
-
-	ostream & operator<<(ostream & os, const Book & b)
+	ostream &	operator <<	(ostream & os, const Book & b)
 	{
 		os
 			<< endl
@@ -393,34 +281,17 @@ namespace ch09_exc05
 			<< b.authorFirstName
 			<< endl
 			<< b.title
-			//<< endl
-			//<< b.isbn
 			<< endl;
 		return os;
 	}
 
-
-
 	//	class Patron;
 
 	Patron::Patron() {}
-	Patron::Patron(int number, string last, string first) 
-		: CardNumber{number}, lastName{last}, firstName{first} {}
+	Patron::Patron(string last, string first) 
+		: lastName{last}, firstName{first} {}
 
-	double Patron::getFeeAccount()
-	{
-		return feeAccount;
-	}
-	void Patron::addToFeeAccount(double d)
-	{
-		feeAccount += d;
-	}
-	bool isPatronDue(Patron p)
-	{
-		return p.getFeeAccount() <= 0.;
-	}
-
-	bool operator==(Patron & p1, Patron & p2)
+	bool	operator == (Patron & p1, Patron & p2)
 	{
 		Patron
 			* temp1 = & p1,
@@ -428,24 +299,19 @@ namespace ch09_exc05
 		return temp1 == temp2;
 	}
 
-
 	//	struct Transactiun;
 
 	Transaction::Transaction() {}
 	Transaction::Transaction(Book & b, Patron & p) 
 		: book{b}, patron{p} {}
-//	Transaction::Transaction(Book &b,Patron &p, Date & d)
-//		: book{b},patron{p},date{d} {}
 
-	bool operator==(Transaction & t1, Transaction & t2)
+	bool	operator == (Transaction & t1, Transaction & t2)
 	{
 		Transaction
 			* temp1 = & t1,
 			* temp2 = & t2;
 		return temp1 == temp2;
 	}
-
-
 
 	//	class Library:
 
@@ -459,7 +325,7 @@ namespace ch09_exc05
 	void Library::addPatron(string last, string first)
 	{
 		if(findPatron(last, first) == Patron::defaultPatron())
-			patrons.push_back(Patron{narrow_cast<int>(patrons.size()),last,first});
+			patrons.push_back(Patron{last, first});
 	}
 	void Library::addTransaction(Book & book, Patron & patron)
 	{
@@ -493,23 +359,7 @@ namespace ch09_exc05
 				return t;
 		return Transaction::defaultTransaction();
 	}
-
-	void Library::checkOut(Book & book, Patron & patron)
-	{
-		if (patron.getFeeAccount() < 0.)
-		{
-			cout
-				<< "Patron is due. Transaction cancelled. Sorry.";
-			return;
-		}
-		addTransaction(book, patron);
-	}
 		
-
-
-
-
-
 	//	tests, sketches, other
 
 	void sketch01()
@@ -520,18 +370,12 @@ namespace ch09_exc05
 			b1{
 				"imie",
 				"naŸwisko",
-				//"1-2-3-x",
-				"tytu³",
-				//Genre::nonfiction,
-				//Date(1973, ch09_lib::Chronou::Month::Feb, 2)
+				"tytu³"
 			},
 			b2{
 				"imie",
 				"naŸwisko",
-				//"1-2-3-x",
 				"tytu³",
-				//Genre::nonfiction,
-				//Date(1973, ch09_lib::Chronou::Month::Feb, 2)
 			};
 		cout 
 			<< (b1 == b2) 
@@ -540,26 +384,6 @@ namespace ch09_exc05
 	}
 
 	void sketch02()
-	{
-		std::cout
-			<< "\n\t sketch02():\n";
-		Patron 
-			p{1,"zbyszek", "romek"};
-		cout
-			<< p.getFeeAccount()
-			<< endl
-			<< isPatronDue(p)
-			<< endl;
-		p.addToFeeAccount(-1);
-		cout
-			<< "\n subtracting from the fee account\n"
-			<< p.getFeeAccount()
-			<< endl
-			<< isPatronDue(p)
-			<< endl;
-	}
-
-	void sketch03()
 	{
 		std::cout
 			<< "\n\t sketch03():\n";
@@ -577,7 +401,7 @@ namespace ch09_exc05
 			<< endl;
 	}
 
-	void sketch04()
+	void sketch03()
 	{
 
 		std::cout
@@ -587,19 +411,11 @@ namespace ch09_exc05
 			patronLast {"nanaziwskoromek"},
 			authorFirst {"twoja"},
 			authorLast {"stara"},
-			bookTitle {"yello pages"};//,
-			//isbn {"1-2-3-x"};
-		//Date
-		//	past {2020, Month::Oct, 2},
-		//	present {2021, Month::Mar, 15};
+			bookTitle {"yello pages"};
 		Library
 			lib;
 		lib.addBook(authorLast,authorFirst,bookTitle);
-		//lib.addPatron(patronLast, patronFirst);
-		//lib.checkOut(lib.findBook(authorLast, authorFirst, bookTitle), lib.findPatron(patronLast, patronFirst));
 		
-
-
 		for(Book book : lib.books)
 		{
 			cout << book.authorLastName << ' ' << book.authorFirstName << ",  " << bookTitle;
@@ -613,8 +429,8 @@ void ch09Excercises()
 
 	using namespace ch09_exc05;
 
-	//sketch01();
-	//sketch02();
-	//sketch03();
-	sketch04();
+	sketch01();
+	sketch02();
+	sketch03();
+
 }
