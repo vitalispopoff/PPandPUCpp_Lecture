@@ -127,19 +127,20 @@ namespace ch09_exc05
 
 	class Patron
 	{
-		//public:
-		//	Patron(int, string, string);
+		public:
+			Patron(int, string, string);
 
-		//	double getLibraryFees();
+			double getFeeAccount();
+			void addToFeeAccount(double);
 
-		//private:
-		//	int
-		//		libraryCardNumber;
-		//	string 
-		//		lastName,
-		//		firstName;
-		//	double
-		//		libraryFees {0.};
+		private:
+			int
+				CardNumber;
+			string 
+				lastName,
+				firstName;
+			double
+				feeAccount {0.};
 	};
 
 	bool userOwesAFee(const Patron&);

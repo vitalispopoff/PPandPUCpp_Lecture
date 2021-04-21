@@ -383,6 +383,29 @@ namespace ch09_exc05
 		return os;
 	}
 
+
+
+	//	class Patron;
+
+	Patron::Patron(int number, string last, string first) 
+		: CardNumber{number}, lastName{last}, firstName{first} {}
+
+	double Patron::getFeeAccount()
+	{
+		return feeAccount;
+	}
+	void Patron::addToFeeAccount(double d)
+	{
+		feeAccount += d;
+	}
+
+	bool isPatronDue(Patron p)
+	{
+		return p.getFeeAccount() <= 0.;
+	}
+
+
+
 	//	tests, sketches, other
 
 	void sketch01()
@@ -407,6 +430,27 @@ namespace ch09_exc05
 			<< endl
 			<< b1;
 	}
+
+	void sketch02()
+	{
+		Patron p{1,"zbyszek", "romek"};
+
+		cout
+			<< p.getFeeAccount()
+			<< endl
+			<< isPatronDue(p)
+			<< endl;
+
+		p.addToFeeAccount(-1);
+
+		cout
+			<< "\n subtracting from the fee account\n"
+			<< p.getFeeAccount()
+			<< endl
+			<< isPatronDue(p)
+			<< endl;
+
+	}
 }
 
 
@@ -417,6 +461,6 @@ void ch09Excercises()
 
 	using namespace ch09_exc05;
 
-	sketch01();
+	//sketch02();
 
 }
