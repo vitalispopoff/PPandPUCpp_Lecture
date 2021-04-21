@@ -336,11 +336,12 @@ namespace ch09_exc05
 	}
 
 
-
 	
 	//	struct Author;
 
-	Author::Author(string l, string f) : lastName{l}, firstName{f} {} 
+	Author::Author() {}
+	Author::Author(string l, string f) 
+		: lastName{l}, firstName{f} {} 
 
 	ostream &operator<<(ostream &os,const Author & a)
 	{
@@ -351,15 +352,22 @@ namespace ch09_exc05
 		return os;
 	}
 
+
+
+	string makeISBN(string s)
+	{
+		if(ISBN(s).isValid())
+			return s;
+		return "";
+	}
+
 	//	struct Book;
 
+	Book::Book() 
+		: genre{Genre::N_A}, copyrightDate{1, ch09_lib::Chronou::Month::Jan, 1} {}
+
 	Book::Book(Author a, string code, string t, Genre g, ch09_lib::Chronou::Date d) 
-		: author{a}, title{t}, genre{g}, copyrightDate{d} 
-	{
-		if(ISBN(code).isValid())
-			isbn=code;
-		else isbn = "";	
-	}
+		: author{a}, isbn(makeISBN(code)), title{t}, genre{g}, copyrightDate{d} {}
 
 	bool operator==(const Book& b1, const Book& b2)
 	{
@@ -387,6 +395,8 @@ namespace ch09_exc05
 
 	//	class Patron;
 
+	Patron::Patron() {}
+
 	Patron::Patron(int number, string last, string first) 
 		: CardNumber{number}, lastName{last}, firstName{first} {}
 
@@ -405,6 +415,27 @@ namespace ch09_exc05
 	}
 
 
+
+	//	struct Transactiun;
+
+	Transaction::Transaction() 
+		: date{1, ch09_lib::Chronou::Month::Jan, 1} {}
+
+
+
+	//	class Library:
+
+	Library::Library() {}
+
+	void Library::addBook(Book & b)
+	{
+		books.push_back(b);
+	}
+
+	void Library::addPatron(Patron & p)
+	{
+		patrons.push_back(p);
+	}
 
 	//	tests, sketches, other
 
@@ -451,9 +482,12 @@ namespace ch09_exc05
 			<< endl;
 
 	}
+
+	void sketch03()
+	{
+
+	}
 }
-
-
 
 void ch09Excercises()
 {
@@ -461,6 +495,6 @@ void ch09Excercises()
 
 	using namespace ch09_exc05;
 
-	//sketch02();
-
+	sketch01();
+	sketch02();
 }

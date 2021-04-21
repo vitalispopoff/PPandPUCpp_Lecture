@@ -118,6 +118,22 @@ namespace ch09_lib
 				&& int(m) <= int(Month::Dec); 
 		}
 		
+		bool Date::isBiggerThan(const Date & date) const
+		{
+			if(y.getValue() > date.y.getValue())
+				return true;
+			else if(y.getValue() == date.y.getValue())		// the same year
+			{
+				if(int(m) > int(date.m))
+					return true;
+				else if(int(m) == int(date.m))						// the same year and month
+					if(d > date.d)
+						return true;
+			}
+			return false;
+		}
+
+		
 		ostream& operator<<(ostream& os, const Date & d)
 		{
 			return
@@ -167,6 +183,22 @@ namespace ch09_lib
 				|| int(a.getMonth()) != int(b.getMonth())
 				|| a.getYear().getValue() != b.getYear().getValue();
 		}
+
+		bool operator>(const Date & a, const Date & b)
+		{			
+			if (a.getYear().getValue() > b.getYear().getValue())
+				return true;
+			else if (a.getYear().getValue() == b.getYear().getValue())		// the same year
+			{
+				if(int(a.getMonth()) > int(b.getMonth()))
+					return true;
+				else if (a.getMonth() == b.getMonth())						// the same year and month
+					if(a.getDay() > b.getDay())
+						return true;
+			}
+		return false;
+		}
+
 
 		bool isValidDate(int y, int m, int d)
 		{
@@ -268,14 +300,26 @@ namespace ch09_lib
 		cout << d;
 
 	}
+
+	void sketch01()
+	{
+		using namespace Chronou;
+		Date 
+			d1 {2000, Month::Jul, 14},
+			d2 {2000, Month::Jun, 15};
+			
+		cout << (d1 > d2);
+	
+	}
+
 }
 
 void ch09Main()
 {
 	using namespace ch09_lib;
 	
-	Chronou::Date 
-		d {};
+	//Chronou::Date 
+	//	d {};
 
 	//example_01();
 	//example_02();
@@ -284,5 +328,9 @@ void ch09Main()
 	//example_08();
 	//example_09(d, Chronou::Date{});	// reference to non-const must be lvalue, hence 'd'.
 	//example_10(d);
-	example_11();
+	//example_11();
+
+	//sketch01();
+
+
 }

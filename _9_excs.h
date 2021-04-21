@@ -63,6 +63,8 @@ using namespace std;
 
 namespace ch09_exc05
 {
+	using namespace ch09_lib::Chronou;
+
 	struct ISBN
 	{
 		int
@@ -82,8 +84,9 @@ namespace ch09_exc05
 	bool operator==(const ISBN &, const ISBN &);
 	bool operator!=(const ISBN &, const ISBN &);
 		
-	enum Genre
+	enum class Genre
 	{
+		N_A,
 		fiction,
 		nonfiction,
 		periodical,
@@ -96,10 +99,9 @@ namespace ch09_exc05
 		string
 			lastName,
 			firstName;
-			
-			Author(string, string);
-
-		//vector<Book> books;
+		
+		Author();
+		Author(string, string);
 	};
 
 	ostream & operator<<(ostream &, const Author &);
@@ -116,7 +118,8 @@ namespace ch09_exc05
 		ch09_lib::Chronou::Date
 			copyrightDate;
 		bool
-			checkedOut{false};
+			checkedOut{true};
+		Book();
 		Book(Author, string, string, Genre, ch09_lib::Chronou::Date);
 
 	};
@@ -128,6 +131,7 @@ namespace ch09_exc05
 	class Patron
 	{
 		public:
+			Patron();
 			Patron(int, string, string);
 
 			double getFeeAccount();
@@ -147,20 +151,28 @@ namespace ch09_exc05
 
 	struct Transaction
 	{
-		//Book 
-		//	book;
-		//Patron
-		//	patron;
-		//ch9_lib::Chronou::Date
-		//	date;
+		Book 
+			book;
+		Patron
+			patron;
+		ch09_lib::Chronou::Date
+			date;
+
+		Transaction();
 	};
 
 	class Library
-	{
-		
-		//vector<Transaction> transactions;
-		//vector<Patron> users;
-		//vector<Book> books;
+	{		
+		vector<Transaction> transactions;
+		vector<Patron> patrons;
+		vector<Book> books;
+
+		public:
+			Library();
+
+			void addBook(Book &);
+			void addPatron(Patron &);			
+			void checkOut(Patron &, Book &, 
 	};
 
 

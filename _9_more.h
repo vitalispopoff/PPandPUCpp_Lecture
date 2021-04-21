@@ -78,6 +78,7 @@ namespace ch09_lib
 				Year	getYear	()	const;
 				Month	getMonth()	const;
 				int		getDay	()	const;
+				bool isBiggerThan( const Date &) const;
 
 				void addDay	(int);
 
@@ -141,3 +142,5 @@ namespace ch09_lib
 	*/
 	void example_10(Date&);
 }
+
+void ch09Main();
