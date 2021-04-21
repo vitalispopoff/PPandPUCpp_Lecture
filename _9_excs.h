@@ -184,23 +184,37 @@ namespace ch09_exc05
 			date;
 
 		Transaction();
+		Transaction(Book & , Patron &);
+		Transaction(Book & , Patron & , Date &);
+
+		static Transaction & defaultTransaction()
+		{
+			static Transaction 
+				dt{};
+			return dt;
+		}
 	};
+
+	bool operator==(Transaction &, Transaction &);
 
 	class Library
 	{		
 		public:
-		vector<Transaction> transactions;
-		vector<Patron> patrons;
-		vector<Book> books;
+			vector<Transaction> transactions;
+			vector<Patron> patrons;
+			vector<Book> books;
 			
 			Library();
 
 			void addBook(string authorLastName, string authorFirstName, string title);
-			void addPatron(string last, string first);			
+			void addPatron(string last, string first);
+			void addTransaction(Book &, Patron &);
+
 			void checkOut(Book &,Patron &, Date &);
 
 			Book & findBook(string authorLastName, string AuthorFirstName, string title);
 			Patron & findPatron(string last, string first);
+			Transaction & findTransaction(Book &, Patron &);
 
 			
 

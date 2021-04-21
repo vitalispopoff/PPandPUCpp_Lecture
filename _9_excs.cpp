@@ -257,6 +257,8 @@ namespace ch09_exc04
 
 namespace ch09_exc05
 {
+	using namespace ch09_lib::Chronou;
+
 	//	struct ISBN;
 
 	ISBN::ISBN(string input)
@@ -364,10 +366,10 @@ namespace ch09_exc05
 	//	struct Book;
 
 	Book::Book() 
-		: genre{Genre::N_A}, copyrightDate{1, ch09_lib::Chronou::Month::Jan, 1} {}
+		: genre{Genre::N_A}, copyrightDate{1, /*ch09_lib::Chronou::*/Month::Jan, 1} {}
 	Book::Book(string last, string first, string t)
 		: authorLastName{last}, authorFirstName{first}, title{t}, isbn{defaultBook().isbn}, genre{defaultBook().genre}, copyrightDate{defaultBook().copyrightDate} {}
-	Book::Book(string last, string first, string t, string code, Genre g, ch09_lib::Chronou::Date d)
+	Book::Book(string last, string first, string t, string code, Genre g, /*ch09_lib::Chronou::*/Date d)
 		: authorLastName{last}, authorFirstName{first}, title{t}, genre{g}, isbn(makeISBN(code)), copyrightDate{d} {}
 
 	bool operator==(const Book& b1, const Book& b2)
@@ -415,39 +417,49 @@ namespace ch09_exc05
 		return p.getFeeAccount() <= 0.;
 	}
 
-	bool Patron::is(string last, string first)
-	{
-		return
-			lastName == last
-			&& firstName == first;
-	}	
-	bool Patron::is(Patron & p)
-	{
-		return
-			lastName == p.lastName
-			&& firstName == p.firstName
-			&& CardNumber == p.CardNumber;
-	}	
-	bool Patron::is(int libraryCardNumber)
-	{
-		return
-			CardNumber == libraryCardNumber;
-	}
+	//bool Patron::is(string last, string first)
+	//{
+	//	return
+	//		lastName == last
+	//		&& firstName == first;
+	//}	
+	//bool Patron::is(Patron & p)
+	//{
+	//	return
+	//		lastName == p.lastName
+	//		&& firstName == p.firstName
+	//		&& CardNumber == p.CardNumber;
+	//}	
+	//bool Patron::is(int libraryCardNumber)
+	//{
+	//	return
+	//		CardNumber == libraryCardNumber;
+	//}
 
 	bool operator==(Patron & p1, Patron & p2)
 	{
 		Patron
 			* temp1 = & p1,
 			* temp2 = & p2;
-
 		return temp1 == temp2;
 	}
 
 
 	//	struct Transactiun;
 
-	Transaction::Transaction() 
-		: date{1, ch09_lib::Chronou::Month::Jan, 1} {}
+	Transaction::Transaction() {}
+	Transaction::Transaction(Book & b, Patron & p) 
+		: book{b}, patron{p} {}
+	Transaction::Transaction(Book &b,Patron &p, Date & d)
+		: book{b},patron{p},date{d} {}
+
+	bool operator==(Transaction & t1, Transaction & t2)
+	{
+		Transaction
+			* temp1 = & t1,
+			* temp2 = & t2;
+		return temp1 == temp2;
+	}
 
 
 
@@ -459,23 +471,25 @@ namespace ch09_exc05
 	{
 		if (findBook(authorLastName, authorFirstName, title) == Book::defaultBook())
 			books.push_back(Book{authorLastName, authorFirstName, title});
-
-			
-
 	}
 	void Library::addPatron(string last, string first)
 	{
 		if(findPatron(last, first) == Patron::defaultPatron())
 			patrons.push_back(Patron{narrow_cast<int>(patrons.size()),last,first});
 	}
-	void Library::checkOut(Book & b, Patron & p, Date & d)
+	void Library::addTransaction(Book & book, Patron & patron)
 	{
-		
-			
-			
-
+		if(findTransaction(book, patron) == Transaction::defaultTransaction())
+			transactions.push_back(Transaction(book, patron));
 	}
 
+	Book & Library::findBook(string last, string first, string title)
+	{
+		for(Book & b : books)
+			if(b.authorLastName == last && b.authorFirstName == first && b.title == title)
+				return b;
+		return Book::defaultBook();
+	}
 	Patron & Library::findPatron(string last, string first)
 	{
 		for(Patron & p : patrons)
@@ -483,6 +497,16 @@ namespace ch09_exc05
 				return p;
 		return Patron::defaultPatron();
 	}
+	Transaction & Library::findTransaction(Book & book, Patron & patron)
+	{
+		for(Transaction & t : transactions)
+			if(t.book == book & t.patron == patron)
+				return t;
+		return Transaction::defaultTransaction();
+	}
+
+
+
 
 
 
@@ -490,16 +514,20 @@ namespace ch09_exc05
 
 	void sketch01()
 	{
+		std::cout
+			<< "\n\t sketch01():\n";
 		Book
 			b1{
-				Author("imie","naŸwisko"),
+				"imie",
+				"naŸwisko",
 				"1-2-3-x",
 				"tytu³",
 				Genre::nonfiction,
 				ch09_lib::Chronou::Date(1973, ch09_lib::Chronou::Month::Feb, 2)
 			},
 			b2{
-				Author("imie","naŸwisko"),
+				"imie",
+				"naŸwisko",
 				"1-2-3-x",
 				"tytu³",
 				Genre::nonfiction,
@@ -513,27 +541,28 @@ namespace ch09_exc05
 
 	void sketch02()
 	{
-		Patron p{1,"zbyszek", "romek"};
-
+		std::cout
+			<< "\n\t sketch02():\n";
+		Patron 
+			p{1,"zbyszek", "romek"};
 		cout
 			<< p.getFeeAccount()
 			<< endl
 			<< isPatronDue(p)
 			<< endl;
-
 		p.addToFeeAccount(-1);
-
 		cout
 			<< "\n subtracting from the fee account\n"
 			<< p.getFeeAccount()
 			<< endl
 			<< isPatronDue(p)
 			<< endl;
-
 	}
 
 	void sketch03()
 	{
+		std::cout
+			<< "\n\t sketch03():\n";
 		string
 			firstName = "zbyszek",
 			lastName = "nanazwiskoromek";
@@ -548,6 +577,13 @@ namespace ch09_exc05
 			<< endl;
 	}
 
+	void sketch04()
+	{
+		std::cout
+			<< "\n\t sketch04():\n";
+
+
+	}
 
 
 }
@@ -558,10 +594,9 @@ void ch09Excercises()
 
 	using namespace ch09_exc05;
 
-	cout << "\n\t sketch01():\n";
-	sketch01();
-	cout << "\n\t sketch02():\n";
-	sketch02();
-	cout << "\n\t sketch03():\n";
-	sketch03();
+	//sketch01();
+	//sketch02();
+	//sketch03();
+
+	sketch04();
 }
