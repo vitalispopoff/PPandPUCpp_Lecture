@@ -207,6 +207,7 @@ namespace ch09_exc02
 	}
 }
 
+/*
 namespace ch09_exc04
 {
 	
@@ -254,6 +255,7 @@ namespace ch09_exc04
 		} 
 	};
 }
+*/
 
 namespace ch09_exc05
 {
@@ -262,17 +264,19 @@ namespace ch09_exc05
 	//	struct Book;
 
 	Book::Book() {}
+
 	Book::Book(string last, string first, string t)
 		: authorLastName{last}, authorFirstName{first}, title{t} {}
 
-	bool		operator ==	(Book& b1, Book& b2)
+	bool operator == (Book& b1, Book& b2)
 	{
 		Book
 			* temp1 = & b1,
 			* temp2 = & b2;
 		return temp1 == temp2;
 	}
-	ostream &	operator <<	(ostream & os, const Book & b)
+
+	ostream & operator << (ostream & os, const Book & b)
 	{
 		os
 			<< endl
@@ -285,13 +289,14 @@ namespace ch09_exc05
 		return os;
 	}
 
-	//	class Patron;
+	//	class Patron
 
 	Patron::Patron() {}
+
 	Patron::Patron(string last, string first) 
 		: lastName{last}, firstName{first} {}
 
-	bool	operator == (Patron & p1, Patron & p2)
+	bool operator == (Patron & p1, Patron & p2)
 	{
 		Patron
 			* temp1 = & p1,
@@ -299,13 +304,15 @@ namespace ch09_exc05
 		return temp1 == temp2;
 	}
 
-	//	struct Transactiun;
+	//	struct Transaction;
 
-	Transaction::Transaction() {}
+	Transaction::Transaction() 
+		: book{Book::defaultBook()}, patron{Patron::defaultPatron()} {}
+
 	Transaction::Transaction(Book & b, Patron & p) 
 		: book{b}, patron{p} {}
 
-	bool	operator == (Transaction & t1, Transaction & t2)
+	bool operator == (Transaction & t1, Transaction & t2)
 	{
 		Transaction
 			* temp1 = & t1,
@@ -317,16 +324,29 @@ namespace ch09_exc05
 
 	Library::Library() {}
 
-	void Library::addBook(string authorLastName, string authorFirstName, string title)
+	void Library::addBook(string authLast, string authFirst, string bookTitle)
 	{
-		if (findBook(authorLastName, authorFirstName, title) == Book::defaultBook())
-			books.push_back(Book{authorLastName, authorFirstName, title});
+		Book 
+			& found {findBook(authLast,authFirst,bookTitle)};
+		if (found == Book::defaultBook())
+		{
+			books.push_back(Book{});
+			Book 
+				& temp {books[books.size() - 1]};
+			temp.authorLastName = authLast;
+			temp.authorFirstName = authFirst;
+			temp.title = bookTitle;
+			return;
+		}
+		else cout << "BOINK!";
 	}
+
 	void Library::addPatron(string last, string first)
 	{
 		if(findPatron(last, first) == Patron::defaultPatron())
 			patrons.push_back(Patron{last, first});
 	}
+
 	void Library::addTransaction(Book & book, Patron & patron)
 	{
 		if(findTransaction(book, patron) == Transaction::defaultTransaction())
@@ -341,10 +361,15 @@ namespace ch09_exc05
 	Book & Library::findBook(string last, string first, string title)
 	{
 		for(Book & b : books)
+		{
 			if(b.authorLastName == last && b.authorFirstName == first && b.title == title)
+			{	
 				return b;
+			}
+		}
 		return Book::defaultBook();
 	}
+
 	Patron & Library::findPatron(string last, string first)
 	{
 		for(Patron & p : patrons)
@@ -352,6 +377,7 @@ namespace ch09_exc05
 				return p;
 		return Patron::defaultPatron();
 	}
+
 	Transaction & Library::findTransaction(Book & book, Patron & patron)
 	{
 		for(Transaction & t : transactions)
@@ -415,6 +441,8 @@ namespace ch09_exc05
 		Library
 			lib;
 		lib.addBook(authorLast,authorFirst,bookTitle);
+		lib.addPatron(patronLast, patronFirst);
+
 		
 		for(Book book : lib.books)
 		{

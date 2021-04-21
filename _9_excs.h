@@ -76,16 +76,15 @@ namespace ch09_exc05
 
 		static Book & defaultBook()
 		{
-			Book 
+			static Book 
 				db{"", "", ""};
 			return db;
 		}
 
 	};
 
-	bool operator==(const Book &, const Book &);
-	bool operator!=(const Book &, const Book &);
-	ostream & operator<<(ostream &, const Book &);
+	bool		operator == (const Book &, const Book &);
+	ostream &	operator << (ostream &, const Book &);
 
 	class Patron
 	{
@@ -117,9 +116,9 @@ namespace ch09_exc05
 	struct Transaction
 	{
 		Book 
-			book;
+			& book;
 		Patron
-			patron;
+			& patron;
 
 		Transaction();
 		Transaction(Book & , Patron &);
