@@ -290,6 +290,32 @@ namespace ch09_exc05
 		return os;
 	}
 
+	bool isValidISBN(string input, int i)
+	{
+		if(input.size() != 13 /*|| input.size() != 17*/)			// we work with ISBN10 only now
+			return false;											// 10 symbols + 3 dashes for ISBN10, and 13 symbols + 4 dashes for ISBN13
+		string
+			s,
+			subS{s.substr(0,s.size() -2)};							// cut out the control sum with last dash
+		replace(subS.begin(), subS.end(), '-', ' ');
+
+		stringstream 
+			ss{subS};
+		int
+			numbers[4];
+		for(int i{0}; i < 11; ++i)
+			ss >> numbers[i];
+
+		remove(subS.begin(), subS.end(), ' ');
+		int
+			result{0};
+		for(int i = 0; i < subS.size() - 1; ++i)
+			
+
+
+
+	}
+
 	//	--------------------------------------------	class Patron;
 
 	Patron::Patron() {}
@@ -421,6 +447,7 @@ namespace ch09_exc05
 			cout << "Currently book is not available.";
 			return;
 		}
+
 		Patron
 			& patron{findPatron(patronLast, patronFirst)};
 		if (patron == Patron::defaultPatron())
@@ -428,8 +455,14 @@ namespace ch09_exc05
 			cout << "Not a member of the library.";
 			return;
 		}
-		//		if fee account is below 0.
-		//		if book account is above threshold.
+		if (patron.getFeeAccount() < 0.)
+		{
+			cout
+				<< "\n\tPatron account suspended due to fee overdraft\n";
+			return;
+		}
+		//	TODO	if book account is above threshold.
+
 		Transaction &
 			transaction{findTransaction(book, patron)};
 		if(!(transaction == Transaction::defaultTransaction()))
@@ -491,7 +524,7 @@ namespace ch09_exc05
 	void sketch03()
 	{
 		cout
-			<< "\n\t sketch04():\n";
+			<< "\n\t sketch03():\n";
 		string
 			patronFirst {"zbyszek"},
 			patronLast {"nanaziwskoromek"},
@@ -507,8 +540,10 @@ namespace ch09_exc05
 		Patron
 			& patron {lib.findPatron(patronLast, patronFirst)};
 		cout 
+			<< "\nlisting book and patron"
 			<< book
 			<< patron;
+
 		lib.checkout(authorLast, authorFirst, bookTitle, patronLast, patronFirst);
 
 

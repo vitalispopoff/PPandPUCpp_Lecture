@@ -71,7 +71,10 @@ namespace ch09_exc05
 		string
 			authorLastName,
 			authorFirstName,			
-			title;
+			title,
+			isbn{"0-0-0-0"};
+		Date
+			copyDate{};
 		bool
 			isCheckedOut{false};
 
@@ -89,6 +92,8 @@ namespace ch09_exc05
 	bool		operator == (const Book &, const Book &);
 	ostream &	operator << (ostream &, const Book &);
 
+	bool isValidISBN(string);
+
 	//	--------------------------------------------	
 
 	class Patron
@@ -97,8 +102,10 @@ namespace ch09_exc05
 			Patron();
 			Patron(string last, string first);
 
-			string getLastName() { return lastName;}
-			string getFirstName() { return firstName;}
+			string	getLastName		()			{ return lastName;}
+			string	getFirstName	()			{ return firstName;}
+			double	getFeeAccount	()			{ return feeAccount;}
+			void	addToAccount	(double d)	{ feeAccount += d;}
 
 			static Patron & defaultPatron()
 			{
@@ -110,6 +117,8 @@ namespace ch09_exc05
 			string 
 				lastName,
 				firstName;
+			double
+				feeAccount{0.};
 	};
 
 	bool		operator == (const Patron & , const Patron & );
@@ -142,10 +151,10 @@ namespace ch09_exc05
 
 	class Library
 	{		
-		public:
 			vector<Transaction> transactions;
 			vector<Patron> patrons;
 			vector<Book> books;
+		public:
 			
 			Library();
 
@@ -157,7 +166,7 @@ namespace ch09_exc05
 			Patron & findPatron(string last, string first);
 			Transaction & findTransaction(Book &, Patron &);
 
-			void checkout(string authorLast,string authorFirst,string title,string patronLast,string patronFirst);
+			void checkout(string authLast,string authFirst,string title,string patronLast,string patronFirst);
 	};
 
 	//	--------------------------------------------	
