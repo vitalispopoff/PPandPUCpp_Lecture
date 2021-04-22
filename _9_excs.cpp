@@ -261,27 +261,28 @@ namespace ch09_exc05
 {
 	using namespace ch09_lib::Chronou;
 
-	//	struct Book;
+	//	--------------------------------------------	
+
+	//	--------------------------------------------	struct Book;
 
 	Book::Book() {}
 
 	Book::Book(string last, string first, string t)
 		: authorLastName{last}, authorFirstName{first}, title{t} {}
 
-	bool operator == (Book& b1, Book& b2)
+	bool		operator == (Book& b1, Book& b2)
 	{
 		Book
 			* temp1 = & b1,
 			* temp2 = & b2;
 		return temp1 == temp2;
 	}
-
-	ostream & operator << (ostream & os, const Book & b)
+	ostream &	operator << (ostream & os, const Book & b)
 	{
 		os
 			<< endl
 			<< b.authorLastName 
-			<< ' ' 
+			<< ", "
 			<< b.authorFirstName
 			<< endl
 			<< b.title
@@ -289,22 +290,33 @@ namespace ch09_exc05
 		return os;
 	}
 
-	//	class Patron
+	//	--------------------------------------------	class Patron;
 
 	Patron::Patron() {}
 
 	Patron::Patron(string last, string first) 
 		: lastName{last}, firstName{first} {}
 
-	bool operator == (Patron & p1, Patron & p2)
+	bool		operator == (Patron & p1, Patron & p2)
 	{
 		Patron
 			* temp1 = & p1,
 			* temp2 = & p2;
 		return temp1 == temp2;
 	}
+	ostream &	operator << (ostream & os, const Patron & patron)
+	{
+		os
+			<< endl
+			<< patron.lastName
+			<< ", "
+			<< patron.firstName
+			<< endl;
+		return os;
+	}
 
-	//	struct Transaction;
+
+	//	--------------------------------------------	struct Transaction;
 
 	Transaction::Transaction() 
 		: book{Book::defaultBook()}, patron{Patron::defaultPatron()} {}
@@ -312,15 +324,24 @@ namespace ch09_exc05
 	Transaction::Transaction(Book & b, Patron & p) 
 		: book{b}, patron{p} {}
 
-	bool operator == (Transaction & t1, Transaction & t2)
+	bool		operator == (Transaction & t1, Transaction & t2)
 	{
 		Transaction
 			* temp1 = & t1,
 			* temp2 = & t2;
 		return temp1 == temp2;
 	}
+	ostream &	operator << (ostream & os, Transaction & transaction)
+	{
+		os
+			<< "\n\ttransaction book:"
+			<< transaction.book
+			<< "\n\ttransaction patron:"
+			<< transaction.patron;
+		return os;
+	}
 
-	//	class Library:
+	//	--------------------------------------------	class Library;
 
 	Library::Library() {}
 
@@ -385,8 +406,48 @@ namespace ch09_exc05
 				return t;
 		return Transaction::defaultTransaction();
 	}
-		
-	//	tests, sketches, other
+
+	void Library::checkout(string authorLast, string authorFirst, string title, string patronLast, string patronFirst)
+	{
+		Book 
+			& book {findBook(authorLast, authorFirst, title)};
+		if (book == Book::defaultBook())
+		{
+			cout << "No such a book in the library";
+				return;
+		}
+		if (book.isCheckedOut)
+		{
+			cout << "Currently book is not available.";
+			return;
+		}
+		Patron
+			& patron{findPatron(patronLast, patronFirst)};
+		if (patron == Patron::defaultPatron())
+		{
+			cout << "Not a member of the library.";
+			return;
+		}
+		//		if fee account is below 0.
+		//		if book account is above threshold.
+		Transaction &
+			transaction{findTransaction(book, patron)};
+		if(!(transaction == Transaction::defaultTransaction()))
+		{	
+			cout 
+				<< "\n\ttransaction found:\n"
+				<< transaction;
+			return;
+		}
+		addTransaction(book, patron);
+		cout 
+			<< "\n\ttransaction added:\n"
+			<< transactions[transactions.size() -1];	
+	}
+	
+	//	--------------------------------------------	
+	
+	//	--------------------------------------------	tests, sketches, other
 
 	void sketch01()
 	{
@@ -412,7 +473,7 @@ namespace ch09_exc05
 	void sketch02()
 	{
 		std::cout
-			<< "\n\t sketch03():\n";
+			<< "\n\t sketch02():\n";
 		string
 			firstName = "zbyszek",
 			lastName = "nanazwiskoromek";
@@ -429,8 +490,7 @@ namespace ch09_exc05
 
 	void sketch03()
 	{
-
-		std::cout
+		cout
 			<< "\n\t sketch04():\n";
 		string
 			patronFirst {"zbyszek"},
@@ -442,12 +502,18 @@ namespace ch09_exc05
 			lib;
 		lib.addBook(authorLast,authorFirst,bookTitle);
 		lib.addPatron(patronLast, patronFirst);
+		Book 
+			& book {lib.findBook(authorLast, authorFirst, bookTitle)}; 
+		Patron
+			& patron {lib.findPatron(patronLast, patronFirst)};
+		cout 
+			<< book
+			<< patron;
+		lib.checkout(authorLast, authorFirst, bookTitle, patronLast, patronFirst);
+
+
 
 		
-		for(Book book : lib.books)
-		{
-			cout << book.authorLastName << ' ' << book.authorFirstName << ",  " << bookTitle;
-		}
 	}
 }
 

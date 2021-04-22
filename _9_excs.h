@@ -62,6 +62,10 @@ namespace ch09_exc05
 {
 	using namespace ch09_lib::Chronou;
 
+	//	--------------------------------------------	
+
+	//	--------------------------------------------	
+
 	struct Book
 	{
 		string
@@ -69,7 +73,7 @@ namespace ch09_exc05
 			authorFirstName,			
 			title;
 		bool
-			isCheckedOut{true};
+			isCheckedOut{false};
 
 		Book();
 		Book(string last, string first, string title);
@@ -80,11 +84,12 @@ namespace ch09_exc05
 				db{"", "", ""};
 			return db;
 		}
-
 	};
 
 	bool		operator == (const Book &, const Book &);
 	ostream &	operator << (ostream &, const Book &);
+
+	//	--------------------------------------------	
 
 	class Patron
 	{
@@ -107,11 +112,10 @@ namespace ch09_exc05
 				firstName;
 	};
 
-	bool operator==(Patron & , Patron & );
+	bool		operator == (const Patron & , const Patron & );
+	ostream &	operator << (ostream & , const Patron &);
 	
-
-
-	bool userOwesAFee(const Patron &);
+	//	--------------------------------------------	
 
 	struct Transaction
 	{
@@ -131,7 +135,10 @@ namespace ch09_exc05
 		}
 	};
 
-	bool operator==(Transaction &, Transaction &);
+	bool operator == (const Transaction &, const Transaction &);
+	ostream &	operator << (ostream &, const Transaction &);
+
+	//	--------------------------------------------	
 
 	class Library
 	{		
@@ -149,5 +156,11 @@ namespace ch09_exc05
 			Book & findBook(string last, string first, string title);
 			Patron & findPatron(string last, string first);
 			Transaction & findTransaction(Book &, Patron &);
+
+			void checkout(string authorLast,string authorFirst,string title,string patronLast,string patronFirst);
 	};
+
+	//	--------------------------------------------	
+
+	//	--------------------------------------------	
 }
