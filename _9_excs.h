@@ -64,6 +64,16 @@ namespace ch09_exc05
 
 	//	--------------------------------------------	
 
+	enum class Genre
+	{
+		nan,
+		fiction,
+		nonfiction,
+		periodical,
+		biography,
+		children
+	};
+
 	//	--------------------------------------------	
 
 	struct Book
@@ -72,9 +82,11 @@ namespace ch09_exc05
 			authorLastName,
 			authorFirstName,			
 			title,
-			isbn{"0-0-0-0"};
+			isbn{"00-0000-000-0"};
 		Date
 			copyDate{};
+		Genre
+			genre{Genre::nan};
 		bool
 			isCheckedOut{false};
 
@@ -106,6 +118,7 @@ namespace ch09_exc05
 			string	getFirstName	()			{ return firstName;}
 			double	getFeeAccount	()			{ return feeAccount;}
 			void	addToAccount	(double d)	{ feeAccount += d;}
+			bool	iou				()			{ return feeAccount < 0.;}
 
 			static Patron & defaultPatron()
 			{
@@ -114,6 +127,7 @@ namespace ch09_exc05
 				return dp;
 			}
 
+		private:
 			string 
 				lastName,
 				firstName;

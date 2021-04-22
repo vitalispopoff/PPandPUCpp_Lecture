@@ -290,30 +290,46 @@ namespace ch09_exc05
 		return os;
 	}
 
-	bool isValidISBN(string input, int i)
+	bool isValidISBN(string input)
 	{
 		if(input.size() != 13 /*|| input.size() != 17*/)			// we work with ISBN10 only now
 			return false;											// 10 symbols + 3 dashes for ISBN10, and 13 symbols + 4 dashes for ISBN13
 		string
 			s,
 			subS{s.substr(0,s.size() -2)};							// cut out the control sum with last dash
-		replace(subS.begin(), subS.end(), '-', ' ');
-
-		stringstream 
-			ss{subS};
+		//replace(subS.begin(), subS.end(), '-', ' ');
+		//stringstream 
+		//	ss{subS};
+		//int
+		//	numbers[4];
+		//try
+		//{
+		//	for(int i{0}; i < 4; ++i)
+		//		ss >> numbers[i];
+		//}
+		//catch(exception & e)
+		//{
+		//	cout << "\n\t something went wrong with numbers";
+		//	return false;
+		//}
+		//remove(subS.begin(), subS.end(), ' ');
+		subS.erase(remove(subS.begin(), subS.end(), '-'), subS.end());
 		int
-			numbers[4];
-		for(int i{0}; i < 11; ++i)
-			ss >> numbers[i];
-
-		remove(subS.begin(), subS.end(), ' ');
-		int
-			result{0};
-		for(int i = 0; i < subS.size() - 1; ++i)
-			
-
-
-
+			result{0},
+			i{10};
+		for(char c : subS)
+		{
+			if (!isdigit(c))
+				return false;
+			result += ((c - '0') * i--);
+		}
+		result %= 11;
+		char
+			controlSum {input[input.size() - 1]};
+		if(controlSum == 'X' || controlSum == 'x')
+			controlSum = 58;
+		
+		return	result + 48 == controlSum;
 	}
 
 	//	--------------------------------------------	class Patron;
@@ -330,17 +346,16 @@ namespace ch09_exc05
 			* temp2 = & p2;
 		return temp1 == temp2;
 	}
-	ostream &	operator << (ostream & os, const Patron & patron)
+	ostream &	operator << (ostream & os, Patron & patron)				// const referenced prohibits using get/set for private members 
 	{
 		os
 			<< endl
-			<< patron.lastName
+			<< patron.getLastName()
 			<< ", "
-			<< patron.firstName
+			<< patron.getFirstName()
 			<< endl;
 		return os;
 	}
-
 
 	//	--------------------------------------------	struct Transaction;
 
@@ -550,6 +565,17 @@ namespace ch09_exc05
 
 		
 	}
+
+	void sketch04()
+	{
+		cout
+			<< "\n\t sketch04():\n";
+		string
+			isbn_0{"00-0000-000-0"},
+			isbn_1{"81-7525-766-0"};
+		cout 
+			<< isValidISBN(isbn_1);
+	}
 }
 
 void ch09Excercises()
@@ -561,5 +587,6 @@ void ch09Excercises()
 	sketch01();
 	sketch02();
 	sketch03();
+	sketch04();
 
 }
