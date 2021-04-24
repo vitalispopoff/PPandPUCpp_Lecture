@@ -260,6 +260,8 @@ namespace ch09_exc04
 namespace ch09_exc05
 {
 	using namespace ch09_lib::Chronou;
+	//#include "chronos.h"
+	//using namespace Chronos;
 
 	//	--------------------------------------------	
 
@@ -296,7 +298,7 @@ namespace ch09_exc05
 			return false;											// 10 symbols + 3 dashes for ISBN10, and 13 symbols + 4 dashes for ISBN13
 		string
 			s,
-			subS{s.substr(0,s.size() -2)};							// cut out the control sum with last dash
+			subS{input.substr(0,input.size() - 2)};							// cut out the control sum with last dash
 		//replace(subS.begin(), subS.end(), '-', ' ');
 		//stringstream 
 		//	ss{subS};
@@ -323,13 +325,13 @@ namespace ch09_exc05
 				return false;
 			result += ((c - '0') * i--);
 		}
-		result %= 11;
+		//result %= 11;
 		char
 			controlSum {input[input.size() - 1]};
 		if(controlSum == 'X' || controlSum == 'x')
 			controlSum = 58;
 		
-		return	result + 48 == controlSum;
+		return	(result % 11) + '0' == controlSum;
 	}
 
 	//	--------------------------------------------	class Patron;
@@ -394,7 +396,7 @@ namespace ch09_exc05
 		{
 			books.push_back(Book{});
 			Book 
-				& temp {books[books.size() - 1]};
+				&temp{books[narrow_cast<int>(books.size() - 1)]};
 			temp.authorLastName = authLast;
 			temp.authorFirstName = authFirst;
 			temp.title = bookTitle;
@@ -490,7 +492,7 @@ namespace ch09_exc05
 		addTransaction(book, patron);
 		cout 
 			<< "\n\ttransaction added:\n"
-			<< transactions[transactions.size() -1];	
+			<< transactions[narrow_cast<int>(transactions.size() - 1)];
 	}
 	
 	//	--------------------------------------------	
@@ -572,7 +574,9 @@ namespace ch09_exc05
 			<< "\n\t sketch04():\n";
 		string
 			isbn_0{"00-0000-000-0"},
-			isbn_1{"81-7525-766-0"};
+			isbn_1{"81-7525-766-0"},
+			isbn_2{"00-0000-050-x"};
+
 		cout 
 			<< isValidISBN(isbn_1);
 	}
@@ -584,9 +588,9 @@ void ch09Excercises()
 
 	using namespace ch09_exc05;
 
-	sketch01();
-	sketch02();
-	sketch03();
+	//sketch01();
+	//sketch02();
+	//sketch03();
 	sketch04();
 
 }
