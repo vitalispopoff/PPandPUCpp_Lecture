@@ -67,10 +67,10 @@ void emptyStatements() {
 	[]() {};
 
 	// wrn C4390 : ';' : empty controlled statement found; is this the intent ?
-	if (true);
+	//if (true);
 
 	//assembly: xor, je, jmp, jmp
-	while (false)break;
+	//while (false)break;
 
 	return;
 }
@@ -316,7 +316,10 @@ void switchWithStringSelector1() {
 	cin
 		>> selectorIn;
 
-	auto stringToUnInt = [](string s)-> unsigned int { return hash<string>()(s); };
+	auto stringToUnInt = [](string s)
+	{ 
+		return /*narrow_cast<unsigned int>*/(hash<string>()(s));
+	};
 
 	switch (stringToUnInt(selectorIn)) {
 
@@ -655,35 +658,60 @@ void computation_drill07() {
 		minimum = numeric_limits<double>::max(),
 		maximum = numeric_limits<double>::min(),
 		values[2];
-	bool switcher{ false };
-	vector<string> unitCodeBook{ "cm", "in", "ft","m" };
-	vector<double> unitConversionBook{ 1, 2.54, (2.54 * 12), 100. };
-	string input;
-	int	inputParseIndex, unitIndex;
+	bool 
+		switcher{ false };
+	vector<string> 
+		unitCodeBook{ "cm", "in", "ft","m" };
+	vector<double> 
+		unitConversionBook{ 1, 2.54, (2.54 * 12), 100. };
+	string 
+		input;
+	int	
+		/*inputParseIndex,*/ 
+		unitIndex;
 
-	auto allowedUnit = [&]() -> bool {
+	auto allowedUnit = [&]() -> bool 
+	{
 		for (unitIndex = 0; unitIndex < unitCodeBook.size(); ++unitIndex)
 			if (input.find(unitCodeBook[unitIndex]) < input.size())
 				return true;
 		return false;
 	};
-	while (cin >> input && allowedUnit()) {
-
+	while (cin >> input && allowedUnit()) 
+	{
 		values[switcher] = stod(input) * unitConversionBook[unitIndex];
-
-		if (values[switcher] < minimum) {
+		if (values[switcher] < minimum) 
+		{
 			minimum = values[switcher];
-			cout << "\n\t" << values[switcher] << " is the smallest so far.";
+			cout 
+				<< "\n\t" 
+				<< values[switcher] 
+				<< " is the smallest so far.";
 		}
-		if (values[switcher] > maximum) {
+		if (values[switcher] > maximum) 
+		{
 			maximum = values[switcher];
-			cout << "\n\t" << values[switcher] << " is the largest so far.";
+			cout 
+			<< "\n\t" 
+			<< values[switcher] 
+			<< " is the largest so far.";
 		}
-		if (switcher) {
-			if (values[0] == values[1]) cout << "\n\tlengths are equal.\n";
-			else {
-				cout << "\n\tthe smaller value is " << min(values[0], values[1]) << "\n\tthe larger values is " << max(values[0], values[1]);
-				if (abs(values[0] - values[1]) < 0.01) cout << "\n\tthe values are almost equal.\n";
+		if (switcher) 
+		{
+			if (values[0] == values[1]) 
+				cout 
+					<< "\n\tlengths are equal.\n";
+			else 
+			{
+				cout 
+					<< "\n\tthe smaller value is " 
+					<< min(values[0], values[1]) 
+					<< "\n\tthe larger values is " 
+					<< max(values[0], values[1]);
+				
+				if (abs(values[0] - values[1]) < 0.01) 
+					cout 
+						<< "\n\tthe values are almost equal.\n";
 			}
 		}
 		switcher = !switcher;
@@ -695,68 +723,112 @@ void computation_drill09() {
 	double
 		minimum = numeric_limits<double>::max(),
 		maximum = numeric_limits<double>::min(),
-		values[3];
-	bool switcher{ false };
-	vector<string> unitCodeBook{ "cm", "in", "ft","m" };
-	vector<double> unitConversionBook{ 1, 2.54, 2.54 * 12., 100. };
-	vector<double>allValues{};
-	string input;
-	int	inputParseIndex, unitIndex;
+		values[3]{};
+	bool 
+		switcher{ false };
+	vector<string> 
+		unitCodeBook{ "cm", "in", "ft","m" };
+	vector<double> 
+		unitConversionBook{ 1, 2.54, 2.54 * 12., 100. },
+		allValues{};
+	string 
+		input;
+	int	
+		//inputParseIndex, 
+		unitIndex;
 
-	auto allowedUnit = [&]() -> bool {
+	auto allowedUnit = [&]() -> bool 
+	{
 		for (unitIndex = 0; unitIndex < unitCodeBook.size(); ++unitIndex)
 			if (input.find(unitCodeBook[unitIndex]) < input.size())
 				return true;
 		return false;
 	};
-	while (cin >> input && allowedUnit()) {
+	while (cin >> input && allowedUnit()) 
+	{
 
 		values[switcher] = (stod(input) * unitConversionBook[unitIndex]) / 100.;
 		values[2] += values[switcher];
 		allValues.push_back(values[switcher]);
 
-		if (values[switcher] < minimum) {
+		if (values[switcher] < minimum) 
+		{
 			minimum = values[switcher];
-			cout << "\n\t" << values[switcher] << " is the smallest so far.";
+			cout 
+				<< "\n\t" 
+				<< values[switcher] 
+				<< " is the smallest so far.";
 		}
-		if (values[switcher] > maximum) {
+		if (values[switcher] > maximum) 
+		{
 			maximum = values[switcher];
-			cout << "\n\t" << values[switcher] << " is the largest so far.";
+			cout 
+				<< "\n\t" 
+				<< values[switcher] 
+				<< " is the largest so far.";
 		}
-		if (switcher) {
-			if (values[0] == values[1]) cout << "\n\tlengths are equal.\n";
-			else {
-				cout << "\n\tthe smaller value is " << min(values[0], values[1]) << "\n\tthe larger values is " << max(values[0], values[1]);
-				if (abs(values[0] - values[1]) < 0.01) cout << "\n\tthe values are almost equal.\n";
+		if (switcher) 
+		{
+			if (values[0] == values[1]) 
+				cout 
+					<< "\n\tlengths are equal.\n";
+			else 
+			{
+				cout 
+					<< "\n\tthe smaller value is " 
+					<< min(values[0], values[1]) 
+					<< "\n\tthe larger values is " 
+					<< max(values[0], values[1]);
+
+				if (abs(values[0] - values[1]) < 0.01) 
+					cout 
+						<< "\n\tthe values are almost equal.\n";
 			}
 		}
 		switcher = !switcher;
 	}
 	sort(allValues);
 	cout
-		<< "\n\tthe smallest value : " << minimum
-		<< "\n\tthe largest value : " << maximum
-		<< "\n\tThe sum of all values : " << values[2]
+		<< "\n\tthe smallest value : " 
+		<< minimum
+		<< "\n\tthe largest value : " 
+		<< maximum
+		<< "\n\tThe sum of all values : " 
+		<< values[2]
 		<< "\n\tall entered values (sorted, and converted to meters):\n";
+
 	for (double d : allValues)
-		cout << "\n\t" << d;
-	cout << "\n\n\tBye.\n";
+		cout 
+			<< "\n\t" << d;
+	cout 
+		<< "\n\n\tBye.\n";
 
 }
 
-void computation_exc02() {
-
-	vector<double>temps;
-	for (double temp; cin >> temp;)	temps.push_back(temp);
-	int length = temps.size();
-	if (length == 0) return;
+void computation_exc02() 
+{
+	vector<double>
+		temps;
+	for (double temp; cin >> temp;)	
+		temps.push_back(temp);
+	int 
+		length = narrow_cast<int>(temps.size());
+	if (length == 0) 
+		return;
 	sort(temps);
-	cout << "\n\n\t";
-	for (double t : temps) cout << t << " , ";
+	cout 
+		<< "\n\n\t";
+	for (double t : temps) 
+		cout 
+			<< t 
+			<< " , ";
 
-	cout << endl
+	cout 
+		<< endl
 		<< "\n\tmedian = "
-		<< ((length & 1) ? (temps[length / 2]) : (temps[(length >> 1) - 1] + temps[length >> 1]) / 2.)
+		<< ((length & 1) 
+			? (temps[length / 2]) 
+			: (temps[(length >> 1) - 1] + temps[length >> 1]) / 2.)
 		<< endl;
 }
 
@@ -777,7 +849,7 @@ void computation_exc03() {
 
 	sort(distances);
 	cout << "\n\tthe smallest distance is " << distances[0];
-	cout << "\n\tthe largest distance is  " << distances[distances.size() - 1];
+	cout << "\n\tthe largest distance is  " << distances[narrow_cast<unsigned int>(distances.size()) - 1];
 
 	double average{ 0 };
 	for (double d : distances) average += d;
@@ -857,12 +929,25 @@ void computation_exc05() {
 			break;
 		case'/':;
 		case':':
-			result = value2 == 0 ? NAN : value1 / value2;
+			result = 
+				value2 == 0 
+				? narrow_cast<double>(NAN) 
+				: double(value1) / double(value2);
 			break;
 		default:
-			cout << "\n\n\tsomething went wrong with the operation sign, start all over again unles You've enough - then ctrl-z will is the solution./n";
+			cout 
+				<< "\n\n\tsomething went wrong with the operation sign, start all over again unles You've enough - then ctrl-z will is the solution./n";
 		}
-		cout << "\n\n\t the " << names[s.find(operation)] << " of " << value1 << " and " << value2 << " is " << result << " .\n";
+		cout 
+			<< "\n\n\t the " 
+			<< names[s.find(operation)] 
+			<< " of " 
+			<< value1 
+			<< " and " 
+			<< value2 
+			<< " is " 
+			<< result 
+			<< " .\n";
 	}
 
 }
@@ -954,7 +1039,7 @@ void computation_exc07() {
 			break;
 		case'/':;
 		case':':
-			result = value2 == 0 ? NAN : value1 / value2;
+			result = narrow_cast<int>(value2 == 0 ? narrow_cast<double>(NAN) : double(value1) / double(value2));
 			break;
 		default:
 			cout << "\n\n\tsomething went wrong with the operation sign, start all over again unles You've enough - then ctrl-z will is the solution./n";
@@ -969,8 +1054,13 @@ void computation_exc08() {
 		aimValue{ 0 };
 	cin >> aimValue;
 	int i = 0;
-	for (; (1 << i) < aimValue / 2.; ++i) cout << "\n\t" << (1 << i);
-	cout << "\n\n\t" << i;
+	for(; narrow_cast<double>(int(1) << i) < aimValue / 2.; ++i)
+		cout 
+			<< "\n\t" 
+			<< (1 << i);
+	cout 
+		<< "\n\n\t" 
+		<< i;
 }
 
 void computation_exc09() {
@@ -1162,7 +1252,7 @@ void computation_exc16() {
 	vector<mode> modes{ mode(-1) };
 
 	for (int i : series) {
-		int index = modes.size() - 1;
+		int index = narrow_cast<int>(modes.size()) - 1;
 		mode& thisMode = (modes[index]);
 
 		if (i == thisMode.element)
@@ -1186,52 +1276,81 @@ void computation_exc16() {
 
 void computation_exc17() {
 
-	int length{ 8 }, population{ 16 };
-	//length = rand()% (length - 1);
-	//population = (rand() % (population / 2)) + population / 2;
-
-	vector<string> strings;
+	int 
+		length{ 8 }, 
+		population{ 16 };
+	vector<string> 
+		strings;
 
 	// populating the strings vector
-	for (int i = 0; (i < population); ++i) {
-		string s{ "" };
-		for (int j = 0; j < length; ++j) {
-			char c = (rand() % ('z' - 'a')) + 'a';
+	for (int i = 0; (i < population); ++i) 
+	{
+		string 
+			s{ "" };
+		for (int j = 0; j < length; ++j) 
+		{
+			char 
+				c = (rand() % ('z' - 'a')) + 'a';
 			s += c;
 		}
-		cout << "\n\t" << s;
+		cout 
+			<< "\n\t" 
+			<< s;
 	}
 	sort(strings);	
-	cout << "\n\tmin " << strings[0] << "\t\tmax" << strings[strings.size() - 1] << endl;
+	cout 
+		<< "\n\tmin " 
+		<< strings[0] 
+		<< "\t\tmax" 
+		<< strings[narrow_cast<int>(strings.size()) - 1] 
+		<< endl;
 
 	//...
 }
 
 void computation_exc18() {
 
-	double a, b, c;
+	double 
+		a, b, c;
 
-	while (cin >> a >> b >> c) {
+	while (cin >> a >> b >> c) 
+	{
+		double 
+			discriminant = (b * b) - 4 * a * c;
+		cout 
+			<< endl;
+		switch ((discriminant > 0) - (discriminant < 0)) 
+		{
 
-		double discriminant = (b * b) - 4 * a * c;
-
-		cout << endl;
-		switch ((discriminant > 0) - (discriminant < 0)) {
-
-		case 1: {
-			double root = sqrt(discriminant), denominator = a * 2;
-			cout << "\n\t" << ((-b + root) / denominator);
-			cout << "\t" << ((-b - root) / denominator) << endl;
-			break;
+			case 1: 
+			{
+				double 
+					root = sqrt(discriminant), denominator = a * 2;
+				cout 
+					<< "\n\t" 
+					<< ((-b + root) / denominator);
+				cout 
+					<< "\t" 
+					<< ((-b - root) / denominator) 
+					<< endl;
+				break;
+			}
+			case 0: 
+			{
+				cout 
+					<< "\n\t" 
+					<< (-b / (a * 2)) 
+					<< endl;
+				break;
+			}
+			case -1:
+				cout 
+					<< "\n\t" 
+					<< "no solutions in a real number domain" 
+					<< endl;
 		}
-		case 0: {
-			cout << "\n\t" << (-b / (a * 2)) << endl;
-			break;
-		}
-		case -1:
-			cout << "\n\t" << "no solutions in a real number domain" << endl;
-		}
-		cout << "\n\tagain ?\n";
+		cout 
+			<< "\n\tagain ?\n";
 	}
 
 }

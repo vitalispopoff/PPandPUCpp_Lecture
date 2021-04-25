@@ -582,15 +582,189 @@ namespace ch09_exc05
 	}
 }
 
+namespace ch09_exc13
+{
+	//	--------------------------------------------	class Rational
+	Rational::Rational() {}
+
+	Rational::Rational(long n, long d = 1)
+		: numerator{n}, denominator{denyZero(d)} {}
+
+	double	Rational::getValue	() const
+	{
+		return double(numerator) / double(denominator);
+	}
+
+	long	Rational::denyZero	(long d)
+	{
+		if(d == 0)
+			throw Invalid();
+		return d;	
+	}
+
+	Rational	operator +	(Rational left, const Rational & rite)
+	{
+		if (left.getDenominator() != rite.getDenominator())
+		{
+		left.setNumerator(left.getNumerator() * rite.getDenominator() + rite.getNumerator() * left.getDenominator());
+		left.setDenominator(left.getDenominator() * rite.getDenominator());
+		}
+		else 
+			left.setNumerator(left.getNumerator() + rite.getNumerator());
+		return left;
+	}
+	Rational	operator +	(Rational left, long rite)
+	{		
+		left.setNumerator(left.getDenominator() * rite + left.getNumerator());
+		return left;
+	}
+
+	Rational	operator *	(Rational left, const Rational & rite)
+	{
+		left.setNumerator(left.getNumerator() * rite.getNumerator());
+		left.setDenominator(left.getDenominator() * rite.getDenominator());
+		return left;
+	}
+	Rational	operator *	(Rational r, long l)
+	{		
+		r.setNumerator(r.getNumerator() * l);
+		return r;
+	}
+	Rational	operator *	(long l, const Rational & r)
+	{
+		return r * l;
+	}
+
+	Rational	operator -	(const Rational & r1, Rational r2)
+	{
+		return r1 + (r2 * -1);
+	}
+	Rational	operator -	(const Rational & r, long l)
+	{
+		return r + (-l);
+	}
+
+	Rational	operator /	(Rational left, const Rational & rite)
+	{
+		if (rite.getNumerator() == 0)
+			throw Rational::Invalid();
+		left.setNumerator(left.getNumerator() * rite.getDenominator());
+		left.setDenominator(left.getDenominator() * rite.getNumerator());
+		return left;
+	}
+	Rational	operator /	(Rational left, long rite)
+	{
+		if(rite == 0)
+			throw Rational::Invalid();
+		left.setDenominator(left.getDenominator() * rite);
+		return left;
+	}
+	Rational	operator /	(long left, Rational rite)
+	{
+		if (rite.getNumerator() == 0)
+			throw Rational::Invalid();
+		long
+			temp {rite.getDenominator()};
+		rite.setDenominator(rite.getNumerator());
+		rite.setNumerator(temp * left);
+		return rite;
+	}
+
+	bool		operator ==	(const Rational & left, const Rational & rite)
+	{
+		return left.getDenominator() * rite.getNumerator() == left.getNumerator() * rite.getDenominator();
+	}
+	bool		operator ==	(const Rational & left, long rite)
+	{
+		return left.getNumerator() == rite * left.getDenominator();
+	}
+
+	void sketch01()
+	{
+		Rational
+			r1{12,8},
+			r2{7,3};
+		cout 
+			<< "--- sketch01 ---\n"
+			<< r1.getValue()
+			<< endl
+			<< r2.getValue()
+			<<endl;
+	}
+
+	void sketch02()
+	{
+		Rational 
+			r;
+	}
+
+	void sketch03()
+	{
+		long
+			l	{2};
+		Rational 
+			r1	{1},
+			r2	{l + r1},
+			r3	{l * r1};
+		cout
+			<< "--- sketch03 ---\n"
+			<< r2.getValue()
+			<< endl
+			<< r3.getValue()
+			<< endl;
+	}
+
+	void sketch04()
+	{
+		long
+			l	{1};
+		Rational
+			r	{2},
+			temp = r + 1;
+		cout
+			<< "--- sketch04 ---\n"
+			<< "+\n"
+			<< ((l + r) + (r + l)).getValue()
+			<< "\t is it 6?\n-\n"
+			<< ((r - l) - (l - r)).getValue()
+			<< "\tis it 2 ?\n*\n"
+			<< ((l * r) * (r * l)).getValue()
+			<<	"\tis it 4?\n/\n"
+			<< ((l / r) / (r / l)).getValue()
+			<< "\tis it 0.25?\n"
+			<< ((r / l) / (l / r)).getValue()
+			<< "\tis it 4?\n"
+			;
+	}
+
+	void sketch05()
+	{
+		long 
+			l	{1};
+		Rational
+			r	{5, 5};
+		cout
+			<< "--- sketch05 ---\n"
+			<< (r == l)
+			<< endl
+			<< (l == r)
+			<< endl;
+	}
+
+}
+
 void ch09Excercises()
 {
-	//ch09_exc02::exc02();
+	//using namespace ch09_exc05;
+	//ch09_exc05::sketch01();
+	//ch09_exc05::sketch02();
+	//ch09_exc05::sketch03();
+	//ch09_exc05::sketch04();
 
-	using namespace ch09_exc05;
-
-	//sketch01();
-	//sketch02();
-	//sketch03();
+	using namespace ch09_exc13;
+	sketch01();
+	sketch02();
+	sketch03();
 	sketch04();
-
+	//sketch05();
 }

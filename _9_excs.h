@@ -187,3 +187,34 @@ namespace ch09_exc05
 
 	//	--------------------------------------------	
 }
+
+namespace ch09_exc13
+{
+
+	//	--------------------------------------------	
+
+	class Rational
+	{
+		public:
+			class Invalid{};
+
+			Rational();
+			Rational(long n,long d);
+
+			double	getValue		() const ;
+			long	getNumerator	() const	{ return numerator;}
+			long	getDenominator	() const	{ return denominator;}
+			void	setNumerator	(long n){ numerator = n;}
+			void	setDenominator	(long d){ denominator = d;}
+
+		private:
+			long
+				numerator{0},
+				denominator{1};
+		
+			long denyZero(long);		
+	};
+
+	//	--------------------------------------------	
+
+}

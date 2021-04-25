@@ -97,8 +97,8 @@ namespace Ch8_lib
 	vector<int>getSwappedVector(vector<int>v)
 	{
 		int 
-			length = v.size() >> 1,
-			last = v.size() - 1;
+			length = narrow_cast<int>(v.size()) >> 1,
+			last = narrow_cast<int>(v.size()) - 1;
 		for (int i = 0; i < length ; ++i)
 		{
 			int 
@@ -112,8 +112,8 @@ namespace Ch8_lib
 	void vectorSwap(vector<int> &v)
 	{
 		int
-			length = v.size() >> 1,
-			last = v.size() - 1;
+			length = narrow_cast<int>(v.size()) >> 1,
+			last = narrow_cast<int>(v.size()) - 1;
 		for(int i = 0; i < length ; ++i)
 		{
 			int 
@@ -157,8 +157,8 @@ namespace Ch8_lib
 	vector<string>getSwappedStrings(vector<string>v)
 	{
 		int
-			length = v.size() >> 1,
-			last = v.size() - 1;
+			length = narrow_cast<int>(v.size()) >> 1,
+			last = narrow_cast<int>(v.size()) - 1;
 		for (int i = 0; i < length; ++i)
 		{
 			string 
@@ -172,8 +172,8 @@ namespace Ch8_lib
 	void stringsSwap(vector<string> &v)
 	{
 		int
-			length = v.size() >> 1,
-			last = v.size() - 1;
+			length = narrow_cast<int>(v.size()) >> 1,
+			last = narrow_cast<int>(v.size()) - 1;
 		for (int i = 0; i < length; ++i)
 		{
 			string s = v[i];
@@ -370,12 +370,12 @@ namespace Ch8_lib
 			result;		
 		sort(v.begin(), v.end());
 		int
-			last = v.size() - 1,
-			middle = v.size() >> 1;
+			last = narrow_cast<int>(v.size()) - 1,
+			middle = narrow_cast<int>(v.size()) >> 1;
 		result.minimum = double (v[0]);
 		result.maximum = double (v[last]);		
 		result.median = last & 1 
-			? 0.5 * double (v[middle] + v[middle - 1])
+			? 0.5 * (double(v[middle]) + double(v[middle - 1]))
 			: double (v[middle]);
 		result.mean = 0.;
 		for(int i : v)
@@ -484,7 +484,7 @@ namespace Ch8_lib
 			<< v[0]
 			<< lineBreak
 			<< "last:\t"
-			<< v[v.size() - 1]
+			<< v[narrow_cast<unsigned int>(v.size()) - 1]
 			<< endl;
 	}
 
@@ -516,7 +516,7 @@ namespace Ch8_lib
 		vector<int>
 			lengths;
 		for(string s : v)
-			lengths.push_back(s.size());
+			lengths.push_back(narrow_cast<int>(s.size()));
 		return lengths;
 	}
 		

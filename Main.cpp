@@ -16,8 +16,9 @@ int main() {
 
 	//srand(time(NULL));
 	//ch09Main();
-	//ch09Excercises();
-	chronosMain();
+	ch09Excercises();
+	//chronosMain();
+
 
 	return 0;
 	
