@@ -585,10 +585,12 @@ namespace ch09_exc05
 namespace ch09_exc13
 {
 	//	--------------------------------------------	class Rational
-	Rational::Rational() {}
+	Rational::Rational() 
+	{}
 
 	Rational::Rational(long n, long d = 1)
-		: numerator{n}, denominator{denyZero(d)} {}
+		: numerator{n}, denominator{denyZero(d)} 
+	{}
 
 	double	Rational::getValue	() const
 	{
@@ -753,18 +755,91 @@ namespace ch09_exc13
 
 }
 
+namespace ch09_exc14
+{
+
+	//	--------------------------------------------	class Money
+	
+	Money::Money()
+		: cents{0}
+	{}
+
+	Money::Money(double d)
+		: cents{doubleToCents(d)}
+	{}
+
+	double Money::getMoney()
+	{
+		return centsToDouble(cents);
+	}
+
+	void Money::setMoney(double d)
+	{
+		cents = doubleToCents(d);
+	}
+
+	double Money::centsToDouble(long l)
+	{
+		if(l > 0x7F'FFFF'FFFF'FFFF)
+		{
+			cout 
+				<< "that exceeds the double mantissa word length, what's now?";
+			return 0.;
+		}
+		return 0.01 * narrow_cast<double>(l);
+	}
+
+	long Money::doubleToCents(double d)
+	{
+		
+		return narrow_cast<long>(round(d * 100));
+	}
+	
+	void sketch01()
+	{
+		// Money::<long>cents set to public.
+
+		Money
+			m1,
+			m2{1},
+			m3{0.995},
+			m4{0.9949};
+		cout 
+			<< "\n{}\t\t"
+			<< m1.cents
+			<< "\t"
+			<< m2.getMoney()
+			<< "\n{1}\t\t"
+			<< m2.cents
+			<< "\t"
+			<< m2.getMoney()
+			<< "\n{0.995}\t\t"
+			<< m3.cents
+			<< "\t"
+			<< m3.getMoney()
+			<< "\n{0.9949}\t"
+			<< m4.cents
+			<< "\t"
+			<< m4.getMoney()
+			<< endl;		
+	}
+}
+
+
 void ch09Excercises()
 {
-	//using namespace ch09_exc05;
 	//ch09_exc05::sketch01();
 	//ch09_exc05::sketch02();
 	//ch09_exc05::sketch03();
 	//ch09_exc05::sketch04();
 
-	using namespace ch09_exc13;
+	//ch09_exc13::sketch01();
+	//ch09_exc13::sketch02();
+	//ch09_exc13::sketch03();
+	//ch09_exc13::sketch04();
+	//ch09_exc13::sketch05();
+
+	using namespace ch09_exc14;
+
 	sketch01();
-	sketch02();
-	sketch03();
-	sketch04();
-	//sketch05();
 }

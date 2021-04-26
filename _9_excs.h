@@ -218,3 +218,35 @@ namespace ch09_exc13
 	//	--------------------------------------------	
 
 }
+
+namespace ch09_exc14
+{
+
+	class Money
+	{
+		public:
+			Money();
+			Money(double);
+
+			double	getMoney();
+			void	setMoney(double);
+
+		//private:
+			long cents;
+
+		/*
+			converts long cents to double representation of money,
+			doesn't care about previewing additional decimal places.
+			does limit the min/max values to the length of double mantissa
+			in order to meet the rounding rule requirement.
+			For the exponent values exceeding length of the mantissa (52),
+			the double cant't keep the increment of value within 0.5, 
+			which breaks the rounding requirement.
+			The accepted max/min range should be probably limited by another bit,
+			to make sure the rounding process makes even sense...	
+		*/
+		double	centsToDouble(long);
+		long	doubleToCents(double);
+	};
+
+}
