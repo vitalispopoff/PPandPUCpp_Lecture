@@ -25,6 +25,12 @@
     <Filter Include="Source Files\_1_Basics\_9_moreTechnicalities">
       <UniqueIdentifier>{f36c2ca2-f8ab-4152-908c-de8066bfba05}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\_2_I_O">
+      <UniqueIdentifier>{b43a7d5a-2de3-4523-83e7-fb1860a90024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\_2_I_O">
+      <UniqueIdentifier>{583b9aa3-3c83-4326-a374-efab81005cf8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -78,6 +84,9 @@
     <ClCompile Include="chronos.cpp">
       <Filter>Source Files\_1_Basics\_9_moreTechnicalities</Filter>
     </ClCompile>
+    <ClCompile Include="_1_IOStreams.cpp">
+      <Filter>Source Files\_2_I_O</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -106,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="chronos.h">
       <Filter>Header Files\_1_Basics</Filter>
+    </ClInclude>
+    <ClInclude Include="_2_io.h">
+      <Filter>Header Files\_2_I_O</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

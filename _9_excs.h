@@ -1,4 +1,5 @@
 #include <string>
+#include <map>
 #include "_9_more.h"
 
 namespace ch09_exc02
@@ -221,6 +222,39 @@ namespace ch09_exc13
 
 namespace ch09_exc14
 {
+	
+	class Currency
+	{
+		public:
+			static map<string, Currency> 
+				currencies;
+
+			Currency();
+			Currency(string c, string n);
+
+			string	getCode		()	{ return code;}
+			string	getName		()	{ return name;}
+			double	getExchangeRate		()	{ return exchangeRate;}
+			
+			void	setCode		(string c)	{ code = c;}
+			void	setName		(string n)	{ name = n;}
+
+			static Currency & implicit()
+			{
+				static Currency
+					impl{"", ""};
+				return impl;
+			}
+
+		private:
+			string
+				code,
+				name;
+			double
+				exchangeRate;
+	};
+
+	double transaction(Currency, Currency, double);
 
 	class Money
 	{
@@ -233,6 +267,7 @@ namespace ch09_exc14
 
 		//private:
 			long cents;
+			Currency currency;
 
 		/*
 			converts long cents to double representation of money,

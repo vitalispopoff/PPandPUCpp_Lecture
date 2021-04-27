@@ -757,6 +757,15 @@ namespace ch09_exc13
 
 namespace ch09_exc14
 {
+	//	--------------------------------------------	class Currency
+
+	Currency::Currency()
+		: code{ }, name{ }, exchangeRate{1}
+	{}
+	
+	Currency::Currency(string c, string n)
+		: code{c}, name{n}, exchangeRate{1}
+	{}
 
 	//	--------------------------------------------	class Money
 	
@@ -790,10 +799,13 @@ namespace ch09_exc14
 	}
 
 	long Money::doubleToCents(double d)
-	{
-		
+	{		
 		return narrow_cast<long>(round(d * 100));
 	}
+
+
+
+	//	--------------------------------------------
 	
 	void sketch01()
 	{
@@ -823,6 +835,11 @@ namespace ch09_exc14
 			<< m4.getMoney()
 			<< endl;		
 	}
+
+	void sketch02()
+	{
+
+	}
 }
 
 
@@ -841,5 +858,6 @@ void ch09Excercises()
 
 	using namespace ch09_exc14;
 
-	sketch01();
+	//sketch01();
+	sketch02();
 }

@@ -145,6 +145,7 @@
     <ClCompile Include="chronos.cpp" />
     <ClCompile Include="my.cpp" />
     <ClCompile Include="use.cpp" />
+    <ClCompile Include="_1_IOStreams.cpp" />
     <ClCompile Include="_2_hello_world.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="_3_objects_types_values.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="my.h" />
     <ClInclude Include="std_lib_facilities.h" />
     <ClInclude Include="_1_basics.h" />
+    <ClInclude Include="_2_io.h" />
     <ClInclude Include="_8_technicalities.h" />
     <ClInclude Include="_9_excs.h" />
     <ClInclude Include="_9_more.h" />
