@@ -37,6 +37,7 @@ double SymbolTable::get(string s)
 		if(var.name == s)
 			return var.value;
 	error("undefined name for a variable: ",s);
+	return 0;
 }
 
 void SymbolTable::set(string s,double d,bool b)
@@ -168,6 +169,7 @@ Token Token_stream::get()
 				return Token(name,s);
 			};
 			error("Bad token: ");
+			return Token(' ');
 		}
 	}
 }
@@ -247,6 +249,7 @@ double primary(Token_stream &ts, SymbolTable &table)
 
 		default:
 			error("primary expected");
+			return 0;
 	}
 }
 
