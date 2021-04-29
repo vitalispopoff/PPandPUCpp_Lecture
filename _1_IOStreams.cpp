@@ -1,6 +1,7 @@
 #include "std_lib_facilities.h"
 #include <iostream>
 #include "_2_io.h"
+#include <map>
 
 namespace p2_ch10
 {
@@ -844,11 +845,99 @@ namespace p2_ch10
 
 		readFile();
 		printContent();
-
-
 	}
 
-		void IOStreamsMain()
+	#include <algorithm>
+
+	namespace ch10_exc06
+	{
+		map <char,int> 
+			digits{
+				{'i', 1},
+				{'v', 5},
+				{'x',10},
+				{'l',50},
+				{'c',100},
+				{'d',500},
+				{'m',1000}
+			};
+
+		struct Roman_int
+		{
+			string
+				number;
+			int
+				value;
+
+			Roman_int()
+				: value{0}
+			{}
+			Roman_int(string n)
+				: number{n}, value{asInt()}
+			{}
+
+			int asInt();
+		};
+
+		istream & operator >> (istream & is, Roman_int & r)
+		{
+			string
+				temp;
+			is 
+				>> temp;
+			for(char c : temp)
+				if(digits[c] == 0)
+					error("not a proper roman integer");
+			r.number = temp;
+			return is;
+		}
+
+		ostream & operator << (ostream & os, const Roman_int & r)
+		{
+			os 
+				<< r.number;
+			return os;
+		}
+
+		int Roman_int::asInt()
+		{
+			string
+				reversedNumber {number};
+			reverse(reversedNumber.begin(), reversedNumber.end());
+			
+			int 
+				result{0};
+			char
+				previous{' '};
+			for(char c : reversedNumber)
+			{
+				if(previous != ' ' && digits[previous] > digits[c])
+					result -= digits[c];
+				else
+					result += digits[c];
+				previous = c;
+			}
+			return result;
+		}
+	}
+
+		void excercise06()
+		{
+			using namespace ch10_exc06;
+
+			Roman_int
+				n;
+			cin
+				>> n;
+			cout
+				<< "Roman "
+				<< n 
+				<< " equals "
+				<< n.asInt()
+				<< endl;
+		}
+
+	void IOStreamsMain()
 		{
 			//ch10_drill01::write();
 			//ch10_drill01::read();
@@ -857,8 +946,8 @@ namespace p2_ch10
 			//cout << ch10_exc01::sumFile();
 
 			//excercise02sqq();
-			excercise04();
+			//excercise04();
+			excercise06();
 
 		}
-
 }
