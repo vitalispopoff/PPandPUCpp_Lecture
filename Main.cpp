@@ -3,7 +3,7 @@
 
 int main() {
 
-	//srand(time(NULL));
+	srand(narrow_cast<int>(time(NULL)));
 
 	IOStreamsMain();
 
