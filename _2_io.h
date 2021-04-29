@@ -1,22 +1,25 @@
 
-namespace ch10_drill01
+namespace p2_ch10
 {
-	class Point
+	namespace ch10_drill01
 	{
-		public:
-			static Point & addPoint(int, int);
+		class Point
+		{
+			public:
+				static Point & addPoint(int, int);
 			
-			int
-				x, y;
-			Point (int, int);
+				int
+					x, y;
+				Point (int, int);
 		
-		private:
-			Point ();
-	};
+			private:
+				Point ();
+		};
 
-	ostream & operator << (ostream &, const Point &);
+		ostream & operator << (ostream &, const Point &);
 
-	void drill();
-}
+		void drill();
+	}
 
 void IOStreamsMain();
+}

@@ -1,5 +1,7 @@
 #include "std_lib_facilities.h"
 
+namespace p01_03
+{
 void hiYetAgain() {
 
 	cout << "\n\tPlease enter your first name and hit 'Enter'.\n\t";
@@ -436,7 +438,8 @@ void excercise10() {
 		};
 		case '/':;
 		case ':': {
-			if (val2 == 0) result = NAN;
+			if(val2 == 0) 
+				return;
 			else result /= val2;
 			break;
 		}
@@ -496,11 +499,11 @@ void excercise11() {
 	cout << "\n\n\t which gives a neatly round sum of " << (pennies + 5. * nickles + 10. * dimes + 25. * quarters + 50. * halves + dollars) / 100. << " dollaz.\n";
 }
 
-
-
+}
 
 void objectsTypesValues() {
 
+	using namespace p01_03;
 	//hiYetAgain();
 	//avoidingSpace();
 	//operationsOperators();

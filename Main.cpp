@@ -5,7 +5,7 @@ int main() {
 
 	srand(narrow_cast<int>(time(NULL)));
 
-	IOStreamsMain();
+	p2_ch10::IOStreamsMain();
 
 
 	return 0;
