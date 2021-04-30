@@ -6,7 +6,7 @@
 namespace p2_ch10
 {
 
-	void enterString(string &s,string name)
+	void enterString(string & s, string name)
 	{
 		if(s == "")
 		{
@@ -847,8 +847,6 @@ namespace p2_ch10
 		printContent();
 	}
 
-	#include <algorithm>
-
 	namespace ch10_exc06
 	{
 		map <char,int> 
@@ -921,7 +919,7 @@ namespace p2_ch10
 		}
 	}
 
-		void excercise06()
+	void excercise06()
 		{
 			using namespace ch10_exc06;
 
@@ -937,17 +935,93 @@ namespace p2_ch10
 				<< endl;
 		}
 
-	void IOStreamsMain()
+	namespace ch10_exc08
+	{
+		string
+			source1,
+			source2,
+			target;
+		
+		void etnerFiles()
 		{
-			//ch10_drill01::write();
-			//ch10_drill01::read();
-
-			//ch10_exc01::writeFile();
-			//cout << ch10_exc01::sumFile();
-
-			//excercise02sqq();
-			//excercise04();
-			excercise06();
-
+			enterString(source1, "source file 1");
+			enterString(source2, "source file 2");
+			enterString(target, "target file");
 		}
+
+		vector<char>
+			bytes;
+
+		void readFile(string name)
+		{
+			ifstream
+				ifs{name, ios_base::binary};
+			if(!ifs)
+				error("can't open file ", name);
+			while(true)
+			{
+				char 
+					byte;
+				//ifs 
+				//	>> byte;
+				ifs.read(& byte, 1);
+
+				if(ifs.eof())
+					break;
+				bytes.push_back(byte);
+			}
+		}
+		
+		// this is very wrong.
+
+		void writeFile(string name)
+		{
+			ofstream
+				ofs{name, ios::binary | ios::out};
+			if(!ofs)
+				error("can't open file ", name);
+			ofs.write( & bytes[0], bytes.size());
+			ofs.close();
+		}
+	}
+
+	void excercise08()
+	{
+		using namespace ch10_exc08;
+
+		auto readBytes = [&]
+		{
+			for (char byte : bytes)
+				cout
+					<< byte;
+		};
+
+		source1 = "E:\\_LAB\\_C\\PPandPUCpp_Lecture\\_other\\ch10_exc01.txt";
+		source2 = "E:\\_LAB\\_C\\PPandPUCpp_Lecture\\_other\\ch10_exc02.txt";
+		target = "E:\\_LAB\\_C\\PPandPUCpp_Lecture\\_other\\ch10_exc08.txt";
+
+		readFile(source1);
+		readFile(source2);
+		writeFile(target);
+		//readBytes();
+		//cout << bytes.size();
+
+	}
+
+
+	void IOStreamsMain()
+	{
+		//ch10_drill01::write();
+		//ch10_drill01::read();
+
+		//ch10_exc01::writeFile();
+		//cout << ch10_exc01::sumFile();
+
+		//excercise02sqq();
+		//excercise04();
+		//excercise06();
+
+		excercise08();
+
+	}
 }
