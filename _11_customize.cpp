@@ -193,17 +193,114 @@ namespace ch11
 				<< i << n;
 	}
 
-	// but not necessarily since set width function works with floating points too
+	// ...but not necessarily since set width function works with floating points too
 	void example07()
 	{
 		int
+			width{8},
 			i{123456};
 		double
 			d{1234.56789};
+		cout			
+			<< t << '|' << setw(width)		<< i << '|' << n
+			<< t << '|' << setw(width)		<< d << '|' << n
+			<< t << '|' << setw(width / 2)	<< i << '|' << n
+			<< t << '|' << setw(width / 2)	<< d << '|' << n;
+	}
+
+	// ... and strings...?
+	void example08()
+	{
+		int
+			width{8};
+		string
+			s{"asdfg"};
 		cout
-			<< setw(4)
-			<< t << '|' << i << n
-			<< t << '|' << d << n;
+			<< t << '|' << setw(width)		<< s << '|' << n
+			<< t << '|' << setw(width / 2)	<< s << '|' << n;
+	}
+
+	// setw() doesn't stick.
+	void example09()
+	{
+		string
+			s{"asdfg"};
+		cout 
+			<< t << '|' << setw(12)	<< s << '|' << n
+			<< t << '|'				<< s << '|' << n;
+	}
+
+	void tryThis04()
+	{
+		vector<string>
+			names{
+				"zbyszek",
+				"rysiek",
+				"romek",
+				"andrzej",
+				"wacek",
+				"marzena"
+			};
+		vector<double>
+			ages{
+				37,
+				15,
+				3,
+				56,
+				47,
+				28
+			};
+		vector<int>
+			phones{
+				22'623'65'23,
+				49'235'05'21,
+				32'123'53'53,
+				12'501'20'13,
+				85'238'12'56,
+				44'684'40'01
+			};
+		int
+			col1{16},
+			col2{3},
+			col3{12};
+		string
+			beginTop{"\t+"},
+			begin{"\t|"},
+			wallTop{"-+-"},
+			wall{" | "},
+			endTop{"-+\n"},
+			end{" |\n"};
+
+		auto drawLine = [](int length)
+		{
+			for(int i = 0 ; i < length ; ++i)
+				cout << '-';
+		};
+		auto horizon = [&]
+		{
+			cout
+				<< beginTop;
+			drawLine(col1);
+			cout 
+				<< wallTop;
+			drawLine(col2);
+			cout
+				<< wallTop;
+			drawLine(col3);
+			cout
+				<< endTop;
+		};
+
+		horizon();
+		for(int i = 0 ; i < names.size() ; ++i)
+		{
+			cout 
+				<< begin
+				<< setw(col1)	<< names[i]		<< wall 
+				<< setw(col2)	<< ages[i]		<< wall 
+				<< setw(col3)	<< phones[i]	<< end;
+		}
+		horizon();
 	}
 }
 
@@ -218,6 +315,9 @@ void ch11Main()
 	//ch11::tryThis03();
 	//ch11::example05();
 	//ch11::example06();
-	ch11::example07();
+	//ch11::example07();
+	//ch11::example08();
+	//ch11::example09();
+	ch11::tryThis04();
 
 }
