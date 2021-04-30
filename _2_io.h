@@ -21,5 +21,30 @@ namespace p2_ch10
 		void drill();
 	}
 
-void IOStreamsMain();
+	void IOStreamsMain();
 }
+
+/*
+	customizing input and output streams
+*/
+namespace ch11
+{
+	void example01();
+
+	void tryThis01();
+
+	void example02();
+
+	void tryThis02();
+
+	void example03();
+
+	void example04();
+
+	void tryThis03();
+
+	void example05();
+
+}
+
+void ch11Main();

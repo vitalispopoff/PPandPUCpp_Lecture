@@ -84,7 +84,10 @@
     <ClCompile Include="chronos.cpp">
       <Filter>Source Files\_1_Basics\_9_moreTechnicalities</Filter>
     </ClCompile>
-    <ClCompile Include="_1_IOStreams.cpp">
+    <ClCompile Include="_10_IOStreams.cpp">
+      <Filter>Source Files\_2_I_O</Filter>
+    </ClCompile>
+    <ClCompile Include="_11_customize.cpp">
       <Filter>Source Files\_2_I_O</Filter>
     </ClCompile>
   </ItemGroup>

@@ -5,8 +5,9 @@ int main() {
 
 	srand(narrow_cast<int>(time(NULL)));
 
-	p2_ch10::IOStreamsMain();
+	//p2_ch10::IOStreamsMain();
 
+	ch11Main();
 
 	return 0;
 	
