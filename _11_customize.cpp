@@ -302,6 +302,67 @@ namespace ch11
 		}
 		horizon();
 	}
+
+	// fun with files
+
+	void example10()
+	{
+		cout
+			<< "enter input file name\n";
+		string
+			iname;
+		cin
+			>> iname;
+		ifstream
+			ifs {iname, ios_base::binary};
+		if (!ifs)
+			error("cant open input file ", iname);
+		cout 
+			<< "enter output file name\n";
+		string
+			oname;
+		cin
+			>> oname;
+		ofstream
+			ofs {oname, ios_base::binary};
+		if (!ofs)
+			error("can't open output file ", oname);
+		vector<int>
+			v;
+		for (int x; ifs.read(as_bytes(x), sizeof(int)); )	// as_bytes() needs more explanation
+			v.push_back(x);
+		for (int x : v)
+			ofs.write(as_bytes(x), sizeof(int));
+	}
+
+	void example11()
+	{
+		string
+			address {"E:\\_LAB\\_C\\PPandPUCpp_Lecture\\_other\\"},
+			name {"ColdGrits_ItsYourThing.wav"};
+		ifstream
+			ifs	{address + name, ios_base::binary};
+		if (!ifs)
+			error("can't open ", name);
+		int
+			//mainHeader,
+			//riff{0x4646'4952},
+			fileSize{0};
+		//ifs.read(as_bytes(mainHeader), 4);
+		//if (mainHeader == riff)
+		//{
+			ifs.seekg(4);
+			ifs.read(as_bytes(fileSize), 4);
+			vector<char>
+				bytes;
+			bytes.resize(fileSize);
+			ifs.seekg(0);
+				ifs.read(as_bytes(bytes), fileSize);
+
+		//}
+
+
+	}
 }
 
 void ch11Main()
@@ -318,6 +379,7 @@ void ch11Main()
 	//ch11::example07();
 	//ch11::example08();
 	//ch11::example09();
-	ch11::tryThis04();
+	//ch11::tryThis04();
+	//ch11::example11();
 
 }
