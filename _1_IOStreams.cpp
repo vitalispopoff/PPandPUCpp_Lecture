@@ -1008,6 +1008,41 @@ namespace p2_ch10
 
 	}
 
+	namespace ch10_exc11
+	{
+		string
+			sourceFile = "E:\\_LAB\\_C\\PPandPUCpp_Lecture\\_other\\ch10_exc11.txt";
+
+		int readFile()
+		{
+			ifstream
+				ifs{sourceFile};
+			if(!ifs)
+				error("can't open file ", sourceFile);
+
+			int
+				result{0};
+			double 
+				d{0};
+			while(true)
+			{
+				if(isdigit(ifs.peek()))
+				{
+					ifs 
+						>> d;
+					//if( floor(d) == d) result += narrow_cast<int>(d);
+					double
+						flag{double(floor(d) == d)};
+					result += (narrow_cast<int>(d * flag));	
+				}
+				if (ifs.eof())
+					break;
+				else
+					ifs.ignore(1);
+			}
+			return result;
+		}
+	}
 
 	void IOStreamsMain()
 	{
@@ -1021,7 +1056,8 @@ namespace p2_ch10
 		//excercise04();
 		//excercise06();
 
-		excercise08();
+		//excercise08();
+		cout << ch10_exc11::readFile();
 
 	}
 }
