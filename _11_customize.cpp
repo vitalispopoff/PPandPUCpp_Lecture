@@ -441,7 +441,7 @@ namespace ch11
 	}
 
 	// dealing with special characters
-	namespace exapmle17
+	namespace example17
 	{
 		//	bad solution 
 
@@ -486,6 +486,7 @@ namespace ch11
 				bool	is_whitespace		(char c);
 
 				Punct_stream & operator >> (string & s);
+				operator bool();
 
 			private:
 				istream 
@@ -510,24 +511,55 @@ namespace ch11
 		{
 			while (!(buffer >> s))					// fail reading from buffer
 			{
-				if (buffer.bad() || !source.good())
+				if (buffer.bad() || !source.good())	// fail in reading at all
 					return * this;					// err C2102, C2440 : must be a lvalue (hence not passing by value E0461 or by reference E0158), or function designator (hence passing by the pointer)
 				
-				buffer.clear();
+				buffer.clear();						// reset buffer	 (because we're here due to the (buffer >> s) fail)
 				string
 					line;
-				getline(source, line);
+				getline(source, line);				// intercept string from the other stream source - freezes as the cin input string gets to its end TODO.
 
-				for (char & c : line)
+				for (char & c : line)				// inspect string
 				{
+					if (c == ' ')					// skip the whitespace
+						continue;
 					if (is_whitespace(c))
-						c = ' ';
-					else if (!sensitive)
+						c = ' ';					// rewrite according to the whitespace list
+					else if (!sensitive)			// this a bit unclear - converting to lowercase if stream is set to DGaF ?
 						c = tolower(c);
 				}
-				buffer.str(line);					// copies line to buffer
+				buffer.str(line);					// copies string to the buffer
 			}
-			return * this;
+			return * this;							// returns buffer
+		}
+
+		Punct_stream::operator bool()
+		{
+			bool											// can source be good and bad or failed simultanously?
+				failOrBad = source.fail() || source.bad();
+			return source.good() && !failOrBad;
+		}
+
+		void final()
+		{
+			Punct_stream 
+				ps {cin};
+			ps.whitespace(";:,.?!()\"{}<>/&$@#%^*|~");
+			ps.case_sensitive(false);
+
+			cout
+				<< "please enter words\n";
+			vector<string>
+				vs {};
+			for (string word; ps >> word; )
+				vs.push_back(word);
+			sort(vs.begin(), vs.end());
+
+			for (int i = 0; i < vs.size(); ++i)
+				if (i == 0 || vs[i] != vs[i - 1])
+					cout
+						<< vs[i]
+						<< '\n';
 		}
 	}
 }
@@ -550,7 +582,9 @@ void ch11Main()
 	//ch11::example11();
 	//ch11::example12();
 	//ch11::example13();
-	ch11::example16();
+	//ch11::example16();
+
+	ch11::example17::final();
 	
 
 }
