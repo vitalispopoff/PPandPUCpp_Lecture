@@ -1,13 +1,10 @@
 #include "std_lib_facilities.h"
 
-/*
-	exc 6
-
-	write help section available at 'H' and 'h'
-
-
-namespace _7_drill
+namespace ch07_drill
 {
+
+	//exc 6
+	//write help section available at 'H' and 'h'
 
 	void getHelp()
 	{
@@ -24,20 +21,26 @@ namespace _7_drill
 	struct Variable
 	{
 		public:
-			string name;
-			double value;
-			bool readOnly;
+			string 
+				name;
+			double 
+				value;
+			bool 
+				readOnly;
 		
-			Variable(string n, double v) : name(n), value(v), readOnly(false) {}
-			Variable(string n, double v, bool b) : name(n), value(v), readOnly(b) {}
+			Variable(string n, double v) 
+				: name(n), value(v), readOnly(false) 
+			{}
+			Variable(string n, double v, bool b) 
+				: name(n), value(v), readOnly(b) 
+			{}
 	};
-
-
 
 	class SymbolTable
 	{
 		private:
-			vector<Variable> varTable;
+			vector<Variable> 
+				varTable;
 
 		public:
 			double get(string);
@@ -53,6 +56,7 @@ namespace _7_drill
 		for (Variable var : varTable)
 			if (var.name == s)
 				return var.value;
+
 		error("undefined name for a variable: ", s);
 	}
 
@@ -61,7 +65,8 @@ namespace _7_drill
 		for (Variable &var : varTable)
 		{
 			if (var.readOnly)
-				cout << "\n\tThis variable is read-only.\n";
+				cout 
+					<< "\n\tThis variable is read-only.\n";
 			else
 			{
 				var.value = d;
@@ -85,38 +90,50 @@ namespace _7_drill
 		varTable.push_back(v);
 	}
 
-
-
 	//const char help		{'H'};
-	const char let		{'L'};
-	const char name		{'a'};
-	const char number	{'8'};
-	const char print	{';'};
-	const char power	{'P'};
-	const char quit		{'Q'};
-	const char remember	{'#'};
-	const char root		{'R'};
+	const char 
+		let			{'L'},
+		name		{'a'},
+		number		{'8'},
+		print		{';'},
+		power		{'P'},
+		quit		{'Q'},
+		remember	{'#'},
+		root		{'R'};
 
 	struct Token
 	{
 		public:
-			char kind;
-			double value {0.};
-			string tokenName;
+			char 
+				kind;
+			double 
+				value {0.};
+			string 
+				tokenName;
 
-			Token(char ch) : kind(ch) {}
-			Token(char ch,double val) : kind(ch), value(val) {}
-			Token(char ch,string s) : kind(ch), value{0}, tokenName(s) {}
+			Token(char ch) 
+				: kind(ch) 
+			{}
+			Token(char ch,double val) 
+				: kind(ch), value(val) 
+			{}
+			Token(char ch,string s) 
+				: kind(ch), value{0}, tokenName(s) 
+			{}
 	};
 
 	class Token_stream
 	{
 		private:
-			bool full;
-			Token buffer;
+			bool 
+				full;
+			Token 
+				buffer;
 
 		public:
-			Token_stream() : full{false}, buffer(0) {}
+			Token_stream() 
+				: full{false}, buffer(0) 
+			{}
 
 			void unget(Token);
 			Token get();
@@ -138,8 +155,10 @@ namespace _7_drill
 			full = false;
 			return buffer;
 		}
-		char c;
-		cin >> c;
+		char 
+			c;
+		cin 
+			>> c;
 		switch (c)
 		{
 			case '('	:	case '+'	:	case '*'	:
@@ -153,14 +172,17 @@ namespace _7_drill
 				if (c == '.' || isdigit(c))
 				{
 					cin.unget();
-					double d;
-					cin >> d;
+					double 
+						d;
+					cin 
+						>> d;
 					return Token(number,d);
 				};
 
 				if (c == '_' || isalpha(c))
 				{
-					string s;
+					string 
+						s;
 					s += c;
 					while (cin.get(c) && (isalpha(c) || isdigit(c) || c == '_'))	// this needs serious refactoring
 						s += c;
@@ -183,10 +205,8 @@ namespace _7_drill
 						getHelp();
 						return ts.get();
 					}
-
 					return Token(name,s);
 				};
-
 				error("Bad token: ");
 			}
 		}
@@ -198,69 +218,65 @@ namespace _7_drill
 		if (c== buffer.kind)
 			return;
 
-		char input;
+		char 
+			input;
 		while(cin >> input)
 			if (input == c)		
 				return;
 	}
 
-
-
-
-	double expression();
+	double expression(Token_stream);
 
 	double primary(Token_stream ts)
 	{
-		Token t = ts.get();
+		Token 
+			t = ts.get();
 
 		switch(t.kind)
 		{
 			case '(':
 			{
-				double d;
-				cin>>d;
+				double 
+					d;
+				cin
+					>> d;
 				t = ts.get();
-
 				if(t.kind != ')')
 					error("')' expected");
 				else
 					return d;
-			}
-				
+			}				
 			case '-':
 				return -primary(ts);
-
 			case number:
 				return t.value;
-
 			case root:
 			{
-				double d = primary(ts);
-
+				double 
+					d = primary(ts);
 				if(d < 0)
 					error("positive number for the root expected (imaginary numbers are not supported).");
 				return sqrt(d);
 			}
-
 			case power:
 			{
 				t = ts.get();
 				if(t.kind != '(')
-					error("'(' expected");
-				
-				double d1 = expression();
+					error("'(' expected");				
+				double 
+					d1 = expression(ts);
 				t = ts.get();
 				if(t.kind != ';')	// temporarily into ';'
 					error("';' expected");
 
-				double d2 = expression();
+				double 
+					d2 = expression(ts);
 				t = ts.get();
 				if(t.kind != ')')
 					error("')' expected");
 			
 				return pow(d1, d2);
 			}
-
 			case name:
 				return table.get(t.tokenName);
 
@@ -269,23 +285,25 @@ namespace _7_drill
 		}
 	}
 
-	double term()
+	double term(Token_stream ts)
 	{
-		double d = primary();
+		double 
+			d = primary(ts);
 		while(true)
 		{
-			Token t = ts.get();
+			Token 
+				t = ts.get();
 			switch(t.kind)
 			{
 				case '*' :
-					d *= primary(); break;
+					d *= primary(ts); break;
 
 				case '/' :
 				{
-					double denominator = primary();
+					double 
+						denominator = primary(ts);
 					if(denominator == 0)
 						error("divide by zero");
-
 					d /= denominator;
 					break;
 				}
@@ -299,20 +317,20 @@ namespace _7_drill
 		}
 	}
 
-	double expression()
+	double expression(Token_stream ts)
 	{
-		double d = term();
+		double 
+			d = term(ts);
 		while(true)
 		{
-			Token t = ts.get();
+			Token 
+				t = ts.get();
 			switch(t.kind)
 			{
 				case '+':
-					d += term(); break;
-
+					d += term(ts); break;
 				case '-':
-					d -= term(); break;
-
+					d -= term(ts); break;
 				default:
 				{
 					ts.unget(t);
@@ -322,104 +340,118 @@ namespace _7_drill
 		}
 	}
 
-	double declaration()
+	double declaration(Token_stream ts)
 	{
-		vector<string>messages{
-			"name expected in declaration",
-			" declared twice",
-			"= missing in declaration of ",
-		};
-		Token t1 = ts.get();
+		vector<string>
+			messages
+			{
+				"name expected in declaration",
+				" declared twice",
+				"= missing in declaration of ",
+			};
+		Token 
+			t1 = ts.get();
 
 		if(t1.kind != 'a')
 			error(messages[0]);
 
-		string name = t1.tokenName;
+		string 
+			name = t1.tokenName;
 		if (table.isDeclared(name))
 			error(name, messages[1]);
 
-		Token t2 = ts.get();
+		Token 
+			t2 = ts.get();
 		if(t2.kind != '=')
 			error(messages[2], name);
 
-		double d = expression();
-		Variable v = Variable(name, d);
+		double 
+			d = expression(ts);
+		Variable 
+			v = Variable(name, d);
 		table.declare(v);
 		return d;	 
 	}
 
-	double statement()
+	double statement(Token_stream ts)
 	{
-		Token t = ts.get();
-		bool b {false};
+		Token 
+			t = ts.get();
+		bool 
+			b {false};
 		while(true)
+		{
 			switch(t.kind)
 			{
-
 				case let :		
-					return declaration();
-
+					return declaration(ts);
 				case remember :
 				{
 					t = ts.get();
 					b = true;
 				}
-
 				case name :
 				{
-					char c;
+					char 
+						c;
 					if(cin >> c && c == '=' && table.isDeclared(t.tokenName))
 					{
-						double d = expression();
+						double 
+							d = expression(ts);
 						table.set(t.tokenName, d, b);
 						return table.get(t.tokenName);
 					}
 					cin.unget();
 				}
-
-
 				default:
 				{
 					ts.unget(t);
-					return expression();
+					return expression(ts);
 				}
 			};
+		}
 	}
 
-	const string prompt = "> ";
-	const string result = "= ";
+	const string 
+		prompt = "> ",
+		result = "= ";
 
 	void setConstants()
 	{
 		table.declare(Variable("pi",3.141592628,true));
 	}
 
-
-
-
-	void calculate()
+	void calculate(Token_stream ts)
 	{
 		setConstants();	
 		while(true)
+		{
 			try
-		{
-			cout << prompt;
-			Token t = ts.get();
-			while(t.kind == print)
-				t = ts.get();
+			{
+				cout 
+					<< prompt;
+				Token 
+					t = ts.get();
 
-			if(t.kind == quit)
-				return;
+				while(t.kind == print)
+					t = ts.get();
 
-			ts.unget(t);
-			cout
-				<< result << statement() << endl;
-		}
-		catch(runtime_error &e)
-		{
-			cerr
-				<< e.what() << endl;
-			ts.ignore(print);
+				if(t.kind == quit)
+					return;
+
+				ts.unget(t);
+				cout
+					<< result 
+					<< statement(ts) 
+					<< endl;
+			}
+			catch(runtime_error & e)
+			{
+				cerr
+					<< e.what() 
+					<< endl;
+				ts.ignore(print);
+			}
 		}
 	}
 
@@ -427,28 +459,32 @@ namespace _7_drill
 	{
 		try
 		{
-			calculate();
+			Token_stream 
+				ts{};
+			calculate(ts);
 			return 0;
 		}
-		catch(exception &e)
+		catch(exception & e)
 		{
 			cerr
-				<< "exception: " << e.what() << endl;
-			char c;
-			while(cin >> c && c != ';') {};
-
+				<< "exception: " 
+				<< e.what() 
+				<< endl;
+			char 
+				c;
+			while(cin >> c && c != ';') 
+			{};
 			return 1;
 		}
 		catch(...)
 		{
 			cerr
 				<< "exception\n";
-			char c;
-			while(cin >> c && c != ';') {};
-
+			char 
+				c;
+			while(cin >> c && c != ';') 
+			{};
 			return 2;
 		}
 	}
-
 }
-*/

@@ -3,17 +3,15 @@
 namespace ch11
 {
 	char
-		t{'\t'},
-		n{'\n'};
+		t {'\t'},
+		n {'\n'};
 		string
-			tt{"\t\t"};
-
-	//	bases and cout malipunators
+			tt {"\t\t"};
 
 	void example01()
 	{
 		int
-			i{1234};
+			i {1234};
 		cout
 			<< n << dec << i << t << "(decimal)" 
 			<< n << hex << i << t << "(hexadecimal)" 
@@ -27,9 +25,9 @@ namespace ch11
 	void tryThis01()
 	{
 		int
-			pastYear{2000},
-			thisYear{2021},
-			years{thisYear - pastYear};
+			pastYear {2000},
+			thisYear {2021},
+			years {thisYear - pastYear};
 		cout
 			<< n 
 			<< t << hex << years
@@ -41,7 +39,7 @@ namespace ch11
 	void example02()
 	{
 		int
-			i{1234};
+			i {1234};
 		cout
 			<< t << dec << i 
 			<< t << hex << i 
@@ -64,14 +62,12 @@ namespace ch11
 			<< n;
 	}
 
-	// bases and cin matilunapors
-
 	void tryThis02()
 	{
 		int
-			i1{0},
-			i2{0},
-			i3{0};
+			i1 {0},
+			i2 {0},
+			i3 {0};
 		cin 
 			>> dec >> i1 
 			>> hex >> i2 
@@ -84,8 +80,6 @@ namespace ch11
 			<< t << i3
 			<< n;
 	}
-
-	// ios_base::fmtflags
 
 	void example03()
 	{
@@ -112,12 +106,10 @@ namespace ch11
 			<< n;
 	}
 
-	//	floating-point outpoop
-
 	void example04()
 	{
 		double
-			d{1234.56789};
+			d {1234.56789};
 		cout
 			<< t << defaultfloat
 				<< d << tt << "(default)" << n
@@ -127,12 +119,10 @@ namespace ch11
 				<< d << t << "(scientific)" << n;
 	}
 
-	// floating-point precission
-
 	void tryThis03()
 	{
 		double
-			d{1234567.89};
+			d {1234567.89};
 		cout
 			<< t << defaultfloat	
 			<< d << n
@@ -145,11 +135,11 @@ namespace ch11
 	void example05()
 	{
 		double
-			d{1234.56789};
+			d {1234.56789};
 		int
-			p1{5},
-			p2{8},
-			implicit{6};
+			p1 {5},
+			p2 {8},
+			implicit {6};
 		cout
 			<< t 
 				<< d << tt 
@@ -176,14 +166,12 @@ namespace ch11
 				<< setprecision(implicit) << defaultfloat;	// default settings
 	}
 
-	// precission equivalent for integrals
-
 	void example06()
 	{
 		int
-			i{123456},
-			width1{4},
-			width2{8};
+			i {123456},
+			width1 {4},
+			width2 {8};
 		cout	
 			<< t <<'|' 
 				<< i << n
@@ -193,14 +181,13 @@ namespace ch11
 				<< i << n;
 	}
 
-	// ...but not necessarily since set width function works with floating points too
 	void example07()
 	{
 		int
-			width{8},
-			i{123456};
+			width {8},
+			i {123456};
 		double
-			d{1234.56789};
+			d {1234.56789};
 		cout			
 			<< t << '|' << setw(width)		<< i << '|' << n
 			<< t << '|' << setw(width)		<< d << '|' << n
@@ -208,23 +195,21 @@ namespace ch11
 			<< t << '|' << setw(width / 2)	<< d << '|' << n;
 	}
 
-	// ... and strings...?
 	void example08()
 	{
 		int
-			width{8};
+			width {8};
 		string
-			s{"asdfg"};
+			s {"asdfg"};
 		cout
 			<< t << '|' << setw(width)		<< s << '|' << n
 			<< t << '|' << setw(width / 2)	<< s << '|' << n;
 	}
 
-	// setw() doesn't stick.
 	void example09()
 	{
 		string
-			s{"asdfg"};
+			s {"asdfg"};
 		cout 
 			<< t << '|' << setw(12)	<< s << '|' << n
 			<< t << '|'				<< s << '|' << n;
@@ -233,7 +218,7 @@ namespace ch11
 	void tryThis04()
 	{
 		vector<string>
-			names{
+			names {
 				"zbyszek",
 				"rysiek",
 				"romek",
@@ -242,7 +227,7 @@ namespace ch11
 				"marzena"
 			};
 		vector<double>
-			ages{
+			ages {
 				37,
 				15,
 				3,
@@ -251,7 +236,7 @@ namespace ch11
 				28
 			};
 		vector<int>
-			phones{
+			phones {
 				22'623'65'23,
 				49'235'05'21,
 				32'123'53'53,
@@ -260,16 +245,16 @@ namespace ch11
 				44'684'40'01
 			};
 		int
-			col1{16},
-			col2{3},
-			col3{12};
+			col1 {16},
+			col2 {3},
+			col3 {12};
 		string
 			beginTop{"\t+"},
-			begin{"\t|"},
-			wallTop{"-+-"},
-			wall{" | "},
-			endTop{"-+\n"},
-			end{" |\n"};
+			begin	{"\t|"},
+			wallTop {"-+-"},
+			wall	{" | "},
+			endTop	{"-+\n"},
+			end		{" |\n"};
 
 		auto drawLine = [](int length)
 		{
@@ -302,8 +287,6 @@ namespace ch11
 		}
 		horizon();
 	}
-
-	// fun with files
 
 	void example10()
 	{
@@ -339,29 +322,213 @@ namespace ch11
 	{
 		string
 			address {"E:\\_LAB\\_C\\PPandPUCpp_Lecture\\_other\\"},
-			name {"ColdGrits_ItsYourThing.wav"};
+			name	{"ColdGrits_ItsYourThing.wav"};
 		ifstream
 			ifs	{address + name, ios_base::binary};
 		if (!ifs)
 			error("can't open ", name);
 		int
-			//mainHeader,
-			//riff{0x4646'4952},
-			fileSize{0};
-		//ifs.read(as_bytes(mainHeader), 4);
-		//if (mainHeader == riff)
-		//{
-			ifs.seekg(4);
-			ifs.read(as_bytes(fileSize), 4);
-			vector<char>
-				bytes;
-			bytes.resize(fileSize);
-			ifs.seekg(0);
-				ifs.read(as_bytes(bytes), fileSize);
+			fileSize {0};
+		ifs.seekg(4);
+		ifs.read(as_bytes(fileSize), 4);
+		char
+			import[106];
+		ifs.seekg(0);
+		ifs.read(as_bytes(import), fileSize);
+		ifs.close();
 
-		//}
+		vector<char>
+			bytes {begin(import), end(import)};
 
+		for(char byte : bytes)
+			cout 
+				<< byte;
+	}
 
+	void example12()
+	{
+		string
+			s {"125937912"};
+		istringstream
+			iss {s};
+		double
+			d;
+		iss 
+			>> d;
+		if (!iss)
+			error("double format error ",s);
+		if(iss.eof())
+			cout
+				<< "BOINK!\n";
+		cout 
+			<< fixed 
+			<< d;
+	}
+
+	void example13()
+	{
+		string
+			s {},
+			input {"one two\nthree four"};
+		stringstream
+			ss {input};
+		if (false)
+		{
+			ss 
+				>> s;
+			cout 
+				<< s
+				<< "|";
+			ss
+				>> s;
+			cout
+				<< s;
+		}
+		else
+		{
+		getline(ss, s);
+		cout
+			<< s;
+		}
+	}
+
+	void example14()
+	{
+		string
+			command {};
+		getline(cin, command);
+		stringstream
+			ss {command};
+		vector<string>
+			words {};
+		for (string s; ss >> s; )
+			words.push_back(s);
+	}
+
+	void example15()
+	{
+		for (char ch; cin.get(ch); )
+		{
+			if (isspace(ch))
+			{
+				// ...
+			}
+			if (isdigit(ch))
+			{
+				// ...
+			}
+			else if (isalpha(ch))
+			{
+				// ...
+			}
+			else
+			{
+				// ...
+			}
+		}
+	}
+
+	void example16()
+	{
+		string
+			input {"EGWEWrgewweQWgGWQ32Gt#Q4thjRtyESrg"};		
+		cout 
+			<< input;
+		for(char & c : input)
+			c = tolower(c);
+		cout
+			<< input;
+	}
+
+	// dealing with special characters
+	namespace exapmle17
+	{
+		//	bad solution 
+
+		void initial()
+		{
+			string
+				line {"As planned, the guests arrived; then,"};
+			if (sizeof(line) == 0)
+				getline(cin,line);
+
+			for (char & c : line)
+				switch (c)
+				{
+					case ';' : 
+					case '.' : 
+					case ',' : 
+					case '?' : 
+					case '!' :
+						c = ' ';
+				}
+			stringstream 
+				ss(line);
+			vector<string> 
+				vs;
+			for (string word; ss >> word; )
+				vs.push_back(word);
+		}
+
+		// better solution
+		
+		class Punct_stream
+		{
+			public:
+				Punct_stream(istream & is)
+					: source {is}, sensitive {true}
+				{}
+
+				void	whitespace			(const string & s)	{white = s; }
+				void	add_white			(char c)			{white += c; }
+				void	case_sensitive		(bool b)			{sensitive = b; }
+				bool	is_case_sensitive	()					{return sensitive; }
+				bool	is_whitespace		(char c);
+
+				Punct_stream & operator >> (string & s);
+
+			private:
+				istream 
+					& source;
+				istringstream
+					buffer;
+				string
+					white;
+				bool
+					sensitive;
+		};
+
+		bool Punct_stream::is_whitespace(char c)
+		{
+			for (char ch : white)
+				if (ch == c)
+					return true;
+			return false;
+		}
+
+		Punct_stream & Punct_stream::operator >> (string & s)
+		{
+			while (!(buffer >> s))					// fail reading from buffer
+			{
+				if (buffer.bad() || !source.good())
+					return * this;					// err C2102, C2440 : must be a lvalue (hence not passing by value E0461 or by reference E0158), or function designator (hence passing by the pointer)
+				
+				buffer.clear();
+				string
+					line;
+				getline(source, line);
+
+				for (char & c : line)
+				{
+					if (is_whitespace(c))
+						c = ' ';
+					else if (!sensitive)
+						c = tolower(c);
+				}
+				buffer.str(line);					// copies line to buffer
+			}
+			return * this;
+		}
 	}
 }
 
@@ -381,5 +548,9 @@ void ch11Main()
 	//ch11::example09();
 	//ch11::tryThis04();
 	//ch11::example11();
+	//ch11::example12();
+	//ch11::example13();
+	ch11::example16();
+	
 
 }
