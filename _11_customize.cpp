@@ -643,6 +643,31 @@ namespace ch11
 				lineNumber++;					
 			}		
 		}
+
+		void exc03()
+		{
+			string
+				inputFile {"E:\\_LAB\\_C\\PPandPUCpp_Lecture\\_other\\ch11_exc02_read.txt"};
+			ifstream
+				ifs {inputFile, ios_base::binary};
+			if(!ifs)
+				error("can't open file ", inputFile);
+			string
+				vowels{"aeiouy"},
+				cache;
+			auto compare = [&](char & c)
+			{
+				for (char & v : vowels)
+					if (c == v)
+						return false;
+				return true;
+			};
+			for (char c; ifs.read(as_bytes(c), 1); )
+				if (compare(c))
+					cache += c;
+			cout
+				<< cache;
+		}	
 	}
 }
 
@@ -652,6 +677,6 @@ void ch11Main()
 
 	//ch11::excercises::exc01();
 	//ch11::excercises::exc02();
-	
+	ch11::excercises::exc03();
 
 }
