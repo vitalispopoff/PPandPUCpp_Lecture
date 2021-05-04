@@ -668,15 +668,109 @@ namespace ch11
 			cout
 				<< cache;
 		}	
+
+		namespace exc04
+		{
+
+			struct Number
+			{
+				string
+					represent;
+				int
+					value;
+				ios_base::fmtflags
+					flag;
+				
+				Number()
+					: value {0}, flag{ios::dec}
+				{}
+				Number (string);
+
+				void setFlag(string);
+			};
+			
+			Number::Number(string s)
+				: represent{s}, value {0}
+			{				
+				if(s[0] == '0')
+					if(s[1] == 'X' || s[1] == 'x')
+						flag = ios_base::hex;
+					else
+						flag = ios_base::oct;
+				else
+					flag = ios_base::dec;
+
+			}
+
+			void Number::setFlag(string s)
+			{
+				if(s[0] == '0')
+					if(s[1] == 'X' || s[1] == 'x')
+						flag = ios_base::hex;
+					else
+						flag = ios_base::oct;
+				else
+					flag = ios_base::dec;
+			}
+
+			istream & operator >> (istream & is, Number & n)
+			{
+				string 
+					s;
+				is 
+					>> s;
+				n.represent = s;
+				n.setFlag(s);
+				stringstream
+					ss{s};
+				ss.flags(n.flag);
+				ss				
+					>> n.value;
+				return is;
+			}
+
+			ostream & operator << (ostream & os, Number & n)
+			{
+				os.setf(n.flag);
+				os
+					<< n.value;
+				return os;
+			}
+
+			string printBase(ios_base::fmtflags flag)
+			{
+				switch(flag)
+				{
+					case ios_base::hex :
+						return "hexadecimal";
+					case ios_base::dec :
+						return "decimal";
+					case ios_base::oct :
+						return "octal";
+					default:
+						return "";
+				}
+			}
+
+			void main()
+			{				
+				for (Number n; cin >> n; )
+				{					
+					cout 
+						<< n.represent 
+						<< '\t'
+						<< printBase(n.flag) 
+						<< "\tconverts to\t"
+						<< dec 
+						<< n.value 
+						<< "\tdecimal\n";
+				}
+			}
+		}
 	}
 }
 
 void ch11Main()
 {
-	//ch11::examples::example17::final();
-
-	//ch11::excercises::exc01();
-	//ch11::excercises::exc02();
-	ch11::excercises::exc03();
-
+	ch11::excercises::exc04::main();
 }
