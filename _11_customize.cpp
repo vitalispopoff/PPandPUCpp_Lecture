@@ -608,42 +608,41 @@ namespace ch11
 			ofs.close();
 		}
 
-		namespace exc02
-		{
+		void exc02()
+		{		
+			string
+				inputFile {"E:\\_LAB\\_C\\PPandPUCpp_Lecture\\_other\\ch11_exc02_read.txt"};				
+			ifstream
+				ifs {inputFile};
 
+			if (!ifs)
+				error("can't open file ", inputFile);
 
-			void main()
+			string
+				bannedSigns {"!@#$%^&*(){}[]<>:;\",.?~`/"},
+				keyword {"that"};
+			int 
+				lineNumber {1};
+
+			for (string signs; getline(ifs, signs,'\n'); signs = "")
 			{
-				string
-					inputFile {"E:\\_LAB\\_C\\PPandPUCpp_Lecture\\_other\\ch11_exc02_read.txt"};
-				
-				ifstream
-					ifs {inputFile};
-				if (!ifs)
-					error("can't open file ", inputFile);
-				string
-					s {};
-				for (char c ; ifs.read(as_bytes(c), 1); )
-					s += c;
+				for (char & sign : signs)
+					for (char & punctuation : bannedSigns)
+						if (sign == punctuation)
+							sign = ' ';
 
-				vector<string>
-					lines { "" };
-				for (char c : s)
-				{
-					if (c == '\n')
-					{
-						lines.push_back("");
-						continue;
-					}
-					lines[lines.size() - 1] += c;
-				}
+				stringstream
+					ss {signs};
 
-				for (string line : lines)
-					cout << line << endl;
-
-			}
+				for (string word; ss >> word; )
+					if (word == keyword)
+						cout 
+							<< "line: " 
+							<< lineNumber 
+							<< endl;
+				lineNumber++;					
+			}		
 		}
-
 	}
 }
 
@@ -652,7 +651,7 @@ void ch11Main()
 	//ch11::examples::example17::final();
 
 	//ch11::excercises::exc01();
-	ch11::excercises::exc02::main();
+	//ch11::excercises::exc02();
 	
 
 }
