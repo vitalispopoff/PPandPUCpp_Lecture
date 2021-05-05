@@ -767,75 +767,8 @@ namespace ch11
 				}
 			}
 		}
-
-		namespace exc05
-		{
-			void analyzeChar(char & c)
-			{
-				vector<string>
-					description;
-				if(isspace(c))
-					description.push_back("space");
-
-				if(iscntrl(c))
-					description.push_back("control");
-				else // assumed print
-				{
-					description.push_back("printable");
-					if(isgraph(c))
-					{
-						description.push_back("graph");
-						if(isalnum(c))
-						{
-							description.push_back("alphanumeric");
-							if(isdigit(c))
-							{
-								description.push_back("decimal digit");
-								description.push_back("hexadecimal digit");
-							}
-							if(isalpha(c))
-							{
-								description.push_back("letter");
-								if(isxdigit(c))
-									description.push_back("hexadecimal digit");
-								if(isupper(c))
-									description.push_back("uppercase");
-								else // assumed lower
-									description.push_back("lowercase");
-							}
-							else
-								description.push_back("punctuation");
-						}
-					}
-				}
-
-				cout << "Character " << c << " is: ";
-				int
-					max{narrow_cast<int>(description.size() - 1)};
-				for(string d : description)
-					cout << d << ", ";
-				cout << endl;
-			}
-
-			void main()
-			{
-				string
-					input;
-				cin
-					>> input;
-				for(char c : input)
-					analyzeChar(c);
-			}
-
-			void formatListAll()
-			{
-				for (int j = 0 ; j < 128; ++j)
-				{					
-					char 
-						c{narrow_cast<char>(j)};
-					analyzeChar(c);
-				}
-			}
+	}
+}
 
 			void listAll()
 			{			
