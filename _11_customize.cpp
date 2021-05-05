@@ -910,39 +910,60 @@ namespace ch11
 		namespace exc09
 		{
 
-			int main()
+			void readFile(vector<int> & v)
 			{
-				cout
-					<< "Please enter input file name\n";
 				string
-					iname;
-				cin
-					>> iname;
+					iname {"E:\\_LAB\\_C\\PPandPUCpp_Lecture\\_other\\ch11_exc02_read.txt"};
+				if (iname == "")
+				{
+					cout
+						<< "Please enter input file name\n";
+					cin
+						>> iname;
+				}
+
 				ifstream
 					ifs {iname, ios_base::binary};
 				if (!ifs)
 					error("can't open input file ", iname);
-				cout
-					<< "Please enter output fil name\n";
+				//vector<int>
+				//	v;
+
+				for (int x; ifs.read(as_bytes(x),sizeof(int)); )
+					v.push_back(x);
+				ifs.close();
+			}
+
+			void writeFile(vector<int> & v)
+			{
 				string
-					oname;
-				cin
-					>> oname;
+					oname {"E:\\_LAB\\_C\\PPandPUCpp_Lecture\\_other\\ch11_exc09_write.txt"};
+				if (oname == "")
+				{
+					cout
+						<< "Please enter output fil name\n";
+					cin
+						>> oname;
+				}
 				ofstream
 					ofs {oname, ios_base::binary};
 				if (!ofs)
 					error("can't open output file ", oname);
-				vector<int>
-					v;
-				for (int x; ifs.read(as_bytes(x), sizeof(int)); )
-					v.push_back(x);
+
 				for (int x : v)
 					ofs.write(as_bytes(x), sizeof(int));
-				return 0;
+				ofs.close();
 			}
 
-		}
+			void main()
+			{
+				vector<int>
+					temp;
+				readFile(temp);
 
+				writeFile(temp);
+			}
+		}
 	}
 }
 
@@ -953,6 +974,7 @@ void ch11Main()
 	//ch11::excercises::exc05::listAll();
 	//ch11::excercises::exc05::main();
 	//ch11::excercises::exc06::main();
+	ch11::excercises::exc09::main();
 
 
 
