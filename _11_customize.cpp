@@ -987,6 +987,91 @@ namespace ch11
 					cout << w << ' ';
 			}
 		}
+
+		namespace exc11
+		{
+			string updateSpaces(const string & w, string s)
+			{
+				for (char & c : s)
+					for (char banned : w)
+						if (c == banned)
+							c = ' ';
+				return s;
+			}
+
+			vector<string> split(const string & s, const string & w)
+			{
+				string
+					cache = updateSpaces(w, s);
+				stringstream
+					ss {cache};
+				vector<string>
+					v,
+					& result = v;
+				for( string word; ss >> word; )
+					v.push_back(word);
+				return result;
+			}
+
+			void main()
+			{
+				string
+					banned {"(){}<>,"},
+					input {" 11.   Write  a  function  vector<string>  split(const  string&  s,  const  string&  w) that  returns  a  vector  of  whitespace-separated  substrings  from  the  argument s,  where  whitespace  is  defined  as  \"ordinary  whitespace\"  plus  the  characters in w."};
+				for(string word : split(input, banned))
+					cout
+						<< word 
+						<< endl;
+			}
+		}
+
+		namespace exc12
+		{
+			vector<char> readFile()
+			{
+				vector<char>
+					bytes;
+				string
+					input {"E:\\_LAB\\_C\\PPandPUCpp_Lecture\\_other\\ch11_exc02_read.txt"};				
+				ifstream
+					ifs {input, ios_base::binary};
+				if(!ifs)
+					error("can't open the file ", input);				
+				for(char c; ifs.read(as_bytes(c), 1); )
+					bytes.push_back(c);
+				ifs.close();
+				return bytes;
+			}
+
+			void writeFile(vector<char> bytes)
+			{
+				string
+					output{"E:\\_LAB\\_C\\PPandPUCpp_Lecture\\_other\\ch11_exc12_write.txt"};
+				ofstream
+					ofs {output, ios_base::binary};
+				if (!ofs)
+					error("can't open the file ", output);
+				int
+					max {narrow_cast<int>(bytes.size() - 1)};
+				for (int i = max; i >= 0 ; --i)
+					ofs.write(as_bytes(bytes[i]), 1);
+				ofs.close();
+			}
+
+			void main()
+			{	
+				vector<char>
+					bytes = readFile();
+				cout 
+					<< endl;
+				for (char & c : bytes)
+					cout 
+						<< c;
+				cout 
+					<< endl;
+				writeFile(bytes);
+			}
+		}
 	}
 }
 
@@ -998,8 +1083,9 @@ void ch11Main()
 	//ch11::excercises::exc05::main();
 	//ch11::excercises::exc06::main();
 	//ch11::excercises::exc09::main();
-	ch11::excercises::exc10::main();
-
+	//ch11::excercises::exc10::main();
+	//ch11::excercises::exc11::main();
+	//ch11::excercises::exc12::main();
 
 
 
