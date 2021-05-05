@@ -880,7 +880,6 @@ namespace ch11
 				for (char b : banned)
 					if (c == b)
 						c = ' ';
-
 			}
 
 			void main()
@@ -901,14 +900,49 @@ namespace ch11
 					if (!quoted && ispunct(c))
 						updatedChar(c);
 				}
-
 				cout 
 					<< "after:\t"
 					<< s
 					<< endl;
-
 			}
 		}
+
+		namespace exc09
+		{
+
+			int main()
+			{
+				cout
+					<< "Please enter input file name\n";
+				string
+					iname;
+				cin
+					>> iname;
+				ifstream
+					ifs {iname, ios_base::binary};
+				if (!ifs)
+					error("can't open input file ", iname);
+				cout
+					<< "Please enter output fil name\n";
+				string
+					oname;
+				cin
+					>> oname;
+				ofstream
+					ofs {oname, ios_base::binary};
+				if (!ofs)
+					error("can't open output file ", oname);
+				vector<int>
+					v;
+				for (int x; ifs.read(as_bytes(x), sizeof(int)); )
+					v.push_back(x);
+				for (int x : v)
+					ofs.write(as_bytes(x), sizeof(int));
+				return 0;
+			}
+
+		}
+
 	}
 }
 
@@ -918,7 +952,9 @@ void ch11Main()
 	//ch11::excercises::exc05::main();
 	//ch11::excercises::exc05::listAll();
 	//ch11::excercises::exc05::main();
-	ch11::excercises::exc06::main();
+	//ch11::excercises::exc06::main();
+
+
 
 
 }
