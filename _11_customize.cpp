@@ -1072,6 +1072,140 @@ namespace ch11
 				writeFile(bytes);
 			}
 		}
+
+		namespace exc13
+		{
+			vector<string> readWords()
+			{
+				string
+					input{"E:\\_LAB\\_C\\PPandPUCpp_Lecture\\_other\\ch11_exc02_read.txt"};
+				ifstream
+					ifs {input};
+				if (!ifs)
+					error("can't open the file ", input);
+				vector<string>
+					words;
+				for(string word; ifs >> word; )
+					words.push_back(word);
+				ifs.close();
+				return words;
+			}
+
+			void writeWords(vector<string> words)
+			{
+				string
+					output{"E:\\_LAB\\_C\\PPandPUCpp_Lecture\\_other\\ch11_exc13_write.txt"};
+				ofstream
+					ofs{output};
+				if(!ofs)
+					error("can't open the file ",output);
+				int
+					max{narrow_cast<int>(words.size() - 1)};
+				for(int i = max; i >= 0 ; --i)
+					ofs << words[i] << " ";
+				ofs.close();
+			}
+
+			void main()
+			{
+				vector<string>
+					words = readWords();
+				writeWords(words);
+			}
+		}
+
+		namespace exc14
+		{
+			int
+				space {0},
+				control {0},
+				printable {0},
+				graph {0},
+				alphanumeric {0},
+				decimalDigit {0},
+				hexadecimalDigit {0},
+				letter {0},
+				upperCase {0},
+				lowerCase {0},
+				punctuation {0};
+			
+
+				
+
+			void analyzeChar(char & c)
+			{
+				if(isspace(c))
+					space++;
+				if(iscntrl(c))
+					control++;
+				else
+				{
+					printable++;
+					if(isgraph(c))
+					{
+						graph++;
+						if(isalnum(c))
+						{
+							alphanumeric++;
+							if(isdigit(c))
+							{
+								decimalDigit++;
+								hexadecimalDigit++;
+							};
+							if(isalpha(c))
+							{
+								letter++;
+								if(isxdigit(c))
+									hexadecimalDigit++;
+								if(isupper(c))
+									upperCase++;
+								else
+									lowerCase++;
+							}
+							else punctuation++;
+						}
+					}
+				}				
+			}
+
+			vector<char> readFile()
+			{
+				vector<char>
+					bytes;
+				string
+					input{"E:\\_LAB\\_C\\PPandPUCpp_Lecture\\_other\\ch11_exc02_read.txt"};
+				ifstream
+					ifs{input,ios_base::binary};
+				if(!ifs)
+					error("can't open the file ",input);
+				for(char c; ifs.read(as_bytes(c),1); )
+					bytes.push_back(c);
+				ifs.close();
+				return bytes;
+			}
+
+
+			void main()
+			{
+				vector<char>
+					bytes = readFile();
+				for (char & byte : bytes)
+					analyzeChar(byte);
+
+				cout 
+					<< "\nspace\t" << space
+					<< "\ncontrol\t" << control
+					<< "\nprintable\t" << printable
+					<< "\ngraph\t" << graph
+					<< "\nalphanumerc\t" << alphanumeric
+					<< "\ndecimal\t" << decimalDigit
+					<< "\nhexadecimal\t" << hexadecimalDigit
+					<< "\nletter\t" << letter
+					<< "\nuppercase\t" << upperCase
+					<< "\nlowercase\t" << lowerCase
+					<< "\npunctuation\t" << punctuation;
+			}
+		}
 	}
 }
 
@@ -1086,6 +1220,9 @@ void ch11Main()
 	//ch11::excercises::exc10::main();
 	//ch11::excercises::exc11::main();
 	//ch11::excercises::exc12::main();
+	//ch11::excercises::exc13::main();
+	ch11::excercises::exc14::main();
+
 
 
 

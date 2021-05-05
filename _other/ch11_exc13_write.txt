@@ -1,0 +1,1 @@
+getline(). Hint: number. line the with together word that contains that line each outputs word a and name file a given that program a Write 2. 
