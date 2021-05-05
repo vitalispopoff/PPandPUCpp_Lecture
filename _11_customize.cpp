@@ -873,21 +873,39 @@ namespace ch11
 
 		namespace exc06
 		{
+			void updatedChar(char & c)
+			{
+				string
+					banned{".;,?-'"};
+				for (char b : banned)
+					if (c == b)
+						c = ' ';
+
+			}
+
 			void main()
 			{
-			string
-				s,
-				banned{".;,?-'"};
-				/*
-				39
-				44
-				46
-				59
-				63
-				*/
+				string
+					s {"Don't use the \"as-if\" rule."};
+				cout
+					<< "before:\t"
+					<< s
+					<< endl;
+				bool
+					quoted {false};
 
-			for (int i = 33; i < 65; ++i)
-				cout << i << '\t' << ((i & 32) > 0 && (i & 64) == 0);
+				for (char & c : s)
+				{	
+					if (c == '"')
+						quoted = !quoted;
+					if (!quoted && ispunct(c))
+						updatedChar(c);
+				}
+
+				cout 
+					<< "after:\t"
+					<< s
+					<< endl;
 
 			}
 		}
@@ -899,8 +917,8 @@ void ch11Main()
 	//ch11::excercises::exc04::main();
 	//ch11::excercises::exc05::main();
 	//ch11::excercises::exc05::listAll();
-	ch11::excercises::exc05::main();
-	//ch11::excercises::exc06::main();
+	//ch11::excercises::exc05::main();
+	ch11::excercises::exc06::main();
 
 
 }
