@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="calculator_6.cpp" />
+    <ClCompile Include="ch12.cpp" />
     <ClCompile Include="ch8_exc1.cpp" />
     <ClCompile Include="ch8_exc2sqq.cpp" />
     <ClCompile Include="chronos.cpp" />
@@ -161,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="calculator_6_.h" />
+    <ClInclude Include="ch12.h" />
     <ClInclude Include="chronos.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="my.h" />

@@ -31,6 +31,9 @@
     <Filter Include="Source Files\_2_I_O">
       <UniqueIdentifier>{583b9aa3-3c83-4326-a374-efab81005cf8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\_3_Gui">
+      <UniqueIdentifier>{4eac976b-7202-467c-ab64-4ddd593ae055}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -90,6 +93,9 @@
     <ClCompile Include="_11_customize.cpp">
       <Filter>Source Files\_2_I_O</Filter>
     </ClCompile>
+    <ClCompile Include="ch12.cpp">
+      <Filter>Source Files\_3_Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -120,6 +126,9 @@
       <Filter>Header Files\_1_Basics</Filter>
     </ClInclude>
     <ClInclude Include="_2_io.h">
+      <Filter>Header Files\_2_I_O</Filter>
+    </ClInclude>
+    <ClInclude Include="ch12.h">
       <Filter>Header Files\_2_I_O</Filter>
     </ClInclude>
   </ItemGroup>

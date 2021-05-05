@@ -1128,9 +1128,6 @@ namespace ch11
 				upperCase {0},
 				lowerCase {0},
 				punctuation {0};
-			
-
-				
 
 			void analyzeChar(char & c)
 			{
@@ -1184,7 +1181,6 @@ namespace ch11
 				return bytes;
 			}
 
-
 			void main()
 			{
 				vector<char>
@@ -1221,7 +1217,7 @@ void ch11Main()
 	//ch11::excercises::exc11::main();
 	//ch11::excercises::exc12::main();
 	//ch11::excercises::exc13::main();
-	ch11::excercises::exc14::main();
+	//ch11::excercises::exc14::main();
 
 
 
