@@ -767,10 +767,104 @@ namespace ch11
 				}
 			}
 		}
+
+		namespace exc05
+		{
+			void main()
+			{
+				for (int j = 0 ; j < 128; ++j)
+				{				
+					char 
+						c{narrow_cast<char>(j)};
+					vector<string>
+						description;
+					if(isspace(c))
+						description.push_back("space");
+
+					if(iscntrl(c))
+						description.push_back("control");
+					else // assumed print
+					{
+						description.push_back("printable");
+						if(isgraph(c))
+						{
+							description.push_back("graph");
+							if(isalnum(c))
+							{
+								description.push_back("alphanumeric");
+								if(isdigit(c))
+								{
+									description.push_back("decimal digit");
+									description.push_back("hexadecimal digit");
+								}
+								if(isalpha(c))
+								{
+									description.push_back("letter");
+									if(isxdigit(c))
+										description.push_back("hexadecimal digit");
+									if(isupper(c))
+										description.push_back("uppercase");
+									else // assumed lower
+										description.push_back("lowercase");
+								}
+								else
+									description.push_back("punctuation");
+							}
+						}
+					}
+
+					cout << "Character " << c << " is: ";
+					int
+						max {narrow_cast<int>(description.size() - 1)};
+					for (string d : description)
+						cout << d << ", ";
+					cout << endl;
+				}
+
+			}
+
+			void listAll()
+			{			
+				cout 
+					<<	"\tgraph\tcntrl\tspace\tprint\talnum\talpha\tdigit\txdigit\tupper\tlower\n\n";
+				for (int i = 0; i < 128; ++i)
+				{	
+					char 
+						c = narrow_cast<char>(i);
+					cout 
+						<< i
+						<< '\t'
+						<< isgraph(c)
+						<< '\t'
+						<< iscntrl(c)
+						<<'\t'
+						<< isspace(c)
+						<< '\t'
+						<< isprint(c)
+						<< '\t'
+						<< isalnum(c)
+						<< '\t'
+						<< isalpha(c)
+						<< '\t'
+						<< isdigit(c)
+						<< '\t'
+						<< isxdigit(c)
+						<< '\t'
+						<< isupper(c)
+						<< '\t'
+						<< islower(c)
+						<< "\t\n";
+				}
+			}
+		}
 	}
 }
 
 void ch11Main()
 {
-	ch11::excercises::exc04::main();
+	//ch11::excercises::exc04::main();
+	//ch11::excercises::exc05::main();
+	ch11::excercises::exc05::listAll();
+	ch11::excercises::exc05::main();
+
 }
