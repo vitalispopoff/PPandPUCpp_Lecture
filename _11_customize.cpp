@@ -909,7 +909,6 @@ namespace ch11
 
 		namespace exc09
 		{
-
 			void readFile(vector<int> & v)
 			{
 				string
@@ -964,6 +963,30 @@ namespace ch11
 				writeFile(temp);
 			}
 		}
+
+		namespace exc10
+		{
+			vector<string>split(const string & s)
+			{
+				vector<string>
+					v,
+					& result = v;
+				stringstream
+					ss {s};
+				for(string word; ss >> word; )
+					v.push_back(word);
+
+				return result;
+			}
+
+			void main()
+			{
+				string
+					s {" 10.  Write a function vector<string> split(const string& s) that returns a  vector of whitespace-separated substrings from the argument s."};
+				for(string w : split(s))
+					cout << w << ' ';
+			}
+		}
 	}
 }
 
@@ -974,7 +997,8 @@ void ch11Main()
 	//ch11::excercises::exc05::listAll();
 	//ch11::excercises::exc05::main();
 	//ch11::excercises::exc06::main();
-	ch11::excercises::exc09::main();
+	//ch11::excercises::exc09::main();
+	ch11::excercises::exc10::main();
 
 
 
