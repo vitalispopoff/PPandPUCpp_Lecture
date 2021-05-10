@@ -13,123 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\_1_Basics">
-      <UniqueIdentifier>{5c645894-06da-4b33-a1ab-157d29195dcd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\_1_Basics">
-      <UniqueIdentifier>{4cff2206-bdcb-438d-802f-526e61f3b27a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\_1_Basics\_8_technicalities">
-      <UniqueIdentifier>{82d9b4e9-2253-4c1c-a480-359a32d01fbc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\_1_Basics\_9_moreTechnicalities">
-      <UniqueIdentifier>{f36c2ca2-f8ab-4152-908c-de8066bfba05}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\_2_I_O">
-      <UniqueIdentifier>{b43a7d5a-2de3-4523-83e7-fb1860a90024}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\_2_I_O">
-      <UniqueIdentifier>{583b9aa3-3c83-4326-a374-efab81005cf8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\_3_Gui">
-      <UniqueIdentifier>{4eac976b-7202-467c-ab64-4ddd593ae055}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="_2_hello_world.cpp">
-      <Filter>Source Files\_1_Basics</Filter>
-    </ClCompile>
-    <ClCompile Include="_3_objects_types_values.cpp">
-      <Filter>Source Files\_1_Basics</Filter>
-    </ClCompile>
-    <ClCompile Include="_4_computation.cpp">
-      <Filter>Source Files\_1_Basics</Filter>
-    </ClCompile>
-    <ClCompile Include="_5_errors.cpp">
-      <Filter>Source Files\_1_Basics</Filter>
-    </ClCompile>
-    <ClCompile Include="_6_programming.cpp">
-      <Filter>Source Files\_1_Basics</Filter>
-    </ClCompile>
-    <ClCompile Include="calculator_6.cpp">
-      <Filter>Source Files\_1_Basics</Filter>
-    </ClCompile>
-    <ClCompile Include="_7_drill.cpp">
-      <Filter>Source Files\_1_Basics</Filter>
-    </ClCompile>
-    <ClCompile Include="my.cpp">
-      <Filter>Source Files\_1_Basics\_8_technicalities</Filter>
-    </ClCompile>
-    <ClCompile Include="use.cpp">
-      <Filter>Source Files\_1_Basics\_8_technicalities</Filter>
-    </ClCompile>
-    <ClCompile Include="_8_swap.cpp">
-      <Filter>Source Files\_1_Basics\_8_technicalities</Filter>
-    </ClCompile>
-    <ClCompile Include="_8_drill_3.cpp">
-      <Filter>Source Files\_1_Basics\_8_technicalities</Filter>
-    </ClCompile>
-    <ClCompile Include="ch8_exc1.cpp">
-      <Filter>Source Files\_1_Basics\_8_technicalities</Filter>
-    </ClCompile>
-    <ClCompile Include="ch8_exc2sqq.cpp">
-      <Filter>Source Files\_1_Basics</Filter>
-    </ClCompile>
-    <ClCompile Include="_9_more.cpp">
-      <Filter>Source Files\_1_Basics\_9_moreTechnicalities</Filter>
-    </ClCompile>
-    <ClCompile Include="_9_excs.cpp">
-      <Filter>Source Files\_1_Basics\_9_moreTechnicalities</Filter>
-    </ClCompile>
-    <ClCompile Include="chronos.cpp">
-      <Filter>Source Files\_1_Basics\_9_moreTechnicalities</Filter>
-    </ClCompile>
-    <ClCompile Include="_10_IOStreams.cpp">
-      <Filter>Source Files\_2_I_O</Filter>
-    </ClCompile>
-    <ClCompile Include="_11_customize.cpp">
-      <Filter>Source Files\_2_I_O</Filter>
-    </ClCompile>
-    <ClCompile Include="ch12.cpp">
-      <Filter>Source Files\_3_Gui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="std_lib_facilities.h">
+    <ClInclude Include="_add\std_lib_facilities.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="_1_basics.h">
-      <Filter>Header Files\_1_Basics</Filter>
-    </ClInclude>
-    <ClInclude Include="calculator_6_.h">
-      <Filter>Header Files\_1_Basics</Filter>
-    </ClInclude>
-    <ClInclude Include="_8_technicalities.h">
-      <Filter>Header Files\_1_Basics</Filter>
-    </ClInclude>
-    <ClInclude Include="my.h">
-      <Filter>Header Files\_1_Basics</Filter>
-    </ClInclude>
-    <ClInclude Include="_9_more.h">
-      <Filter>Header Files\_1_Basics</Filter>
-    </ClInclude>
-    <ClInclude Include="_9_excs.h">
-      <Filter>Header Files\_1_Basics</Filter>
-    </ClInclude>
-    <ClInclude Include="chronos.h">
-      <Filter>Header Files\_1_Basics</Filter>
-    </ClInclude>
-    <ClInclude Include="_2_io.h">
-      <Filter>Header Files\_2_I_O</Filter>
-    </ClInclude>
-    <ClInclude Include="ch12.h">
-      <Filter>Header Files\_2_I_O</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
