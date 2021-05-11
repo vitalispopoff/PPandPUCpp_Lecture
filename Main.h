@@ -1,14 +1,8 @@
 #pragma once
 
-// some notes
-/*notifications:
-blue - concepts, and techniques
-green - advice
-red - warning
-*/
+#include "ch02\ch02.h"
 
-#include "_1_basics.h"
+#include "ch03\ch03.h"
 
-#include "_2_io.h"
+#include"ch04\ch04.h"
 
-#include "ch12.h"

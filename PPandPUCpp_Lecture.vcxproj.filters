@@ -13,18 +13,63 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\ch02">
+      <UniqueIdentifier>{dd348edb-6eaa-4abe-895b-004c3161d391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ch02">
+      <UniqueIdentifier>{542a75c1-cbd5-4017-afe9-3b759d1d74f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\_add">
+      <UniqueIdentifier>{091bf094-b93e-4c4d-bc82-11c947e2763a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ch03">
+      <UniqueIdentifier>{fafb90f6-516d-4484-a87a-c19c0308ae97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ch03">
+      <UniqueIdentifier>{08e2c4da-d4be-4e11-9a6c-6d3193322c7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ch04">
+      <UniqueIdentifier>{ba5e54b6-bbc6-4c76-902a-26f5516d0b28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ch04">
+      <UniqueIdentifier>{4380cb81-d4d3-4cb7-8afb-7c1104511088}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ch02\ch02.cpp">
+      <Filter>Source Files\ch02</Filter>
+    </ClCompile>
+    <ClCompile Include="ch03\ch03.cpp">
+      <Filter>Source Files\ch03</Filter>
+    </ClCompile>
+    <ClCompile Include="ch04\ch04_excercise.cpp">
+      <Filter>Source Files\ch04</Filter>
+    </ClCompile>
+    <ClCompile Include="ch04\ch04_drill.cpp">
+      <Filter>Source Files\ch04</Filter>
+    </ClCompile>
+    <ClCompile Include="ch04\ch04_example.cpp">
+      <Filter>Source Files\ch04</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Main.h">
+    <ClInclude Include="main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="_add\std_lib_facilities.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\_add</Filter>
+    </ClInclude>
+    <ClInclude Include="ch03\ch03.h">
+      <Filter>Header Files\ch03</Filter>
+    </ClInclude>
+    <ClInclude Include="ch02\ch02.h">
+      <Filter>Header Files\ch02</Filter>
+    </ClInclude>
+    <ClInclude Include="ch04\ch04.h">
+      <Filter>Header Files\ch04</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -139,10 +139,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="ch02\ch02.cpp" />
+    <ClCompile Include="ch03\ch03.cpp" />
+    <ClCompile Include="ch04\ch04_excercise.cpp" />
+    <ClCompile Include="ch04\ch04_drill.cpp" />
+    <ClCompile Include="ch04\ch04_example.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Main.h" />
+    <ClInclude Include="ch02\ch02.h" />
+    <ClInclude Include="ch03\ch03.h" />
+    <ClInclude Include="ch04\ch04.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="_add\std_lib_facilities.h" />
   </ItemGroup>
   <ItemGroup>
