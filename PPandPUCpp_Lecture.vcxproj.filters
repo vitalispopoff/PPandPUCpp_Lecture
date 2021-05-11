@@ -52,6 +52,12 @@
     <Filter Include="Source Files\ch07">
       <UniqueIdentifier>{7cdd8d5a-4443-481d-9f8c-b848343e4e50}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ch08">
+      <UniqueIdentifier>{b39a2c7c-3cd3-4958-a7bf-cbccb622eba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ch08">
+      <UniqueIdentifier>{59f98b9a-3ee0-42d7-a8be-a293e991880d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -93,6 +99,21 @@
     <ClCompile Include="ch07\_7_drill.cpp">
       <Filter>Source Files\ch07</Filter>
     </ClCompile>
+    <ClCompile Include="ch08\ch08_drill.cpp">
+      <Filter>Source Files\ch08</Filter>
+    </ClCompile>
+    <ClCompile Include="ch08\ch08_excercise.cpp">
+      <Filter>Source Files\ch08</Filter>
+    </ClCompile>
+    <ClCompile Include="ch08\ch08_sample.cpp">
+      <Filter>Source Files\ch08</Filter>
+    </ClCompile>
+    <ClCompile Include="ch08\chronos.cpp">
+      <Filter>Source Files\ch08</Filter>
+    </ClCompile>
+    <ClCompile Include="ch08\my.cpp">
+      <Filter>Source Files\ch08</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -124,6 +145,15 @@
     </ClInclude>
     <ClInclude Include="ch07\ch07.h">
       <Filter>Header Files\ch07</Filter>
+    </ClInclude>
+    <ClInclude Include="ch08\ch08.h">
+      <Filter>Header Files\ch08</Filter>
+    </ClInclude>
+    <ClInclude Include="ch08\chronos.h">
+      <Filter>Header Files\ch08</Filter>
+    </ClInclude>
+    <ClInclude Include="ch08\my.h">
+      <Filter>Header Files\ch08</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

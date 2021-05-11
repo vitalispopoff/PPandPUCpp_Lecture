@@ -151,6 +151,11 @@
     <ClCompile Include="ch06\ch06_excercise.cpp" />
     <ClCompile Include="ch06\ch06_sample.cpp" />
     <ClCompile Include="ch07\_7_drill.cpp" />
+    <ClCompile Include="ch08\ch08_drill.cpp" />
+    <ClCompile Include="ch08\ch08_excercise.cpp" />
+    <ClCompile Include="ch08\ch08_sample.cpp" />
+    <ClCompile Include="ch08\chronos.cpp" />
+    <ClCompile Include="ch08\my.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +167,9 @@
     <ClInclude Include="ch06\ch06.h" />
     <ClInclude Include="ch06\_6_programming.h" />
     <ClInclude Include="ch07\ch07.h" />
+    <ClInclude Include="ch08\ch08.h" />
+    <ClInclude Include="ch08\chronos.h" />
+    <ClInclude Include="ch08\my.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="_add\std_lib_facilities.h" />
   </ItemGroup>
