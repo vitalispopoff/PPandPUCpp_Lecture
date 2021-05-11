@@ -147,6 +147,9 @@
     <ClCompile Include="ch05\ch05_drill.cpp" />
     <ClCompile Include="ch05\ch05_excercise.cpp" />
     <ClCompile Include="ch05\ch05_sample.cpp" />
+    <ClCompile Include="ch06\ch06_drill.cpp" />
+    <ClCompile Include="ch06\ch06_excercise.cpp" />
+    <ClCompile Include="ch06\ch06_sample.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +157,9 @@
     <ClInclude Include="ch03\ch03.h" />
     <ClInclude Include="ch04\ch04.h" />
     <ClInclude Include="ch05\ch05.h" />
+    <ClInclude Include="ch06\calculator_6_.h" />
+    <ClInclude Include="ch06\ch06.h" />
+    <ClInclude Include="ch06\_6_programming.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="_add\std_lib_facilities.h" />
   </ItemGroup>

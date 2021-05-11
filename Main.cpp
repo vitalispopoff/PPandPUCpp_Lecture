@@ -7,4 +7,4 @@ int main()
 	srand(int(time(NULL)));
 
 	return 0;	
-}
+} 

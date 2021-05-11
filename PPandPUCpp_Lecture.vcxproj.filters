@@ -40,6 +40,12 @@
     <Filter Include="Header Files\ch05">
       <UniqueIdentifier>{53557711-1b74-42a2-b8e9-dd99a933b1e2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ch06">
+      <UniqueIdentifier>{7c03d26c-90e7-46fd-ba53-8f12a86a8e6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ch06">
+      <UniqueIdentifier>{98f026cd-7bb4-4ede-9b30-ced1957915e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -69,6 +75,15 @@
     <ClCompile Include="ch05\ch05_sample.cpp">
       <Filter>Source Files\ch05</Filter>
     </ClCompile>
+    <ClCompile Include="ch06\ch06_sample.cpp">
+      <Filter>Source Files\ch06</Filter>
+    </ClCompile>
+    <ClCompile Include="ch06\ch06_excercise.cpp">
+      <Filter>Source Files\ch06</Filter>
+    </ClCompile>
+    <ClCompile Include="ch06\ch06_drill.cpp">
+      <Filter>Source Files\ch06</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -88,6 +103,15 @@
     </ClInclude>
     <ClInclude Include="ch05\ch05.h">
       <Filter>Header Files\ch05</Filter>
+    </ClInclude>
+    <ClInclude Include="ch06\_6_programming.h">
+      <Filter>Header Files\ch06</Filter>
+    </ClInclude>
+    <ClInclude Include="ch06\calculator_6_.h">
+      <Filter>Header Files\ch06</Filter>
+    </ClInclude>
+    <ClInclude Include="ch06\ch06.h">
+      <Filter>Header Files\ch06</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
