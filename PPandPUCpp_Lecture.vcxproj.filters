@@ -34,6 +34,12 @@
     <Filter Include="Source Files\ch04">
       <UniqueIdentifier>{4380cb81-d4d3-4cb7-8afb-7c1104511088}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ch05">
+      <UniqueIdentifier>{37f350c2-0b18-435a-8f57-f6ba1ee7b232}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ch05">
+      <UniqueIdentifier>{53557711-1b74-42a2-b8e9-dd99a933b1e2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -54,6 +60,15 @@
     <ClCompile Include="ch04\ch04_example.cpp">
       <Filter>Source Files\ch04</Filter>
     </ClCompile>
+    <ClCompile Include="ch05\ch05_drill.cpp">
+      <Filter>Source Files\ch05</Filter>
+    </ClCompile>
+    <ClCompile Include="ch05\ch05_excercise.cpp">
+      <Filter>Source Files\ch05</Filter>
+    </ClCompile>
+    <ClCompile Include="ch05\ch05_sample.cpp">
+      <Filter>Source Files\ch05</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -70,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="ch04\ch04.h">
       <Filter>Header Files\ch04</Filter>
+    </ClInclude>
+    <ClInclude Include="ch05\ch05.h">
+      <Filter>Header Files\ch05</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
