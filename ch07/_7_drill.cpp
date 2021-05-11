@@ -1,8 +1,8 @@
-#include "std_lib_facilities.h"
+#include "../_add/std_lib_facilities.h"
+#include "ch07.h"
 
-namespace ch07_drill
+namespace ch07
 {
-
 	//exc 6
 	//write help section available at 'H' and 'h'
 
@@ -18,40 +18,9 @@ namespace ch07_drill
 			<< "\n\tquit\tquit\n";
 	}
 
-	struct Variable
-	{
-		public:
-			string 
-				name;
-			double 
-				value;
-			bool 
-				readOnly;
-		
-			Variable(string n, double v) 
-				: name(n), value(v), readOnly(false) 
-			{}
-			Variable(string n, double v, bool b) 
-				: name(n), value(v), readOnly(b) 
-			{}
-	};
-
-	class SymbolTable
-	{
-		private:
-			vector<Variable> 
-				varTable;
-
-		public:
-			double get(string);
-			void set(string, double, bool);
-			bool isDeclared(string);
-			void declare(Variable);
-	};
-
 	SymbolTable table;
 
-	double SymbolTable::get(string s)
+	double	SymbolTable::get(string s)
 	{
 		for (Variable var : varTable)
 			if (var.name == s)
@@ -60,7 +29,7 @@ namespace ch07_drill
 		error("undefined name for a variable: ", s);
 	}
 
-	void SymbolTable::set(string s, double d, bool b)
+	void	SymbolTable::set(string s, double d, bool b)
 	{
 		for (Variable &var : varTable)
 		{
@@ -77,7 +46,7 @@ namespace ch07_drill
 		error("Undefined name for a variable to set: ", s);
 	}
 
-	bool SymbolTable::isDeclared(string s)
+	bool	SymbolTable::isDeclared(string s)
 	{
 		for (Variable var : varTable)
 			if (var.name == s)
@@ -85,7 +54,7 @@ namespace ch07_drill
 		return false;
 	}
 
-	void SymbolTable::declare(Variable v)
+	void	SymbolTable::declare(Variable v)
 	{
 		varTable.push_back(v);
 	}
@@ -101,54 +70,15 @@ namespace ch07_drill
 		remember	{'#'},
 		root		{'R'};
 
-	struct Token
-	{
-		public:
-			char 
-				kind;
-			double 
-				value {0.};
-			string 
-				tokenName;
-
-			Token(char ch) 
-				: kind(ch) 
-			{}
-			Token(char ch,double val) 
-				: kind(ch), value(val) 
-			{}
-			Token(char ch,string s) 
-				: kind(ch), value{0}, tokenName(s) 
-			{}
-	};
-
-	class Token_stream
-	{
-		private:
-			bool 
-				full;
-			Token 
-				buffer;
-
-		public:
-			Token_stream() 
-				: full{false}, buffer(0) 
-			{}
-
-			void unget(Token);
-			Token get();
-			void ignore(char);
-	};
-
 	Token_stream ts;
 
-	void Token_stream::unget(Token t)
+	void	Token_stream::unget(Token t)
 	{
 		buffer = t;
 		full = true;
 	}
 
-	Token Token_stream::get()
+	Token	Token_stream::get()
 	{
 		if(full)
 		{
@@ -212,7 +142,7 @@ namespace ch07_drill
 		}
 	}
 
-	void Token_stream::ignore(char c)
+	void	Token_stream::ignore(char c)
 	{
 		full = false;
 		if (c== buffer.kind)

@@ -46,6 +46,12 @@
     <Filter Include="Source Files\ch06">
       <UniqueIdentifier>{98f026cd-7bb4-4ede-9b30-ced1957915e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ch07">
+      <UniqueIdentifier>{df206508-8fa4-42c2-b221-1f1740ed8201}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ch07">
+      <UniqueIdentifier>{7cdd8d5a-4443-481d-9f8c-b848343e4e50}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -84,6 +90,9 @@
     <ClCompile Include="ch06\ch06_drill.cpp">
       <Filter>Source Files\ch06</Filter>
     </ClCompile>
+    <ClCompile Include="ch07\_7_drill.cpp">
+      <Filter>Source Files\ch07</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -112,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="ch06\ch06.h">
       <Filter>Header Files\ch06</Filter>
+    </ClInclude>
+    <ClInclude Include="ch07\ch07.h">
+      <Filter>Header Files\ch07</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
